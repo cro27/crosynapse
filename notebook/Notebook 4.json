@@ -17,21 +17,18 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "b1814030-66e0-4724-87c2-2dc4c49ddaca"
+				"spark.autotune.trackingId": "d6bb4529-a07b-4d5d-ac66-66893cad2fa4"
 			}
 		},
 		"metadata": {
 			"saveOutput": true,
-			"synapse_widget": {
-				"version": "0.1"
-			},
 			"enableDebugMode": false,
 			"kernelspec": {
 				"name": "synapse_pyspark",
 				"display_name": "Synapse PySpark"
 			},
 			"language_info": {
-				"name": "sql"
+				"name": "python"
 			},
 			"a365ComputeOptions": {
 				"id": "/subscriptions/37b2d7dc-7393-47ad-8c51-90c89944370c/resourceGroups/AzSynapse/providers/Microsoft.Synapse/workspaces/crosynapse/bigDataPools/deltapool31",
@@ -46,7 +43,7 @@
 				"nodeCount": 10,
 				"cores": 8,
 				"memory": 56,
-				"extraHeader": null
+				"automaticScaleJobs": false
 			},
 			"sessionKeepAliveTimeout": 30
 		},
@@ -65,15 +62,57 @@
 					},
 					"microsoft": {
 						"language": "sparksql"
-					},
-					"collapsed": false
+					}
 				},
 				"source": [
 					"%%sql\r\n",
-					"CREATE TABLE databasenotebook2.mydeltatable USING DELTA LOCATION '/tst'"
+					"create database DatabaseNotebook2 location '/tst/DatabaseNotebook2';"
 				],
-				"attachments": null,
-				"execution_count": 11
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "python"
+					}
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"# spark.sql(\"DROP DATABASE IF EXISTS DatabaseNotebook2 CASCADE\")"
+				],
+				"execution_count": 19
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "python"
+					}
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"spark.sql(\"CREATE DATABASE IF NOT EXISTS DatabaseNotebook\")"
+				],
+				"execution_count": 20
 			},
 			{
 				"cell_type": "code",
@@ -94,11 +133,11 @@
 				},
 				"source": [
 					"%%sql\r\n",
-					"\r\n",
-					"create database dev2 location '/tst';"
+					"create table DatabaseNotebook.parquet_person1(id int, fname varchar(50), lname varchar(100)) USING PARQUET;\r\n",
+					"insert into DatabaseNotebook.parquet_person1 values (1,'John','Smith');\r\n",
+					"select * from DatabaseNotebook.parquet_person1;"
 				],
-				"attachments": null,
-				"execution_count": 12
+				"execution_count": 21
 			},
 			{
 				"cell_type": "code",
@@ -119,12 +158,11 @@
 				},
 				"source": [
 					"%%sql\r\n",
-					"\r\n",
-					"create table dev2.delta_person(id int, fname varchar(50), lname varchar(100)) USING DELTA;\r\n",
-					""
+					"create table DatabaseNotebook.delta_person1(id int, fname varchar(50), lname varchar(100)) USING DELTA;\r\n",
+					"insert into DatabaseNotebook.delta_person1 values (1,'John','Smith');\r\n",
+					"select * from DatabaseNotebook.delta_person1"
 				],
-				"attachments": null,
-				"execution_count": 1
+				"execution_count": 22
 			},
 			{
 				"cell_type": "code",
@@ -145,10 +183,10 @@
 				},
 				"source": [
 					"%%sql\r\n",
-					"insert into dev2.delta_person values (1,'John','Smith');"
+					"create table DatabaseNotebook.parquetconvert_person2(id int, fname varchar(50), lname varchar(100)) USING PARQUET;\r\n",
+					"insert into DatabaseNotebook.parquetconvert_person2 values (1,'John','Smith');"
 				],
-				"attachments": null,
-				"execution_count": 2
+				"execution_count": 23
 			},
 			{
 				"cell_type": "code",
@@ -169,10 +207,9 @@
 				},
 				"source": [
 					"%%sql\r\n",
-					"select * from dev2.delta_person"
+					"convert to delta DatabaseNotebook.parquetconvert_person2;"
 				],
-				"attachments": null,
-				"execution_count": 3
+				"execution_count": 24
 			},
 			{
 				"cell_type": "code",
@@ -193,36 +230,11 @@
 				},
 				"source": [
 					"%%sql\r\n",
-					"\r\n",
-					"create table dev2.delta_person2(id int, fname varchar(50), lname varchar(100)) USING PARQUET;"
+					"alter table DatabaseNotebook.parquetconvert_person2 add columns (address varchar(50));\r\n",
+					"insert into DatabaseNotebook.parquetconvert_person2 values (1,'John','Smith','27 Happydays St');\r\n",
+					"select * from DatabaseNotebook.parquetconvert_person2;"
 				],
-				"attachments": null,
-				"execution_count": 5
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					},
-					"microsoft": {
-						"language": "sparksql"
-					},
-					"collapsed": false
-				},
-				"source": [
-					"%%sql\r\n",
-					"insert into dev2.delta_person2 values (1,'John','Smith');\r\n",
-					"select * from dev2.delta_person2"
-				],
-				"attachments": null,
-				"execution_count": 6
+				"execution_count": 26
 			}
 		]
 	}
