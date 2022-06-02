@@ -1,0 +1,121 @@
+{
+	"name": "TransactionEventType",
+	"properties": {
+		"Name": "TransactionEventType",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "Retail_bpb"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [
+				{
+					"Name": "TransactionEventTypeId",
+					"Description": "The unique identifier of a Transaction Event Type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionEventTypeName",
+					"Description": "The name of a Transaction Event Type.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "TransactionEventTypeDescription",
+					"Description": "The description of a Transaction Event Type.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"ColumnSetEntityName": "b4f976d3-1292-440c-b797-6ad1bc5fbe69",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/Retail_bpb/TransactionEventType",
+					"delimiter": ",",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/Retail_bpb/TransactionEventType",
+				"Properties": {
+					"LinkedServiceName": "crosynapse-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": null,
+		"CreateTime": 0,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionEventType\",\"path\":\"TransactionEventType.cdm.json/TransactionEventType\"},\"description\":\"A discrete event, which may be associated with a transaction. \\n\\nA transaction consists of one or more events.\\n\\nEx:\\n- Receive Transaction Request\\n- Initiate Transaction Processing\\n- Request Transaction Authorization\\n- Receive Transaction Authorization\\n- Close Transaction\\n- Archive Transaction\\n- Transaction Confirmed\\n- Payment Transmitted\\n- Payment Receipt Confirmed\",\"primaryKey\":[\"TransactionEventTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"TransactionEventTypeId\",\"attributeReference\":{\"entity\":\"TransactionEventType.cdm.json/TransactionEventType\",\"name\":\"TransactionEventTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"TransactionEventTypeName\",\"attributeReference\":{\"entity\":\"TransactionEventType.cdm.json/TransactionEventType\",\"name\":\"TransactionEventTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"TransactionEventTypeDescription\",\"attributeReference\":{\"entity\":\"TransactionEventType.cdm.json/TransactionEventType\",\"name\":\"TransactionEventTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512}]}}}",
+			"Description": "A discrete event, which may be associated with a transaction. \n\nA transaction consists of one or more events.\n\nEx:\n- Receive Transaction Request\n- Initiate Transaction Processing\n- Request Transaction Authorization\n- Receive Transaction Authorization\n- Close Transaction\n- Archive Transaction\n- Transaction Confirmed\n- Payment Transmitted\n- Payment Receipt Confirmed",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#A33E2C\"}",
+			"spark.sql.sources.provider": "csv",
+			"spark.sql.sources.schema.numParts": "1",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"TransactionEventTypeId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"TransactionEventTypeName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"TransactionEventTypeDescription\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}",
+			"PrimaryKeys": "TransactionEventTypeId"
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "c30fa81c-aa07-4472-ab1f-995bc63bf4a2",
+		"Description": "A discrete event, which may be associated with a transaction. \n\nA transaction consists of one or more events.\n\nEx:\n- Receive Transaction Request\n- Initiate Transaction Processing\n- Request Transaction Authorization\n- Receive Transaction Authorization\n- Close Transaction\n- Archive Transaction\n- Transaction Confirmed\n- Payment Transmitted\n- Payment Receipt Confirmed"
+	},
+	"type": "TABLE"
+}

@@ -1,0 +1,29 @@
+{
+	"name": "Salesperson",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "crosynapse-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "curateddata"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "StateProvince",
+				"type": "UTF8"
+			},
+			{
+				"name": "TotalOrders",
+				"type": "INT64"
+			}
+		]
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

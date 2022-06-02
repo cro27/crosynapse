@@ -1,0 +1,529 @@
+{
+	"name": "LoyaltyAccount",
+	"properties": {
+		"Name": "LoyaltyAccount",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "Retail_bpb"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [
+				{
+					"Name": "LoyaltyProgramId",
+					"Description": "The unique identifier of a Loyalty Program.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountId",
+					"Description": "The unique identifier of a Loyalty Account.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountEstablishmentTimestamp",
+					"Description": "The timestamp that the loyalty account was established.",
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountCancellationTimestamp",
+					"Description": "The timestamp that the loyalty account was cancelled.",
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountHolderFirstName",
+					"Description": "The first name of the loyalty account holder.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountHolderMiddleName",
+					"Description": "The middle name of the loyalty account holder.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountHolderLastName",
+					"Description": "The last name of the loyalty account holder.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountHolderTitle",
+					"Description": "The title of the loyalty account holder.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 16,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountExpirationDate",
+					"Description": "The expiration date of a Loyalty Account.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountStreetAddress",
+					"Description": "The address associated with the Loyalty Account.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountCity",
+					"Description": "The city associated with the Loyalty Account.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountState",
+					"Description": "The state associated with the Loyalty Account.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 64,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountCountry",
+					"Description": "The country associated with the  Loyalty Account.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 64,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountPostalCode",
+					"Description": "The postal code associated with the Loyalty Account.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 6,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountPhoneContactNumber",
+					"Description": "The phone number associated with the loyalty account contact.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountMobilePhoneContactNumber",
+					"Description": "The mobile phone number associated with the loyalty account contact.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountEmailAddress",
+					"Description": "The email address associated with the loyalty account.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 256,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountEmergencyContactName",
+					"Description": "The name of the loyalty account emergency account.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountEmergencyContactEmailAddress",
+					"Description": "The email address associated with the loyalty account emergency contact.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 256,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountTypeId",
+					"Description": "The unique identifier of  the Loyalty Account Type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "CustomerId",
+					"Description": "The unique identifier of a Customer.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "CustomerAccountId",
+					"Description": "The unique identifier of a Customer Account.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "PartyId",
+					"Description": "The unique identifier of a Party.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "HouseholdId",
+					"Description": "The unique identifier of a Household.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "HouseholdMemberPartyId",
+					"Description": "The unique identifier of a Party.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "SignUpChannelId",
+					"Description": "The unique identifier of a Channel.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "SignUpStoreId",
+					"Description": "The unique identifier of a Store.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PrimaryStoreId",
+					"Description": "The unique identifier of a Store.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "SecondaryStoreId",
+					"Description": "The unique identifier of a Store.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "CouponUserIndicator",
+					"Description": "Indicates that the loyalty account utilizes coupons that are provided.",
+					"OriginDataTypeName": {
+						"TypeName": "boolean",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "boolean"
+						}
+					}
+				}
+			],
+			"ColumnSetEntityName": "62ec802a-de82-434c-b91e-48153c80ba09",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/Retail_bpb/LoyaltyAccount",
+					"delimiter": ",",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/Retail_bpb/LoyaltyAccount",
+				"Properties": {
+					"LinkedServiceName": "crosynapse-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": null,
+		"CreateTime": 0,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"LoyaltyAccount\",\"path\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\"},\"description\":\"A program offered by a company to customers that make frequent purchases or transactions with that company.\",\"primaryKey\":[\"LoyaltyProgramId\",\"LoyaltyAccountId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"LoyaltyProgramId\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyProgramId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountId\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountEstablishmentTimestamp\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountEstablishmentTimestamp\"},\"dataType\":\"timestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountCancellationTimestamp\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountCancellationTimestamp\"},\"dataType\":\"timestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountHolderFirstName\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountHolderFirstName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountHolderMiddleName\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountHolderMiddleName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountHolderLastName\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountHolderLastName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountHolderTitle\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountHolderTitle\"},\"dataType\":\"string\",\"dataTypeLength\":16},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountExpirationDate\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountExpirationDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountStreetAddress\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountStreetAddress\"},\"dataType\":\"string\",\"dataTypeLength\":512},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountCity\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountCity\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountState\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountState\"},\"dataType\":\"string\",\"dataTypeLength\":64},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountCountry\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountCountry\"},\"dataType\":\"string\",\"dataTypeLength\":64},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountPostalCode\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountPostalCode\"},\"dataType\":\"string\",\"dataTypeLength\":6},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountPhoneContactNumber\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountPhoneContactNumber\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountMobilePhoneContactNumber\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountMobilePhoneContactNumber\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountEmailAddress\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountEmailAddress\"},\"dataType\":\"string\",\"dataTypeLength\":256},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountEmergencyContactName\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountEmergencyContactName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountEmergencyContactEmailAddress\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountEmergencyContactEmailAddress\"},\"dataType\":\"string\",\"dataTypeLength\":256},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountTypeId\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"LoyaltyAccountTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"CustomerId\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"CustomerId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"CustomerAccountId\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"CustomerAccountId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"PartyId\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"PartyId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"HouseholdId\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"HouseholdId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"HouseholdMemberPartyId\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"HouseholdMemberPartyId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"SignUpChannelId\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"SignUpChannelId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"SignUpStoreId\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"SignUpStoreId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PrimaryStoreId\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"PrimaryStoreId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"SecondaryStoreId\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"SecondaryStoreId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"CouponUserIndicator\",\"attributeReference\":{\"entity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"name\":\"CouponUserIndicator\"},\"dataType\":\"boolean\"}]}}}",
+			"Description": "A program offered by a company to customers that make frequent purchases or transactions with that company.",
+			"DisplayFolderInfo": "{\"name\":\"Loyalty\",\"colorCode\":\"#0050AC\"}",
+			"spark.sql.sources.provider": "csv",
+			"spark.sql.sources.schema.numParts": "1",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"LoyaltyProgramId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"LoyaltyAccountId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"LoyaltyAccountEstablishmentTimestamp\",\"type\":\"timestamp\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountCancellationTimestamp\",\"type\":\"timestamp\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountHolderFirstName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountHolderMiddleName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountHolderLastName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountHolderTitle\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountExpirationDate\",\"type\":\"date\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountStreetAddress\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountCity\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountState\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountCountry\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountPostalCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountPhoneContactNumber\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountMobilePhoneContactNumber\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountEmailAddress\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountEmergencyContactName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountEmergencyContactEmailAddress\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountTypeId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"CustomerId\",\"type\":\"long\",\"nullable\":true,\"metadata\":{}},{\"name\":\"CustomerAccountId\",\"type\":\"long\",\"nullable\":true,\"metadata\":{}},{\"name\":\"PartyId\",\"type\":\"long\",\"nullable\":true,\"metadata\":{}},{\"name\":\"HouseholdId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"HouseholdMemberPartyId\",\"type\":\"long\",\"nullable\":true,\"metadata\":{}},{\"name\":\"SignUpChannelId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"SignUpStoreId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"PrimaryStoreId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"SecondaryStoreId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"CouponUserIndicator\",\"type\":\"boolean\",\"nullable\":true,\"metadata\":{}}]}",
+			"PrimaryKeys": "LoyaltyProgramId,LoyaltyAccountId"
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "b33ac79e-1915-40e2-9c69-b8aef9aa202e",
+		"Description": "A program offered by a company to customers that make frequent purchases or transactions with that company."
+	},
+	"type": "TABLE"
+}

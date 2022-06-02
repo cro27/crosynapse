@@ -1,0 +1,33 @@
+{
+	"name": "LoyaltyAccount_LoyaltyCard_990073e6a30d67d6332ab86a3f47cdeef3510d46509a2298a98ac2608bd7fed9",
+	"properties": {
+		"Name": "LoyaltyAccount_LoyaltyCard_990073e6a30d67d6332ab86a3f47cdeef3510d46509a2298a98ac2608bd7fed9",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "Retail_bpb"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "LoyaltyAccount",
+		"ToTableName": "LoyaltyCard",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "LoyaltyProgramId",
+				"ToColumnName": "LoyaltyProgramId"
+			},
+			{
+				"FromColumnName": "LoyaltyAccountId",
+				"ToColumnName": "LoyaltyAccountId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"toEntity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"joinPairs\":[{\"fromAttribute\":\"LoyaltyProgramId\",\"toAttribute\":\"LoyaltyProgramId\"},{\"fromAttribute\":\"LoyaltyAccountId\",\"toAttribute\":\"LoyaltyAccountId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "8db6826d-7f72-4d75-8a3e-60e1b175a0a2"
+	},
+	"type": "RELATIONSHIP"
+}

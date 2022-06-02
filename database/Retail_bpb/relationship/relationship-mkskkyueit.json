@@ -1,0 +1,29 @@
+{
+	"name": "relationship-mkskkyueit",
+	"properties": {
+		"Name": "relationship-mkskkyueit",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "Retail_bpb"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Store",
+		"ToTableName": "LoyaltyAccount",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "StoreId",
+				"ToColumnName": "PrimaryStoreId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Store.cdm.json/Store\",\"toEntity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"joinPairs\":[{\"fromAttribute\":\"StoreId\",\"toAttribute\":\"PrimaryStoreId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "659f3d09-3baa-4169-834a-bdb7cd037573"
+	},
+	"type": "RELATIONSHIP"
+}

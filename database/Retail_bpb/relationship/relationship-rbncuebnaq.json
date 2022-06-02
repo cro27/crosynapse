@@ -1,0 +1,29 @@
+{
+	"name": "relationship-rbncuebnaq",
+	"properties": {
+		"Name": "relationship-rbncuebnaq",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "Retail_bpb"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Store",
+		"ToTableName": "LoyaltyAccount",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "StoreId",
+				"ToColumnName": "SecondaryStoreId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Store.cdm.json/Store\",\"toEntity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"joinPairs\":[{\"fromAttribute\":\"StoreId\",\"toAttribute\":\"SecondaryStoreId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "422a5d12-6a4a-44bd-86f8-15f5bcc5388b"
+	},
+	"type": "RELATIONSHIP"
+}

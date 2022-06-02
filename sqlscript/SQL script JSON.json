@@ -1,0 +1,16 @@
+{
+	"name": "SQL script JSON",
+	"properties": {
+		"content": {
+			"query": "-- type your sql script here, we now have intellisense \nSELECT\n    JSON_VALUE(jsonContent, '$.title') AS title\n  , JSON_VALUE(jsonContent, '$.publisher') as publisher\n  , jsonContent\nFROM OPENROWSET\n  (\n      BULK 'json/books/*.json',\n      DATA_SOURCE = 'SqlOnDemandDemo'\n    , FORMAT='CSV'\n    , FIELDTERMINATOR ='0x0b'\n    , FIELDQUOTE = '0x0b'\n    , ROWTERMINATOR = '0x0b'\n  )\nWITH\n  ( jsonContent varchar(8000) ) AS [r]\nWHERE\n  JSON_VALUE(jsonContent, '$.title') = 'Probabilistic and Statistical Methods in Cryptology, An Introduction by Selected Topics'",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"name": "crodb",
+				"type": "SqlOnDemand"
+			}
+		},
+		"type": "SqlQuery"
+	}
+}

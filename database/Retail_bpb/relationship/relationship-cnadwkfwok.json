@@ -1,0 +1,29 @@
+{
+	"name": "relationship-cnadwkfwok",
+	"properties": {
+		"Name": "relationship-cnadwkfwok",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "Retail_bpb"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "LoyaltyCard",
+		"ToTableName": "Transaction",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "LoyaltyCardId",
+				"ToColumnName": "LoyaltyCardId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"toEntity\":\"Transaction.cdm.json/Transaction\",\"joinPairs\":[{\"fromAttribute\":\"LoyaltyCardId\",\"toAttribute\":\"LoyaltyCardId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "a88705c1-523e-4212-861d-cf7f10dede9b"
+	},
+	"type": "RELATIONSHIP"
+}

@@ -1,0 +1,27 @@
+{
+	"name": "Retail_bpb",
+	"properties": {
+		"Name": "Retail_bpb",
+		"EntityType": "DATABASE",
+		"Description": "",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"DerivedModelDBInfo": "{\"ModelDirectives\":{\"BaseModel\":{\"Name\":\"Retail\",\"Version\":\"0.1.0\"}}}",
+			"IsSyMSCDMDatabase": true
+		},
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/Retail_bpb",
+			"Properties": {
+				"FormatType": "csv",
+				"LinkedServiceName": "crosynapse-WorkspaceDefaultStorage"
+			}
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "e7111dde-37fb-405a-8fa9-9275a194396d"
+	},
+	"type": "DATABASE"
+}

@@ -1,0 +1,65 @@
+{
+	"name": "delta_person",
+	"properties": {
+		"Name": "delta_person",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "databasestudio"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [],
+			"ColumnSetEntityName": "786f69aa-7786-4851-aaa5-2a10e1e234f8",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "delta",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/DatabaseStudio/delta_person",
+					"serialization.format": "1"
+				}
+			},
+			"Source": {
+				"Location": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/DatabaseStudio/delta_person",
+				"Properties": {
+					"LocationSetToDatabaseDefault": false
+				}
+			},
+			"Properties": {
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": "trusted-service-user",
+		"CreateTime": 1653263604,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"Transient_lastDdlTime": "1653263604",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[]}",
+			"spark.sql.partitionProvider": "catalog",
+			"spark.sql.sources.schema.numParts": "1",
+			"spark.sql.sources.provider": "delta",
+			"spark.sql.create.version": "3.1.2.5.0-62565507",
+			"PrimaryKeys": ""
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "a13203e3-0844-4f70-95d2-4e4d0300d5ec"
+	},
+	"type": "TABLE"
+}

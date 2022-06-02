@@ -1,0 +1,16 @@
+{
+	"name": "SQL script CSV",
+	"properties": {
+		"content": {
+			"query": "-- type your sql script here, we now have intellisense\nSELECT TOP 10 *\nFROM OPENROWSET\n  (\n      BULK 'csv/population/*.csv',\n      DATA_SOURCE = 'SqlOnDemandDemo',\n      FORMAT = 'CSV', PARSER_VERSION = '2.0'\n  )\nWITH\n  (\n      country_code VARCHAR (5)\n    , country_name VARCHAR (100)\n    , year smallint\n    , population bigint\n  ) AS r\nWHERE\n  country_name = 'Luxembourg' AND year = 2017",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"name": "crodb",
+				"type": "SqlOnDemand"
+			}
+		},
+		"type": "SqlQuery"
+	}
+}

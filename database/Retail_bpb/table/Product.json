@@ -1,0 +1,1360 @@
+{
+	"name": "Product",
+	"properties": {
+		"Name": "Product",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "Retail_bpb"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductName",
+					"Description": "The name of the Product, which normally corresponds to the 'marketing name' of the Product.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ProductShortDescription",
+					"Description": "The short description of the Product.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 20,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ProductDescription",
+					"Description": "The description of the Product.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ProductInternalName",
+					"Description": "The internal name by which a Product is known.\n\nThis normally approximates the business name by which the public identifies the Product.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ProductIntendedUse",
+					"Description": "The intended use of the product.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "IntroductionDate",
+					"Description": "The date that the Product was introduced for sale.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "PlannedAbandonmentDate",
+					"Description": "The planned date to discontinue marketing the product.    \n\nAbandonment is a component in the decline stage of the product's life cycle characterized by a reduced market demand for the product and an increased number of competing products with similar characteristics.\n\nThere are three (3) strategies for abandoning a product:\n\n(1)  Reduced marketing and expenditures to maintain profits.\n\n(2)  Concentrating on the strongest market segments and eliminating the weaker market segments\n\n(3)  Maintain the marketing level until the product is discontinued.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "ActualAbandonmentDate",
+					"Description": "The actual date that the marketing of the product was discontinued. \n\nAbandonment is a component in the decline stage of the product's life cycle characterized by a reduced market demand for the product and an increased number of competing products with similar characteristics.\n\nThere are three (3) strategies for abandoning a product:\n\n(1)  Reduced marketing and expenditures to maintain profits.\n\n(2)  Concentrating on the strongest market segments and eliminating the weaker market segments\n\n(3)  Maintain the marketing level until the product is discontinued.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "StorageInstructions",
+					"Description": "Statements regarding how the product should be stored.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ShelfLifeDays",
+					"Description": "The amount of time that a product can be stored before it can no longer be safely consumed or sold.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ConsumerStorageInstructions",
+					"Description": "Statements regarding how the product should be stored by the consumer.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ProductShippingInstructions",
+					"Description": "Statements regarding how the product should be shipped.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ConsumerUsageInstructions",
+					"Description": "Statements regarding how the product should be used by the consumer.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "HealthClaimDescription",
+					"Description": "A health claim regarding the product as per regulations of the target market.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "MarketingMessageDescription",
+					"Description": "A market message that is present on the packaging of the product.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "GlobalTradeItemNumber",
+					"Description": "The Global Trade Item Number (GTIN) is an identifier for trade items that was developed by GS1.\n\nA GTIN can be assigned to only one brick.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 14,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "GtinName",
+					"Description": "A note, comment or additional information regarding the Product GTIN.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "EuropeanArticleNumber",
+					"Description": "A 13 digit barcoding standard which is a superset of the original 12-digit Universal Product Code (UPC).\n\naka International Article Number (abbreviation of EAN retained)",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 13,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "UniversalProductCode",
+					"Description": "A system that identifies products by type and by manufacturer.  \n\nA UPC consists of eleven (11) digits.  Six (6) indicate the Manufacturer and five (5) digits describe the product.\n\nUPC's appear on product packages as bar codes, which are graphic symbols that are read by optical scanner devices.   \n\nUPC's are assigned by the Uniform Code Council of Dayton, Ohio.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 12,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "GpcBrickId",
+					"Description": "The unique identifier of a GPC Brick.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ItemElectronicProductCode",
+					"Description": "EPC is the RFID version of the UPC barcode. \nEPC is intended to be used for specific product identification. However, EPC goes beyond UPC by not only identifying the product as an SKU, but also providing access to additional data about the origin and history of the specific units. \nThe EPC tag itself identifies the manufacturer, product, version, and serial number. It's the serial number that takes EPC to the next level. \nThis is the key to data related to specific lots/batches as well as potentially tracking the specific unit's history as it moves through the supply chain.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 14,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "ComponentPartIdentifier",
+					"Description": "The Component / Part Identifier (CPID) is used to identify components or parts that are used in the assembly of a larger item. The CPID is part of the GS1 system of standards.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 30,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PluCode",
+					"Description": "PLU Codes are typically assigned to fresh produce but can also be assigned to other items as well.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 5,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "ProductNetContent",
+					"Description": "The standard product length.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "NetContentUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ResponsibilityCenterId",
+					"Description": "The unique identifier of a Responsibility Center.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PatentNumber",
+					"Description": "The patent that is associated with the Product.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 12,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PatentDate",
+					"Description": "The date that the Patent was granted.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "PatentExpirationDate",
+					"Description": "The date that the patent is scheduled to expire.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "Trademark",
+					"Description": "A 'trademark' is a brand name or brand mark that is given legal protection.",
+					"OriginDataTypeName": {
+						"TypeName": "binary",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "binary"
+						}
+					}
+				},
+				{
+					"Name": "ProductLogo",
+					"Description": "A design, symbol or series of words that identifies the product.",
+					"OriginDataTypeName": {
+						"TypeName": "binary",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "binary"
+						}
+					}
+				},
+				{
+					"Name": "CopyrightNumber",
+					"Description": "The unique identifier (number) of the copyright granted.\n\nA copyright is legal protection given to a work so that it can only be published or sold by the copyright holder.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 18,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "CopyrightDate",
+					"Description": "The date that the copyright was granted.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "ProductLicenserName",
+					"Description": "The name of the company that receives a flat fee or royalty for selling the rights to use a trademark, Patent, manufacturing right or process for the Product.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "EligibleForExportIndicator",
+					"Description": "Indicates that the product is eligible for export to foreign countries without restriction.",
+					"OriginDataTypeName": {
+						"TypeName": "boolean",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "boolean"
+						}
+					}
+				},
+				{
+					"Name": "ProductExportRestrictionIndicator",
+					"Description": "Indicates that exportation of the product is restricted.",
+					"OriginDataTypeName": {
+						"TypeName": "boolean",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "boolean"
+						}
+					}
+				},
+				{
+					"Name": "ProductExportRestrictionStartDate",
+					"Description": "The period start date for which the associated restriction is in effect.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "ProductExportRestrictionEndDate",
+					"Description": "The period end date for which the associated restriction is in effect.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "ProductExportRestrictionDescription",
+					"Description": "A description or statement defining the export restriction(s) placed upon the Product.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "BaseProductQuantity",
+					"Description": "The number of base product items contained in the product packaging.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 13,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "ProductLength",
+					"Description": "The standard product length.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductPlanogramLength",
+					"Description": "The standard product length.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductLengthUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductWidth",
+					"Description": "The standard product width.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductPlanogramWidth",
+					"Description": "The standard product width.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductWidthUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductHeight",
+					"Description": "The standard product height.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductPlanogramHeight",
+					"Description": "The standard product height.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductHeightUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductVolume",
+					"Description": "The standard product volume.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductVolumeUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductNetWeight",
+					"Description": "The net product weight.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductNetWeightUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductGrossWeight",
+					"Description": "The gross product weight.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductGrossWeightUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductDrainedWeight",
+					"Description": "The drained product weight.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductDrainedWeightUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "MinimumStorageTemperature",
+					"Description": "The minimum temperature at which the product may be stored.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "MinimumStorageTemperatureUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "MaximumStorageTemperature",
+					"Description": "The maximum temperature at which the product may be stored.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "MaximumStorageTemperatureUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "MinimumStorageHumidity",
+					"Description": "The minimum storage humidity that the product may be stored at.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "MinimumStorageHumidityUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "MaximumStorageHumidity",
+					"Description": "The maximum storage humidity that the product may be stored at.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "MaximumStorageHumidityUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ReturnPolicyStatement",
+					"Description": "A statement detailing the product return policy.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ReturnPolicyPeriodInDays",
+					"Description": "The period in days allowed under the associated return policy.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ReplacementPolicyStatement",
+					"Description": "A statement detailing the product replacement policy.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ReplacementPeriodInDays",
+					"Description": "The period in days allowed under the associated replacement policy.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ExchangePolicyStatement",
+					"Description": "A statement detailing the product exchange policy.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ExchangePolicyPeriodInDays",
+					"Description": "The period in days allowed under the associated exchange policy.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductMustBeDeliveredDaysPriorToExpirationDate",
+					"Description": "The number of days prior to the expiration date of the product that the product must be delivered to the an agreed upon point in the distribution system.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "WarrantyId",
+					"Description": "The unique identifier of a Warranty.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ItemSku",
+					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 20,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PrimaryBrandId",
+					"Description": "The unique identifier of a Brand.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductTypeId",
+					"Description": "The unique identifier of a Product Type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PackageTypeId",
+					"Description": "The unique identifier of a Package Type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PrimaryCountryOfOriginCountryId",
+					"Description": "The unique identifier of the Country.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "GeographicAreaOfOriginGeographicAreaId",
+					"Description": "The unique identifier of a Geographic Area.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PrimaryColorId",
+					"Description": "The unique identifier of a color.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "FlavorTypeId",
+					"Description": "The unique identifier of a Flavor Type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ScentTypeId",
+					"Description": "The unique identifier of a Scent Type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "SuitableAgeRatingId",
+					"Description": "The unique identifier of a suitable age rating.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "SeasonalUsageId",
+					"Description": "The unique identifier of a seasonal usage for the associated product.\n\nEx:\n- Summer\n- Fall\n- Winter\n- Spring\n- All seasons",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"ColumnSetEntityName": "a6eb3b0b-890e-48da-be97-1a85104d78a6",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/Retail_bpb/Product",
+					"delimiter": ",",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/Retail_bpb/Product",
+				"Properties": {
+					"LinkedServiceName": "crosynapse-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": null,
+		"CreateTime": 0,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"Product\",\"path\":\"Product.cdm.json/Product\"},\"description\":\"A product is anything that can be offered to a market that might satisfy a want or need by potential customers.    That product is the sum of all physical, psychological, symbolic, and service attributes associated with it.\\n\\nThere are two basic types of products:\\n\\n- Tangible (physical)\\n- Intangible (non-physical) such as services\\n\\nA service is a non-material or intangible product - such as professional consultancy, maintenance service, repair service etc.\\nEach product has its own benefits, application, brand name, and packaging that gives it its own identity and distinguishing characteristics.\\n\\nEvery business or organization has business rules that define precisely what a product is.    While we intuitively know what a product is, we must quantify that knowledge and associated business rules with consistent definitions that can be implemented within the organization in strategies and applications.\\n\\nA product typically goes through five stages of development:\\n\\n(1) Idea Stage - involving a thorough evaluation of the potential product\\n\\n(2) Concept Stage - determines customer acceptance by testing and presentation to consumers and distribution channel members.   Specific aspects regarding quality, dependability, reliability, warranty, packaging, service, pricing, terms of sale, sales and distribution channels, advertising and promotions are evaluated.\\n\\n(3) Product Development Stage - transforms the prototype product into an actual product for mass sale.   This stage requires close interaction between both marketing and manufacturing.\\n\\n(4) Test Marketing Stage - may or may not be used since it is an expensive and time-consuming process.  Test marketing involves evaluating various product options and alternatives.\\n\\n(5) Commercialization - It is very expensive to launch a new product so commercialization only applies to those specific products that are actually going to be sold to the market.\\n\\nProducts tend to be categorized as either:  Industrial goods and consumer goods\\n\\nIndustrial goods are used to produce other products .\\n\\nIndustrial goods may be further divided into:\\n\\n- Raw materials\\n- Equipment\\n- Pre-built materials \\n- Supplies.\\n\\nConsumer goods are intended for consumption by the general public.\\n\\nConsumer goods may be further divided into:\\n\\n- Durable goods\\n- Nondurable goods\\n- Packaged goods\\n\\nA product may be a member of a product family or product line.\\n\\nA product family is a grouping of products or services that are related to each other by common function, functionality, design platform or similar characteristics.\\n\\nMembers of a product family frequently have many common parts and assemblies.\\n\\nProduct families are the highest level of grouping for forecasting, capacity planning or related functions.\\n\\nEx:\\nThe Apple Macintosh family of products consists of the product lines:\\n- Mac mini\\n- MacBook Pro\\n- Mac Pro\\n\\nA product line is a grouping of products that are closely related in usage, functionality or marketing characteristics.\\n\\nA Product Family typically is created to address one or five functions:\\n\\n1. To increase profits and not erode the sales of existing products\\n\\n2. To attract additional Markets or Market Segments\\n\\n3. To counter competitor's products\\n\\n4. To fill a gap in an existing Product Family.\\n\\n5. To promote sales of other products in the family line\\n\\nLine Depth refers to the number of products in the product line.\\n\\nLine consistency refers to how closely related the products are that make up the product line.\\n\\nLine vulnerability refers to the percentage of sales or profits that are derived from only a few products in the product line.\\n\\nProduct width refers to the number of different product lines sold by a company.\\n\\nProduct mix refers to the total number of products sold in all product lines.\\n\\nLine extension refers to the adding of a new product to a line.\\n\\n\\\"Trading up or brand leveraging\\\" refers to adding a product of better quality to a product line than the other products in that line.\\n\\n\\\"Trading down\\\" refers to adding a product of lesser quality to a product line than the other products in that line.\\n\\nIf a line of products is sold with the same brand name, this is referred to as family branding.\\nStrategy and decisions regarding a product line are usually incorporated in a high-level marketing plan addressing product line strategy, sales, channels, distribution channels, pricing and related issues.\\nA product-line manager is responsible for a product line and supervises several product managers who are responsible for individual products within the line.\\nProduct-line managers typically have the following responsibilities:\\n- Expansion and composition of a product line\\n- Evaluate the effects of product mixes on the profitability of other items in the line\\n- Planning and allocation of resources to individual products in the line\\nA product is normally associated with a brand strategy - manufacturer, private or generic.\\n\\n1. Manufacturer-  or 'national' branding in which the brand is assigned by the manufacturer of the Product.\\n\\n2. Private - or 'dealer' branding in which the brand is assigned by the retailer or wholesaler of the Product.\\n\\n3. Generic - in which the Product is not marked with any identification.   Generic brands are a means for manufacturers to increase profits by saving on advertising, packaging or other costs associated with manufacturer or private branding.\\n\\nA brand is name, term, sign, symbol or design or a combination of these which identify the goods or services and differentiate them from those of competitors'\\n\\nA Trade mark is a brand or some part of the brand that is given legal protection because it is capable of exclusive appropriation and representation.\\n\\nManufacturers can use their own brands (known as Manufacturers' brands) or brands of their distributors (Distributors' brands).\\n\\nManufacturers/ distributors use brand names for a variety of reasons ranging from simple identification purposes to having legal protection for unique features of the products from imitations.\\n\\nBrands help consumers recognize certain quality parameters. In some cases, brands are just used to endow the product with unique story and character which itself can be a basis for product differentiation.\\n\\nIndividual brands have their own identity and the corporate or common name is not used to promote its equity.\\n\\nIndividual branding requires more expensive advertising and brand extensive brand creation investments.  By extension, each new brand does not benefit from the positive perceptions of earlier brands.\\n\\nBy contrast, family branding has several advantages.\\n\\nEach new product is quickly associated with the other products and brand in terms of quality and benefits.\\n\\nReduced or eliminated time for name identification and advertising for name recognition purposes.\",\"primaryKey\":[\"ProductId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ProductId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductName\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"ProductShortDescription\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductShortDescription\"},\"dataType\":\"string\",\"dataTypeLength\":20},{\"type\":\"Existing\",\"name\":\"ProductDescription\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512},{\"type\":\"Existing\",\"name\":\"ProductInternalName\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductInternalName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"ProductIntendedUse\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductIntendedUse\"},\"dataType\":\"string\",\"dataTypeLength\":2048},{\"type\":\"Existing\",\"name\":\"IntroductionDate\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"IntroductionDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"PlannedAbandonmentDate\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"PlannedAbandonmentDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ActualAbandonmentDate\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ActualAbandonmentDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"StorageInstructions\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"StorageInstructions\"},\"dataType\":\"string\",\"dataTypeLength\":2048},{\"type\":\"Existing\",\"name\":\"ShelfLifeDays\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ShelfLifeDays\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ConsumerStorageInstructions\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ConsumerStorageInstructions\"},\"dataType\":\"string\",\"dataTypeLength\":2048},{\"type\":\"Existing\",\"name\":\"ProductShippingInstructions\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductShippingInstructions\"},\"dataType\":\"string\",\"dataTypeLength\":2048},{\"type\":\"Existing\",\"name\":\"ConsumerUsageInstructions\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ConsumerUsageInstructions\"},\"dataType\":\"string\",\"dataTypeLength\":2048},{\"type\":\"Existing\",\"name\":\"HealthClaimDescription\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"HealthClaimDescription\"},\"dataType\":\"string\",\"dataTypeLength\":2048},{\"type\":\"Existing\",\"name\":\"MarketingMessageDescription\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"MarketingMessageDescription\"},\"dataType\":\"string\",\"dataTypeLength\":2048},{\"type\":\"Existing\",\"name\":\"GlobalTradeItemNumber\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"GlobalTradeItemNumber\"},\"dataType\":\"decimal\",\"dataTypeLength\":14,\"scale\":0},{\"type\":\"Existing\",\"name\":\"GtinName\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"GtinName\"},\"dataType\":\"string\",\"dataTypeLength\":1024},{\"type\":\"Existing\",\"name\":\"EuropeanArticleNumber\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"EuropeanArticleNumber\"},\"dataType\":\"decimal\",\"dataTypeLength\":13,\"scale\":0},{\"type\":\"Existing\",\"name\":\"UniversalProductCode\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"UniversalProductCode\"},\"dataType\":\"decimal\",\"dataTypeLength\":12,\"scale\":0},{\"type\":\"Existing\",\"name\":\"GpcBrickId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"GpcBrickId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ItemElectronicProductCode\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ItemElectronicProductCode\"},\"dataType\":\"decimal\",\"dataTypeLength\":14,\"scale\":0},{\"type\":\"Existing\",\"name\":\"ComponentPartIdentifier\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ComponentPartIdentifier\"},\"dataType\":\"string\",\"dataTypeLength\":30},{\"type\":\"Existing\",\"name\":\"PluCode\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"PluCode\"},\"dataType\":\"decimal\",\"dataTypeLength\":5,\"scale\":0},{\"type\":\"Existing\",\"name\":\"ProductNetContent\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductNetContent\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"NetContentUomId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"NetContentUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ResponsibilityCenterId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ResponsibilityCenterId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PatentNumber\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"PatentNumber\"},\"dataType\":\"string\",\"dataTypeLength\":12},{\"type\":\"Existing\",\"name\":\"PatentDate\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"PatentDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"PatentExpirationDate\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"PatentExpirationDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"Trademark\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"Trademark\"},\"dataType\":\"binary\"},{\"type\":\"Existing\",\"name\":\"ProductLogo\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductLogo\"},\"dataType\":\"binary\"},{\"type\":\"Existing\",\"name\":\"CopyrightNumber\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"CopyrightNumber\"},\"dataType\":\"string\",\"dataTypeLength\":18},{\"type\":\"Existing\",\"name\":\"CopyrightDate\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"CopyrightDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ProductLicenserName\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductLicenserName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"EligibleForExportIndicator\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"EligibleForExportIndicator\"},\"dataType\":\"boolean\"},{\"type\":\"Existing\",\"name\":\"ProductExportRestrictionIndicator\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductExportRestrictionIndicator\"},\"dataType\":\"boolean\"},{\"type\":\"Existing\",\"name\":\"ProductExportRestrictionStartDate\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductExportRestrictionStartDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ProductExportRestrictionEndDate\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductExportRestrictionEndDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ProductExportRestrictionDescription\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductExportRestrictionDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512},{\"type\":\"Existing\",\"name\":\"BaseProductQuantity\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"BaseProductQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":13,\"scale\":2},{\"type\":\"Existing\",\"name\":\"ProductLength\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductLength\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductPlanogramLength\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductPlanogramLength\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductLengthUomId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductLengthUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductWidth\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductWidth\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductPlanogramWidth\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductPlanogramWidth\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductWidthUomId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductWidthUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductHeight\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductHeight\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductPlanogramHeight\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductPlanogramHeight\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductHeightUomId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductHeightUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductVolume\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductVolume\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductVolumeUomId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductVolumeUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductNetWeight\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductNetWeight\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductNetWeightUomId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductNetWeightUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductGrossWeight\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductGrossWeight\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductGrossWeightUomId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductGrossWeightUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductDrainedWeight\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductDrainedWeight\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductDrainedWeightUomId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductDrainedWeightUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"MinimumStorageTemperature\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"MinimumStorageTemperature\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"MinimumStorageTemperatureUomId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"MinimumStorageTemperatureUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"MaximumStorageTemperature\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"MaximumStorageTemperature\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"MaximumStorageTemperatureUomId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"MaximumStorageTemperatureUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"MinimumStorageHumidity\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"MinimumStorageHumidity\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"MinimumStorageHumidityUomId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"MinimumStorageHumidityUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"MaximumStorageHumidity\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"MaximumStorageHumidity\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"MaximumStorageHumidityUomId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"MaximumStorageHumidityUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ReturnPolicyStatement\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ReturnPolicyStatement\"},\"dataType\":\"string\",\"dataTypeLength\":2048},{\"type\":\"Existing\",\"name\":\"ReturnPolicyPeriodInDays\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ReturnPolicyPeriodInDays\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ReplacementPolicyStatement\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ReplacementPolicyStatement\"},\"dataType\":\"string\",\"dataTypeLength\":2048},{\"type\":\"Existing\",\"name\":\"ReplacementPeriodInDays\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ReplacementPeriodInDays\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ExchangePolicyStatement\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ExchangePolicyStatement\"},\"dataType\":\"string\",\"dataTypeLength\":2048},{\"type\":\"Existing\",\"name\":\"ExchangePolicyPeriodInDays\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ExchangePolicyPeriodInDays\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductMustBeDeliveredDaysPriorToExpirationDate\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductMustBeDeliveredDaysPriorToExpirationDate\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"WarrantyId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"WarrantyId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ItemSku\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ItemSku\"},\"dataType\":\"string\",\"dataTypeLength\":20},{\"type\":\"Existing\",\"name\":\"PrimaryBrandId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"PrimaryBrandId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductTypeId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ProductTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PackageTypeId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"PackageTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PrimaryCountryOfOriginCountryId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"PrimaryCountryOfOriginCountryId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"GeographicAreaOfOriginGeographicAreaId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"GeographicAreaOfOriginGeographicAreaId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PrimaryColorId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"PrimaryColorId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"FlavorTypeId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"FlavorTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ScentTypeId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"ScentTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"SuitableAgeRatingId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"SuitableAgeRatingId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"SeasonalUsageId\",\"attributeReference\":{\"entity\":\"Product.cdm.json/Product\",\"name\":\"SeasonalUsageId\"},\"dataType\":\"integer\"}]}}}",
+			"Description": "A product is anything that can be offered to a market that might satisfy a want or need by potential customers.    That product is the sum of all physical, psychological, symbolic, and service attributes associated with it.\n\nThere are two basic types of products:\n\n- Tangible (physical)\n- Intangible (non-physical) such as services\n\nA service is a non-material or intangible product - such as professional consultancy, maintenance service, repair service etc.\nEach product has its own benefits, application, brand name, and packaging that gives it its own identity and distinguishing characteristics.\n\nEvery business or organization has business rules that define precisely what a product is.    While we intuitively know what a product is, we must quantify that knowledge and associated business rules with consistent definitions that can be implemented within the organization in strategies and applications.\n\nA product typically goes through five stages of development:\n\n(1) Idea Stage - involving a thorough evaluation of the potential product\n\n(2) Concept Stage - determines customer acceptance by testing and presentation to consumers and distribution channel members.   Specific aspects regarding quality, dependability, reliability, warranty, packaging, service, pricing, terms of sale, sales and distribution channels, advertising and promotions are evaluated.\n\n(3) Product Development Stage - transforms the prototype product into an actual product for mass sale.   This stage requires close interaction between both marketing and manufacturing.\n\n(4) Test Marketing Stage - may or may not be used since it is an expensive and time-consuming process.  Test marketing involves evaluating various product options and alternatives.\n\n(5) Commercialization - It is very expensive to launch a new product so commercialization only applies to those specific products that are actually going to be sold to the market.\n\nProducts tend to be categorized as either:  Industrial goods and consumer goods\n\nIndustrial goods are used to produce other products .\n\nIndustrial goods may be further divided into:\n\n- Raw materials\n- Equipment\n- Pre-built materials \n- Supplies.\n\nConsumer goods are intended for consumption by the general public.\n\nConsumer goods may be further divided into:\n\n- Durable goods\n- Nondurable goods\n- Packaged goods\n\nA product may be a member of a product family or product line.\n\nA product family is a grouping of products or services that are related to each other by common function, functionality, design platform or similar characteristics.\n\nMembers of a product family frequently have many common parts and assemblies.\n\nProduct families are the highest level of grouping for forecasting, capacity planning or related functions.\n\nEx:\nThe Apple Macintosh family of products consists of the product lines:\n- Mac mini\n- MacBook Pro\n- Mac Pro\n\nA product line is a grouping of products that are closely related in usage, functionality or marketing characteristics.\n\nA Product Family typically is created to address one or five functions:\n\n1. To increase profits and not erode the sales of existing products\n\n2. To attract additional Markets or Market Segments\n\n3. To counter competitor's products\n\n4. To fill a gap in an existing Product Family.\n\n5. To promote sales of other products in the family line\n\nLine Depth refers to the number of products in the product line.\n\nLine consistency refers to how closely related the products are that make up the product line.\n\nLine vulnerability refers to the percentage of sales or profits that are derived from only a few products in the product line.\n\nProduct width refers to the number of different product lines sold by a company.\n\nProduct mix refers to the total number of products sold in all product lines.\n\nLine extension refers to the adding of a new product to a line.\n\n\"Trading up or brand leveraging\" refers to adding a product of better quality to a product line than the other products in that line.\n\n\"Trading down\" refers to adding a product of lesser quality to a product line than the other products in that line.\n\nIf a line of products is sold with the same brand name, this is referred to as family branding.\nStrategy and decisions regarding a product line are usually incorporated in a high-level marketing plan addressing product line strategy, sales, channels, distribution channels, pricing and related issues.\nA product-line manager is responsible for a product line and supervises several product managers who are responsible for individual products within the line.\nProduct-line managers typically have the following responsibilities:\n- Expansion and composition of a product line\n- Evaluate the effects of product mixes on the profitability of other items in the line\n- Planning and allocation of resources to individual products in the line\nA product is normally associated with a brand strategy - manufacturer, private or generic.\n\n1. Manufacturer-  or 'national' branding in which the brand is assigned by the manufacturer of the Product.\n\n2. Private - or 'dealer' branding in which the brand is assigned by the retailer or wholesaler of the Product.\n\n3. Generic - in which the Product is not marked with any identification.   Generic brands are a means for manufacturers to increase profits by saving on advertising, packaging or other costs associated with manufacturer or private branding.\n\nA brand is name, term, sign, symbol or design or a combination of these which identify the goods or services and differentiate them from those of competitors'\n\nA Trade mark is a brand or some part of the brand that is given legal protection because it is capable of exclusive appropriation and representation.\n\nManufacturers can use their own brands (known as Manufacturers' brands) or brands of their distributors (Distributors' brands).\n\nManufacturers/ distributors use brand names for a variety of reasons ranging from simple identification purposes to having legal protection for unique features of the products from imitations.\n\nBrands help consumers recognize certain quality parameters. In some cases, brands are just used to endow the product with unique story and character which itself can be a basis for product differentiation.\n\nIndividual brands have their own identity and the corporate or common name is not used to promote its equity.\n\nIndividual branding requires more expensive advertising and brand extensive brand creation investments.  By extension, each new brand does not benefit from the positive perceptions of earlier brands.\n\nBy contrast, family branding has several advantages.\n\nEach new product is quickly associated with the other products and brand in terms of quality and benefits.\n\nReduced or eliminated time for name identification and advertising for name recognition purposes.",
+			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#003C96\"}",
+			"spark.sql.sources.provider": "csv",
+			"spark.sql.sources.schema.numParts": "2",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"ProductId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"ProductName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductShortDescription\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductDescription\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductInternalName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductIntendedUse\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"IntroductionDate\",\"type\":\"date\",\"nullable\":true,\"metadata\":{}},{\"name\":\"PlannedAbandonmentDate\",\"type\":\"date\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ActualAbandonmentDate\",\"type\":\"date\",\"nullable\":true,\"metadata\":{}},{\"name\":\"StorageInstructions\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ShelfLifeDays\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ConsumerStorageInstructions\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductShippingInstructions\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ConsumerUsageInstructions\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"HealthClaimDescription\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"MarketingMessageDescription\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"GlobalTradeItemNumber\",\"type\":\"decimal(14,0)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"GtinName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"EuropeanArticleNumber\",\"type\":\"decimal(13,0)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"UniversalProductCode\",\"type\":\"decimal(12,0)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"GpcBrickId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ItemElectronicProductCode\",\"type\":\"decimal(14,0)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ComponentPartIdentifier\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"PluCode\",\"type\":\"decimal(5,0)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductNetContent\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"NetContentUomId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ResponsibilityCenterId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"PatentNumber\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"PatentDate\",\"type\":\"date\",\"nullable\":true,\"metadata\":{}},{\"name\":\"PatentExpirationDate\",\"type\":\"date\",\"nullable\":true,\"metadata\":{}},{\"name\":\"Trademark\",\"type\":\"binary\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductLogo\",\"type\":\"binary\",\"nullable\":true,\"metadata\":{}},{\"name\":\"CopyrightNumber\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"CopyrightDate\",\"type\":\"date\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductLicenserName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"EligibleForExportIndicator\",\"type\":\"boolean\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductExportRestrictionIndicator\",\"type\":\"boolean\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductExportRestrictionStartDate\",\"type\":\"date\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductExportRestrictionEndDate\",\"type\":\"date\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductExportRestrictionDescription\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"BaseProductQuantity\",\"type\":\"decimal(13,2)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductLength\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductPlanogramLength\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductLengthUomId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductWidth\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductPlanogramWidth\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductWidthUomId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductHeight\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductPlanogramHeight\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductHeightUomId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductVolume\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"",
+			"spark.sql.sources.schema.part.1": "ProductVolumeUomId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductNetWeight\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductNetWeightUomId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductGrossWeight\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductGrossWeightUomId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductDrainedWeight\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductDrainedWeightUomId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"MinimumStorageTemperature\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"MinimumStorageTemperatureUomId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"MaximumStorageTemperature\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"MaximumStorageTemperatureUomId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"MinimumStorageHumidity\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"MinimumStorageHumidityUomId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"MaximumStorageHumidity\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"MaximumStorageHumidityUomId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ReturnPolicyStatement\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ReturnPolicyPeriodInDays\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ReplacementPolicyStatement\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ReplacementPeriodInDays\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ExchangePolicyStatement\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ExchangePolicyPeriodInDays\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductMustBeDeliveredDaysPriorToExpirationDate\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"WarrantyId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ItemSku\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"PrimaryBrandId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ProductTypeId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"PackageTypeId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"PrimaryCountryOfOriginCountryId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"GeographicAreaOfOriginGeographicAreaId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"PrimaryColorId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"FlavorTypeId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"ScentTypeId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"SuitableAgeRatingId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"SeasonalUsageId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}}]}",
+			"PrimaryKeys": "ProductId"
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "6b10699e-44c1-45c4-9dc2-53c4726778a0",
+		"Description": "A product is anything that can be offered to a market that might satisfy a want or need by potential customers.    That product is the sum of all physical, psychological, symbolic, and service attributes associated with it.\n\nThere are two basic types of products:\n\n- Tangible (physical)\n- Intangible (non-physical) such as services\n\nA service is a non-material or intangible product - such as professional consultancy, maintenance service, repair service etc.\nEach product has its own benefits, application, brand name, and packaging that gives it its own identity and distinguishing characteristics.\n\nEvery business or organization has business rules that define precisely what a product is.    While we intuitively know what a product is, we must quantify that knowledge and associated business rules with consistent definitions that can be implemented within the organization in strategies and applications.\n\nA product typically goes through five stages of development:\n\n(1) Idea Stage - involving a thorough evaluation of the potential product\n\n(2) Concept Stage - determines customer acceptance by testing and presentation to consumers and distribution channel members.   Specific aspects regarding quality, dependability, reliability, warranty, packaging, service, pricing, terms of sale, sales and distribution channels, advertising and promotions are evaluated.\n\n(3) Product Development Stage - transforms the prototype product into an actual product for mass sale.   This stage requires close interaction between both marketing and manufacturing.\n\n(4) Test Marketing Stage - may or may not be used since it is an expensive and time-consuming process.  Test marketing involves evaluating various product options and alternatives.\n\n(5) Commercialization - It is very expensive to launch a new product so commercialization only applies to those specific products that are actually going to be sold to the market.\n\nProducts tend to be categorized as either:  Industrial goods and consumer goods\n\nIndustrial goods are used to produce other products .\n\nIndustrial goods may be further divided into:\n\n- Raw materials\n- Equipment\n- Pre-built materials \n- Supplies.\n\nConsumer goods are intended for consumption by the general public.\n\nConsumer goods may be further divided into:\n\n- Durable goods\n- Nondurable goods\n- Packaged goods\n\nA product may be a member of a product family or product line.\n\nA product family is a grouping of products or services that are related to each other by common function, functionality, design platform or similar characteristics.\n\nMembers of a product family frequently have many common parts and assemblies.\n\nProduct families are the highest level of grouping for forecasting, capacity planning or related functions.\n\nEx:\nThe Apple Macintosh family of products consists of the product lines:\n- Mac mini\n- MacBook Pro\n- Mac Pro\n\nA product line is a grouping of products that are closely related in usage, functionality or marketing characteristics.\n\nA Product Family typically is created to address one or five functions:\n\n1. To increase profits and not erode the sales of existing products\n\n2. To attract additional Markets or Market Segments\n\n3. To counter competitor's products\n\n4. To fill a gap in an existing Product Family.\n\n5. To promote sales of other products in the family line\n\nLine Depth refers to the number of products in the product line.\n\nLine consistency refers to how closely related the products are that make up the product line.\n\nLine vulnerability refers to the percentage of sales or profits that are derived from only a few products in the product line.\n\nProduct width refers to the number of different product lines sold by a company.\n\nProduct mix refers to the total number of products sold in all product lines.\n\nLine extension refers to the adding of a new product to a line.\n\n\"Trading up or brand leveraging\" refers to adding a product of better quality to a product line than the other products in that line.\n\n\"Trading down\" refers to adding a product of lesser quality to a product line than the other products in that line.\n\nIf a line of products is sold with the same brand name, this is referred to as family branding.\nStrategy and decisions regarding a product line are usually incorporated in a high-level marketing plan addressing product line strategy, sales, channels, distribution channels, pricing and related issues.\nA product-line manager is responsible for a product line and supervises several product managers who are responsible for individual products within the line.\nProduct-line managers typically have the following responsibilities:\n- Expansion and composition of a product line\n- Evaluate the effects of product mixes on the profitability of other items in the line\n- Planning and allocation of resources to individual products in the line\nA product is normally associated with a brand strategy - manufacturer, private or generic.\n\n1. Manufacturer-  or 'national' branding in which the brand is assigned by the manufacturer of the Product.\n\n2. Private - or 'dealer' branding in which the brand is assigned by the retailer or wholesaler of the Product.\n\n3. Generic - in which the Product is not marked with any identification.   Generic brands are a means for manufacturers to increase profits by saving on advertising, packaging or other costs associated with manufacturer or private branding.\n\nA brand is name, term, sign, symbol or design or a combination of these which identify the goods or services and differentiate them from those of competitors'\n\nA Trade mark is a brand or some part of the brand that is given legal protection because it is capable of exclusive appropriation and representation.\n\nManufacturers can use their own brands (known as Manufacturers' brands) or brands of their distributors (Distributors' brands).\n\nManufacturers/ distributors use brand names for a variety of reasons ranging from simple identification purposes to having legal protection for unique features of the products from imitations.\n\nBrands help consumers recognize certain quality parameters. In some cases, brands are just used to endow the product with unique story and character which itself can be a basis for product differentiation.\n\nIndividual brands have their own identity and the corporate or common name is not used to promote its equity.\n\nIndividual branding requires more expensive advertising and brand extensive brand creation investments.  By extension, each new brand does not benefit from the positive perceptions of earlier brands.\n\nBy contrast, family branding has several advantages.\n\nEach new product is quickly associated with the other products and brand in terms of quality and benefits.\n\nReduced or eliminated time for name identification and advertising for name recognition purposes."
+	},
+	"type": "TABLE"
+}

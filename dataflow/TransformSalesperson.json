@@ -1,0 +1,35 @@
+{
+	"name": "TransformSalesperson",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
+					"name": "Employee"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Salesperson",
+						"type": "DatasetReference"
+					},
+					"name": "ADLSG2output"
+				}
+			],
+			"transformations": [
+				{
+					"name": "CombineFirstLastName"
+				},
+				{
+					"name": "SelectColumns"
+				}
+			],
+			"script": "source(output(\n\t\tEmployeeKey as integer,\n\t\tParentEmployeeKey as integer,\n\t\tEmployeeNationalIDAlternateKey as string,\n\t\tParentEmployeeNationalIDAlternateKey as string,\n\t\tSalesTerritoryKey as integer,\n\t\tFirstName as string,\n\t\tLastName as string,\n\t\tMiddleName as string,\n\t\tNameStyle as boolean,\n\t\tTitle as string,\n\t\tHireDate as date,\n\t\tBirthDate as date,\n\t\tLoginID as string,\n\t\tEmailAddress as string,\n\t\tPhone as string,\n\t\tMaritalStatus as string,\n\t\tEmergencyContactName as string,\n\t\tEmergencyContactPhone as string,\n\t\tSalariedFlag as boolean,\n\t\tGender as string,\n\t\tPayFrequency as integer,\n\t\tBaseRate as decimal(19,4),\n\t\tVacationHours as short,\n\t\tSickLeaveHours as short,\n\t\tCurrentFlag as boolean,\n\t\tSalesPersonFlag as boolean,\n\t\tDepartmentName as string,\n\t\tStartDate as date,\n\t\tEndDate as date,\n\t\tStatus as string,\n\t\tEmployeePhoto as binary\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tlimit: 100,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tquery: 'select * from dbo.DimEmployee where SalariedFlag = 1',\n\tformat: 'query') ~> Employee\nEmployee derive(Salesperson = concatWS(\" \",FirstName,LastName)) ~> CombineFirstLastName\nCombineFirstLastName select(mapColumn(\n\t\tEmployeeKey,\n\t\tEmployeeID = EmployeeNationalIDAlternateKey,\n\t\tUPN = EmailAddress,\n\t\tSalesperson,\n\t\tTitle\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nSelectColumns sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tStateProvince as string,\n\t\tTotalOrders as long\n\t),\n\tformat: 'parquet',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> ADLSG2output"
+		}
+	}
+}

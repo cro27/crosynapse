@@ -1,0 +1,121 @@
+{
+	"name": "TransactionType",
+	"properties": {
+		"Name": "TransactionType",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "Retail_bpb"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [
+				{
+					"Name": "TransactionTypeId",
+					"Description": "The unique identifier of a Transaction Type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionTypeName",
+					"Description": "The name of a Transaction Type.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "TransactionTypeDescription",
+					"Description": "The description of a Transaction Type.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"ColumnSetEntityName": "61e01c4a-a628-4b68-8371-7bdb546baffa",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/Retail_bpb/TransactionType",
+					"delimiter": ",",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/Retail_bpb/TransactionType",
+				"Properties": {
+					"LinkedServiceName": "crosynapse-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": null,
+		"CreateTime": 0,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionType\",\"path\":\"TransactionType.cdm.json/TransactionType\"},\"description\":\"A classification of transaction based on common function.\\n\\nEx:\\n- In-store Purchase \\n- On-line Purchase \\n- Order\\n- Return\\n- Refund\\n- Exchange\\n- Payment\\n- Rebate\\n- Layaway\\n- Credit\\n- Receipt\\n- Coupon Redemption\\n- Securities Lending\\n- Trade Order\\n- Transfer\\n- Add funds to account\\n- Debit Account payout\\n- Buy\\n- Sell\\n- Borrow\\n- Account Maintenance\\n- Mark To Market\",\"primaryKey\":[\"TransactionTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"TransactionTypeId\",\"attributeReference\":{\"entity\":\"TransactionType.cdm.json/TransactionType\",\"name\":\"TransactionTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"TransactionTypeName\",\"attributeReference\":{\"entity\":\"TransactionType.cdm.json/TransactionType\",\"name\":\"TransactionTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"TransactionTypeDescription\",\"attributeReference\":{\"entity\":\"TransactionType.cdm.json/TransactionType\",\"name\":\"TransactionTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512}]}}}",
+			"Description": "A classification of transaction based on common function.\n\nEx:\n- In-store Purchase \n- On-line Purchase \n- Order\n- Return\n- Refund\n- Exchange\n- Payment\n- Rebate\n- Layaway\n- Credit\n- Receipt\n- Coupon Redemption\n- Securities Lending\n- Trade Order\n- Transfer\n- Add funds to account\n- Debit Account payout\n- Buy\n- Sell\n- Borrow\n- Account Maintenance\n- Mark To Market",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#A33E2C\"}",
+			"spark.sql.sources.provider": "csv",
+			"spark.sql.sources.schema.numParts": "1",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"TransactionTypeId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"TransactionTypeName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"TransactionTypeDescription\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}",
+			"PrimaryKeys": "TransactionTypeId"
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "f2284958-c657-4244-9462-4889f561d8b5",
+		"Description": "A classification of transaction based on common function.\n\nEx:\n- In-store Purchase \n- On-line Purchase \n- Order\n- Return\n- Refund\n- Exchange\n- Payment\n- Rebate\n- Layaway\n- Credit\n- Receipt\n- Coupon Redemption\n- Securities Lending\n- Trade Order\n- Transfer\n- Add funds to account\n- Debit Account payout\n- Buy\n- Sell\n- Borrow\n- Account Maintenance\n- Mark To Market"
+	},
+	"type": "TABLE"
+}

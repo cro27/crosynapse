@@ -1,0 +1,751 @@
+{
+	"name": "AustraliaLocation",
+	"properties": {
+		"Name": "AustraliaLocation",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "Retail_bpb"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [
+				{
+					"Name": "LocationId",
+					"Description": "The unique identifier of a Location.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "AddressLine1",
+					"Description": "The 'street' component of a location. Includes street name, apartment, suite number or PO Box.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 512,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "AddressLine2",
+					"Description": "The 'street' component of a location. Includes street name, apartment, suite number or PO Box.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 512,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "SuburbPlaceLocality",
+					"Description": "Defines the Suburb Place Locality as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "StateTerritoryCode",
+					"Description": "The unique identifier of a State Territory.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "Postcode",
+					"Description": "Defines the Postcode as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 1024,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "FlatUnitTypeId",
+					"Description": "The unique identifier of a Flat Unit type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "FlatUnitNumber",
+					"Description": "Defines the Flat Unit Number as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "FloorLevelTypeId",
+					"Description": "The unique identifier of a Floor Level type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "FloorLevelNumber",
+					"Description": "Defines the Floor Level Number as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "BuildingPropertyName1",
+					"Description": "Defines the Building Property Name 1 as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "BuildingPropertyName2",
+					"Description": "Defines the Building Property Name 2  as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LocationDescriptor",
+					"Description": "Defines the Location Descriptor as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 1024,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "HouseNumber1",
+					"Description": "Defines the House Number 1  as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "HouseNumber1Suffix",
+					"Description": "Defines the Building House Number 1 Suffix  as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 30,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "HouseNumber2",
+					"Description": "Defines the House Number 2  as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "HouseNumber2Suffix",
+					"Description": "Defines the House Number 2 Suffix as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 30,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LotNumber",
+					"Description": "Defines the Lot Number as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 6,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "StreetName",
+					"Description": "Defines the Street Name as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "StreetTypeId",
+					"Description": "The unique identifier of a Street type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "StreetSuffixId",
+					"Description": "The unique identifier of a Street Suffix.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PostalDeliveryTypeId",
+					"Description": "The unique identifier of a Postal Delivery type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PostalDeliveryPrefix",
+					"Description": "Defines the Postal Delivery Prefix as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 30,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PostalDeliveryNumber",
+					"Description": "Defines the Postal Delivery Number as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 11,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PostalDeliverySuffix",
+					"Description": "Defines the Postal Delivery Suffix as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 30,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "DeliveryPoint",
+					"Description": "Defines the Delivery Point as per Australian Standard AS 4590.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 8,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LocalGovernmentAreaCode",
+					"Description": "The unique identifier of a LGA.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "StatisticalDistrictCode",
+					"Description": "The unique identifier of a Statistical District.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 4,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "StatisticalDivisionCode",
+					"Description": "The unique identifier of a Statistical Division.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "StatisticalSubdivisionCode",
+					"Description": "The unique identifier of a Statistical Subdivision.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 4,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "StatisticalLocationAreaCode",
+					"Description": "The unique identifier of a Statistical Location Area.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 4,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "CensusCollectionDistrictCode",
+					"Description": "The unique identifier of a Census Collection District Code.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 6,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "MajorStatisticalRegionCode",
+					"Description": "The code that uniquely identifies a Major Statistical Region.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "StatisticalRegionCode",
+					"Description": "The unique identifier of a Statistical Region.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "StatisticalRegionSectorCode",
+					"Description": "The code that uniquely identifies a Statistical Region Sector.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "SectionOfStateCode",
+					"Description": "The unique identifier of a Section Of State.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "RemotenessAreaCode",
+					"Description": "The unique identifier of a Remoteness Area (RA).",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "UrbanCenterLocalityCode",
+					"Description": "The unique identifier of a Urban Center/Locality.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 5,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "AsgsStateTerritoryCode",
+					"Description": "The unique identifier of an ASGS State Territory.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "AsgsSa4Code",
+					"Description": "The unique identifier of a ASGS Statistical Area Level 4.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "AsgsSa3Code",
+					"Description": "The unique identifier of a ASGS Statistical Area Level 3.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "AsgsSa2MainCode",
+					"Description": "The unique identifier of a ASGS Statistical Area Level 2.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "AsgsSa1MainCode",
+					"Description": "The unique identifier of a ASGS Statistical Area Level 1.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "AsgsMeshBlockCode",
+					"Description": "The unique identifier of a ASGS Mesh Block.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "AsgsGccsaCode",
+					"Description": "The unique identifier of a ASGS Greater Capital City Statistical Area.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"ColumnSetEntityName": "09d5f042-9aa2-42b7-98ca-5b7bae270951",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/Retail_bpb/AustraliaLocation",
+					"delimiter": ",",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/Retail_bpb/AustraliaLocation",
+				"Properties": {
+					"LinkedServiceName": "crosynapse-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": null,
+		"CreateTime": 0,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"AustraliaLocation\",\"path\":\"AustraliaLocation.cdm.json/AustraliaLocation\"},\"description\":\"A location in Australia. Uses mailing address formats and census data that are commonly used in Australia.\",\"primaryKey\":[\"LocationId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"LocationId\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"LocationId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"AddressLine1\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"AddressLine1\"},\"dataType\":\"string\",\"dataTypeLength\":512},{\"type\":\"Existing\",\"name\":\"AddressLine2\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"AddressLine2\"},\"dataType\":\"string\",\"dataTypeLength\":512},{\"type\":\"Existing\",\"name\":\"SuburbPlaceLocality\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"SuburbPlaceLocality\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"StateTerritoryCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"StateTerritoryCode\"},\"dataType\":\"string\",\"dataTypeLength\":1},{\"type\":\"Existing\",\"name\":\"Postcode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"Postcode\"},\"dataType\":\"string\",\"dataTypeLength\":1024},{\"type\":\"Existing\",\"name\":\"FlatUnitTypeId\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"FlatUnitTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"FlatUnitNumber\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"FlatUnitNumber\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"FloorLevelTypeId\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"FloorLevelTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"FloorLevelNumber\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"FloorLevelNumber\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"BuildingPropertyName1\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"BuildingPropertyName1\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"BuildingPropertyName2\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"BuildingPropertyName2\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"LocationDescriptor\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"LocationDescriptor\"},\"dataType\":\"string\",\"dataTypeLength\":1024},{\"type\":\"Existing\",\"name\":\"HouseNumber1\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"HouseNumber1\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"HouseNumber1Suffix\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"HouseNumber1Suffix\"},\"dataType\":\"string\",\"dataTypeLength\":30},{\"type\":\"Existing\",\"name\":\"HouseNumber2\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"HouseNumber2\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"HouseNumber2Suffix\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"HouseNumber2Suffix\"},\"dataType\":\"string\",\"dataTypeLength\":30},{\"type\":\"Existing\",\"name\":\"LotNumber\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"LotNumber\"},\"dataType\":\"string\",\"dataTypeLength\":6},{\"type\":\"Existing\",\"name\":\"StreetName\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"StreetName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"StreetTypeId\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"StreetTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"StreetSuffixId\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"StreetSuffixId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PostalDeliveryTypeId\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"PostalDeliveryTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PostalDeliveryPrefix\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"PostalDeliveryPrefix\"},\"dataType\":\"string\",\"dataTypeLength\":30},{\"type\":\"Existing\",\"name\":\"PostalDeliveryNumber\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"PostalDeliveryNumber\"},\"dataType\":\"string\",\"dataTypeLength\":11},{\"type\":\"Existing\",\"name\":\"PostalDeliverySuffix\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"PostalDeliverySuffix\"},\"dataType\":\"string\",\"dataTypeLength\":30},{\"type\":\"Existing\",\"name\":\"DeliveryPoint\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"DeliveryPoint\"},\"dataType\":\"string\",\"dataTypeLength\":8},{\"type\":\"Existing\",\"name\":\"LocalGovernmentAreaCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"LocalGovernmentAreaCode\"},\"dataType\":\"string\",\"dataTypeLength\":3},{\"type\":\"Existing\",\"name\":\"StatisticalDistrictCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"StatisticalDistrictCode\"},\"dataType\":\"string\",\"dataTypeLength\":4},{\"type\":\"Existing\",\"name\":\"StatisticalDivisionCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"StatisticalDivisionCode\"},\"dataType\":\"string\",\"dataTypeLength\":3},{\"type\":\"Existing\",\"name\":\"StatisticalSubdivisionCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"StatisticalSubdivisionCode\"},\"dataType\":\"string\",\"dataTypeLength\":4},{\"type\":\"Existing\",\"name\":\"StatisticalLocationAreaCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"StatisticalLocationAreaCode\"},\"dataType\":\"string\",\"dataTypeLength\":4},{\"type\":\"Existing\",\"name\":\"CensusCollectionDistrictCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"CensusCollectionDistrictCode\"},\"dataType\":\"decimal\",\"dataTypeLength\":6,\"scale\":0},{\"type\":\"Existing\",\"name\":\"MajorStatisticalRegionCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"MajorStatisticalRegionCode\"},\"dataType\":\"string\",\"dataTypeLength\":2},{\"type\":\"Existing\",\"name\":\"StatisticalRegionCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"StatisticalRegionCode\"},\"dataType\":\"string\",\"dataTypeLength\":2},{\"type\":\"Existing\",\"name\":\"StatisticalRegionSectorCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"StatisticalRegionSectorCode\"},\"dataType\":\"string\",\"dataTypeLength\":2},{\"type\":\"Existing\",\"name\":\"SectionOfStateCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"SectionOfStateCode\"},\"dataType\":\"string\",\"dataTypeLength\":1},{\"type\":\"Existing\",\"name\":\"RemotenessAreaCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"RemotenessAreaCode\"},\"dataType\":\"string\",\"dataTypeLength\":1},{\"type\":\"Existing\",\"name\":\"UrbanCenterLocalityCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"UrbanCenterLocalityCode\"},\"dataType\":\"string\",\"dataTypeLength\":5},{\"type\":\"Existing\",\"name\":\"AsgsStateTerritoryCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"AsgsStateTerritoryCode\"},\"dataType\":\"string\",\"dataTypeLength\":3},{\"type\":\"Existing\",\"name\":\"AsgsSa4Code\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"AsgsSa4Code\"},\"dataType\":\"string\",\"dataTypeLength\":3},{\"type\":\"Existing\",\"name\":\"AsgsSa3Code\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"AsgsSa3Code\"},\"dataType\":\"string\",\"dataTypeLength\":3},{\"type\":\"Existing\",\"name\":\"AsgsSa2MainCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"AsgsSa2MainCode\"},\"dataType\":\"string\",\"dataTypeLength\":3},{\"type\":\"Existing\",\"name\":\"AsgsSa1MainCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"AsgsSa1MainCode\"},\"dataType\":\"string\",\"dataTypeLength\":3},{\"type\":\"Existing\",\"name\":\"AsgsMeshBlockCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"AsgsMeshBlockCode\"},\"dataType\":\"string\",\"dataTypeLength\":3},{\"type\":\"Existing\",\"name\":\"AsgsGccsaCode\",\"attributeReference\":{\"entity\":\"AustraliaLocation.cdm.json/AustraliaLocation\",\"name\":\"AsgsGccsaCode\"},\"dataType\":\"string\",\"dataTypeLength\":3}]}}}",
+			"Description": "A location in Australia. Uses mailing address formats and census data that are commonly used in Australia.",
+			"DisplayFolderInfo": "{\"name\":\"Geography\",\"colorCode\":\"#8170C2\"}",
+			"spark.sql.sources.provider": "csv",
+			"spark.sql.sources.schema.numParts": "1",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"LocationId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"AddressLine1\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"AddressLine2\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"SuburbPlaceLocality\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"StateTerritoryCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"Postcode\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"FlatUnitTypeId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"FlatUnitNumber\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"FloorLevelTypeId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"FloorLevelNumber\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"BuildingPropertyName1\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"BuildingPropertyName2\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"LocationDescriptor\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"HouseNumber1\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"HouseNumber1Suffix\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"HouseNumber2\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"HouseNumber2Suffix\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"LotNumber\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"StreetName\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"StreetTypeId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"StreetSuffixId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"PostalDeliveryTypeId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"PostalDeliveryPrefix\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"PostalDeliveryNumber\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"PostalDeliverySuffix\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"DeliveryPoint\",\"type\":\"string\",\"nullable\":false,\"metadata\":{}},{\"name\":\"LocalGovernmentAreaCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"StatisticalDistrictCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"StatisticalDivisionCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"StatisticalSubdivisionCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"StatisticalLocationAreaCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"CensusCollectionDistrictCode\",\"type\":\"decimal(6,0)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"MajorStatisticalRegionCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"StatisticalRegionCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"StatisticalRegionSectorCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"SectionOfStateCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"RemotenessAreaCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"UrbanCenterLocalityCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"AsgsStateTerritoryCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"AsgsSa4Code\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"AsgsSa3Code\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"AsgsSa2MainCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"AsgsSa1MainCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"AsgsMeshBlockCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"AsgsGccsaCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}",
+			"PrimaryKeys": "LocationId"
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "cbc25b9d-a81d-4ef3-8f95-de4e94e7a365",
+		"Description": "A location in Australia. Uses mailing address formats and census data that are commonly used in Australia."
+	},
+	"type": "TABLE"
+}

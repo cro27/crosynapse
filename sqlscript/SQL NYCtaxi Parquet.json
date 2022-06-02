@@ -1,0 +1,16 @@
+{
+	"name": "SQL NYCtaxi Parquet",
+	"properties": {
+		"content": {
+			"query": "-- Query set of parquet files\nSELECT\n        YEAR(tpepPickupDateTime),\n        passengerCount,\n        COUNT(*) AS cnt\nFROM  \n    OPENROWSET(\n        BULK 'puYear=2018/puMonth=*/*.snappy.parquet',\n        DATA_SOURCE = 'YellowTaxi',\n        FORMAT='PARQUET'\n    ) WITH (\n        tpepPickupDateTime DATETIME2,\n        passengerCount INT\n    ) AS nyc\nGROUP BY\n    passengerCount,\n    YEAR(tpepPickupDateTime)\nORDER BY\n    YEAR(tpepPickupDateTime),\n    passengerCount;\n\n-- Automatic schema inference\nSELECT TOP 10 *\nFROM  \n    OPENROWSET(\n        BULK 'puYear=2018/puMonth=*/*.snappy.parquet',\n        DATA_SOURCE = 'YellowTaxi',\n        FORMAT='PARQUET'\n    ) AS nyc\n\n-- Query partitioned data\nSELECT\n        YEAR(tpepPickupDateTime),\n        passengerCount,\n        COUNT(*) AS cnt\nFROM  \n    OPENROWSET(\n        BULK 'puYear=*/puMonth=*/*.snappy.parquet',\n        DATA_SOURCE = 'YellowTaxi',\n        FORMAT='PARQUET'\n    ) nyc\nWHERE\n    nyc.filepath(1) = 2017\n    AND nyc.filepath(2) IN (1, 2, 3)\n    AND tpepPickupDateTime BETWEEN CAST('1/1/2017' AS datetime) AND CAST('3/31/2017' AS datetime)\nGROUP BY\n    passengerCount,\n    YEAR(tpepPickupDateTime)\nORDER BY\n    YEAR(tpepPickupDateTime),\n    passengerCount;\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"name": "Demo",
+				"type": "SqlOnDemand"
+			}
+		},
+		"type": "SqlQuery"
+	}
+}

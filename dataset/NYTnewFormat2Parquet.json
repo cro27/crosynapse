@@ -1,0 +1,21 @@
+{
+	"name": "NYTnewFormat2Parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ocpmelbadls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "csv-new/format2",
+				"fileSystem": "nytaxi-demo"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

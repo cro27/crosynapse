@@ -1,0 +1,29 @@
+{
+	"name": "relationship-syzctglzzk",
+	"properties": {
+		"Name": "relationship-syzctglzzk",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "Retail_bpb"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Store",
+		"ToTableName": "LoyaltyAccount",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "StoreId",
+				"ToColumnName": "SignUpStoreId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Store.cdm.json/Store\",\"toEntity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"joinPairs\":[{\"fromAttribute\":\"StoreId\",\"toAttribute\":\"SignUpStoreId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "0a72472d-074d-4625-b00c-1fa545067c00"
+	},
+	"type": "RELATIONSHIP"
+}

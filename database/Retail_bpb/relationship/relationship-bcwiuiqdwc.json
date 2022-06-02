@@ -1,0 +1,29 @@
+{
+	"name": "relationship-bcwiuiqdwc",
+	"properties": {
+		"Name": "relationship-bcwiuiqdwc",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "Retail_bpb"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Channel",
+		"ToTableName": "LoyaltyAccount",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "ChannelId",
+				"ToColumnName": "SignUpChannelId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Channel.cdm.json/Channel\",\"toEntity\":\"LoyaltyAccount.cdm.json/LoyaltyAccount\",\"joinPairs\":[{\"fromAttribute\":\"ChannelId\",\"toAttribute\":\"SignUpChannelId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "af91b89c-cb90-4386-a73d-b3ef83dd1101"
+	},
+	"type": "RELATIONSHIP"
+}

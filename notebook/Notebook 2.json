@@ -1,0 +1,58 @@
+{
+	"name": "Notebook 2",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "SparkPoolMedium",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2
+		},
+		"metadata": {
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/37b2d7dc-7393-47ad-8c51-90c89944370c/resourceGroups/AzSynapse/providers/Microsoft.Synapse/workspaces/crosynapse/bigDataPools/SparkPoolMedium",
+				"name": "SparkPoolMedium",
+				"type": "Spark",
+				"endpoint": "https://crosynapse.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SparkPoolMedium",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 3,
+				"cores": 8,
+				"memory": 56
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"%%pyspark\n",
+					"df = spark.sql(\"SELECT * FROM nyctaxi.passengercountstats\")\n",
+					"df = df.repartition(1) # This ensure we'll get a single file during write()\n",
+					"df.write.mode(\"overwrite\").csv(\"/NYCTaxi/PassengerCountStats.csv\")\n",
+					"df.write.mode(\"overwrite\").parquet(\"/NYCTaxi/PassengerCountStats.parquet\")"
+				],
+				"execution_count": 3
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"%sql "
+				],
+				"execution_count": null
+			}
+		]
+	}
+}

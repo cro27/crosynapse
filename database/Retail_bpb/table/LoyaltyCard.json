@@ -1,0 +1,274 @@
+{
+	"name": "LoyaltyCard",
+	"properties": {
+		"Name": "LoyaltyCard",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Namespace": {
+			"SchemaName": null,
+			"DatabaseName": "Retail_bpb"
+		},
+		"StorageDescriptor": {
+			"Distribution": null,
+			"Columns": [
+				{
+					"Name": "LoyaltyCardId",
+					"Description": "The unique identifier of a Loyalty Card.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "CardIssuedTimestamp",
+					"Description": "The timestamp for which the Loyalty Card was issued to the Loyalty Account Member.",
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "CardTerminatedTimestamp",
+					"Description": "The timestamp associated with when the card was terminated, usually at the cardholders request due to loss or damage.",
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyCardNumber",
+					"Description": "Loyalty Card Account Numbers follow a variety of different formats. The following is the definition associated with the Primary Account Number (PAN) of a credit card. While many loyalty cards follow a similar format, not all do.\n\nThe number of the payment card. It is also referred to as the Primary Account Number (PAN) = The number that is embossed, encoded, or both, on a plastic card that identifies the issuer and the particular cardholder account.\n\nThe account number on the card, which is unique to every cardholder. The card number is used to identify the purchaser for authorization and billing purposes.\n\nThe Payment Card Industry (PCI) Data Security Standard (DSS) requires that the PAN be stored with strong encryption at all times and masked whenever it is displayed.\n\nCredit card numbers are a special case of ISO/IEC 7812 bank card numbers.\nAn ISO/IEC 7812 number contains a single-digit Major Industry Identifier (MII), a six-digit Issuer Identification Number (IIN), an account number, and a single digit check sum calculated using the Luhn algorithm. The MII is considered to be part of the IIN.\nThe card number's prefix is the sequence of digits at the beginning of the number that determine the credit card network to which the number belongs.\n\nThe first digit of your credit card number is the Major Industry Identifier (MII), which represents the category of entity which issued your credit card. Different MII digits represent the following issuer categories:\n\nMII Digit Value Issuer Category\n\n1 Airlines\n2 Airlines and other industry assignments\n3 Travel and entertainment\n4 Banking and financial\n5 Banking and financial\n6 Merchandizing and banking\n7 Petroleum\n8 Telecommunications and other industry assignments\n9 National assignment\n\nIssuer Identification Number\nThe first 6 digits of the credit card number are known as the Issuer Identification Number (IIN). These identify the institution that issued the card to the card holder. The rest of the number is allocated by the issuer.\n\nDigits 7 to (n - 1) of your credit card number are your individual account identifier. The maximum length of a credit card number is 19 digits. Since the initial 6 digits of a credit card number are the issuer identifier, and the final digit is the check digit, this means that the maximum length of the account number field is 19 - 7, or 12 digits.\n\nCard Length\nAmerican Express = 15\nDiscover Card = 16\nMasterCard = 16\nVisa = 13 or 16",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 0,
+						"Precision": 16,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyCardCardholderName",
+					"Description": "The name of a Loyalty Card Cardholder.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyCardExpirationDate",
+					"Description": "The last day of the designated month/year the loyalty card is valid.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyCardServiceCode",
+					"Description": "Three-digit or four-digit value in the magnetic-stripe that follows the expiration date of the payment card on the track data. It is used for various things such as defining service attributes, differentiating between international and national interchange, or identifying usage restrictions.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 4,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "PrimaryCardIndicator",
+					"Description": "Indicates whether the card is the primary card.",
+					"OriginDataTypeName": {
+						"TypeName": "boolean",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "boolean"
+						}
+					}
+				},
+				{
+					"Name": "OrphanedCardIndicator",
+					"Description": "Indicates that the card has been orphaned, lost or is otherwise not to be used.",
+					"OriginDataTypeName": {
+						"TypeName": "boolean",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "boolean"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyProgramId",
+					"Description": "The unique identifier of a Loyalty Program.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountId",
+					"Description": "The unique identifier of a Loyalty Account.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountMemberId",
+					"Description": "The unique identifier of a Loyalty Account Member.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 0,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyCardNote",
+					"Description": "A note, comment or additional information regarding the Loyalty Card.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Precision": 0,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"ColumnSetEntityName": "4072f65d-2c7a-4b84-8133-22b63d1fc8b4",
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/Retail_bpb/LoyaltyCard",
+					"delimiter": ",",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/Retail_bpb/LoyaltyCard",
+				"Properties": {
+					"LinkedServiceName": "crosynapse-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+			},
+			"Compressed": false,
+			"SerDeInfo": null,
+			"IsStoredAsSubdirectories": false
+		},
+		"Owner": null,
+		"CreateTime": 0,
+		"LastAccessTime": 0,
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false,
+		"ViewOriginalText": null,
+		"ViewExpandedText": null,
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"OriginObjectId": null,
+		"IsSharedEntity": false,
+		"PublishStatus": "PUBLISHED",
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"LoyaltyCard\",\"path\":\"LoyaltyCard.cdm.json/LoyaltyCard\"},\"description\":\"A loyalty card enables card holders to get rewards through the loyalty program which they are members of.\",\"primaryKey\":[\"LoyaltyCardId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"LoyaltyCardId\",\"attributeReference\":{\"entity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"name\":\"LoyaltyCardId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"CardIssuedTimestamp\",\"attributeReference\":{\"entity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"name\":\"CardIssuedTimestamp\"},\"dataType\":\"timestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"name\":\"CardTerminatedTimestamp\",\"attributeReference\":{\"entity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"name\":\"CardTerminatedTimestamp\"},\"dataType\":\"timestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"name\":\"LoyaltyCardNumber\",\"attributeReference\":{\"entity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"name\":\"LoyaltyCardNumber\"},\"dataType\":\"decimal\",\"dataTypeLength\":16,\"scale\":0},{\"type\":\"Existing\",\"name\":\"LoyaltyCardCardholderName\",\"attributeReference\":{\"entity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"name\":\"LoyaltyCardCardholderName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"LoyaltyCardExpirationDate\",\"attributeReference\":{\"entity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"name\":\"LoyaltyCardExpirationDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"LoyaltyCardServiceCode\",\"attributeReference\":{\"entity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"name\":\"LoyaltyCardServiceCode\"},\"dataType\":\"decimal\",\"dataTypeLength\":4,\"scale\":0},{\"type\":\"Existing\",\"name\":\"PrimaryCardIndicator\",\"attributeReference\":{\"entity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"name\":\"PrimaryCardIndicator\"},\"dataType\":\"boolean\"},{\"type\":\"Existing\",\"name\":\"OrphanedCardIndicator\",\"attributeReference\":{\"entity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"name\":\"OrphanedCardIndicator\"},\"dataType\":\"boolean\"},{\"type\":\"Existing\",\"name\":\"LoyaltyProgramId\",\"attributeReference\":{\"entity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"name\":\"LoyaltyProgramId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountId\",\"attributeReference\":{\"entity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"name\":\"LoyaltyAccountId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"LoyaltyAccountMemberId\",\"attributeReference\":{\"entity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"name\":\"LoyaltyAccountMemberId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"LoyaltyCardNote\",\"attributeReference\":{\"entity\":\"LoyaltyCard.cdm.json/LoyaltyCard\",\"name\":\"LoyaltyCardNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "A loyalty card enables card holders to get rewards through the loyalty program which they are members of.",
+			"DisplayFolderInfo": "{\"name\":\"Loyalty\",\"colorCode\":\"#0050AC\"}",
+			"spark.sql.sources.provider": "csv",
+			"spark.sql.sources.schema.numParts": "1",
+			"spark.sql.sources.schema.part.0": "{\"type\":\"struct\",\"fields\":[{\"name\":\"LoyaltyCardId\",\"type\":\"integer\",\"nullable\":false,\"metadata\":{}},{\"name\":\"CardIssuedTimestamp\",\"type\":\"timestamp\",\"nullable\":false,\"metadata\":{}},{\"name\":\"CardTerminatedTimestamp\",\"type\":\"timestamp\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyCardNumber\",\"type\":\"decimal(16,0)\",\"nullable\":false,\"metadata\":{}},{\"name\":\"LoyaltyCardCardholderName\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyCardExpirationDate\",\"type\":\"date\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyCardServiceCode\",\"type\":\"decimal(4,0)\",\"nullable\":true,\"metadata\":{}},{\"name\":\"PrimaryCardIndicator\",\"type\":\"boolean\",\"nullable\":true,\"metadata\":{}},{\"name\":\"OrphanedCardIndicator\",\"type\":\"boolean\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyProgramId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyAccountMemberId\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"LoyaltyCardNote\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}]}",
+			"PrimaryKeys": "LoyaltyCardId"
+		},
+		"ObjectVersion": 1,
+		"ObjectId": "4d8ac9d2-370c-49b1-8792-d1bf0f2ef661",
+		"Description": "A loyalty card enables card holders to get rewards through the loyalty program which they are members of."
+	},
+	"type": "TABLE"
+}

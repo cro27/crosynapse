@@ -1,0 +1,29 @@
+{
+	"name": "relationship-othfktrmkn",
+	"properties": {
+		"Name": "relationship-othfktrmkn",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "Retail_bpb"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "TransactionEventType",
+		"ToTableName": "TransactionEvent",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "TransactionEventTypeId",
+				"ToColumnName": "TransactionEventTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionEventType.cdm.json/TransactionEventType\",\"toEntity\":\"TransactionEvent.cdm.json/TransactionEvent\",\"joinPairs\":[{\"fromAttribute\":\"TransactionEventTypeId\",\"toAttribute\":\"TransactionEventTypeId\"}]}}"
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 1,
+		"ObjectId": "85e02704-5054-4d06-b8b5-e68c5a681386"
+	},
+	"type": "RELATIONSHIP"
+}

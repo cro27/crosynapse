@@ -1,0 +1,98 @@
+{
+	"name": "AzureSynapse-azureml-opendatasets-nyc_tlc_yellow",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "SparkPoolMedium",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2
+		},
+		"metadata": {
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/37b2d7dc-7393-47ad-8c51-90c89944370c/resourceGroups/AzSynapse/providers/Microsoft.Synapse/workspaces/crosynapse/bigDataPools/SparkPoolMedium",
+				"name": "SparkPoolMedium",
+				"type": "Spark",
+				"endpoint": "https://crosynapse.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SparkPoolMedium",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 3,
+				"cores": 8,
+				"memory": 56
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"# This is a package in preview.\n",
+					"from azureml.opendatasets import NycTlcYellow\n",
+					"\n",
+					"from datetime import datetime\n",
+					"from dateutil import parser\n",
+					"\n",
+					"\n",
+					"end_date = parser.parse('2018-01-01')\n",
+					"start_date = parser.parse('2018-12-31')\n",
+					"nyc_tlc = NycTlcYellow(start_date=start_date, end_date=end_date)\n",
+					"nyc_tlc_df = nyc_tlc.to_spark_dataframe()"
+				],
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"diagram": {
+						"activateDiagramType": 1,
+						"chartConfig": {
+							"category": "bar",
+							"keys": [
+								"vendorID"
+							],
+							"values": [
+								"passengerCount"
+							],
+							"yLabel": "passengerCount",
+							"xLabel": "vendorID",
+							"aggregation": "SUM",
+							"aggByBackend": false
+						},
+						"aggData": {
+							"passengerCount": {
+								"2": 9
+							}
+						},
+						"isSummary": false,
+						"previewData": {
+							"filter": null
+						},
+						"isSql": false
+					}
+				},
+				"source": [
+					"# Display top 5 rows\n",
+					"display(nyc_tlc_df.limit(5))"
+				],
+				"execution_count": 4
+			},
+			{
+				"cell_type": "code",
+				"source": [],
+				"execution_count": null
+			}
+		]
+	}
+}

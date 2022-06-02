@@ -1,0 +1,16 @@
+{
+	"name": "05 Data Exploration with SQLOD",
+	"properties": {
+		"content": {
+			"query": "SELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK 'https://ocpadlsg2.dfs.core.windows.net/curateddata/WWI.parquet/OrdersByState/*.snappy.parquet',\n        FORMAT='PARQUET'\n    ) AS [result]\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "master",
+				"poolName": "Built-in"
+			}
+		},
+		"type": "SqlQuery"
+	}
+}
