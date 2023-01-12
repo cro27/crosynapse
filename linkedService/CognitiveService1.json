@@ -1,0 +1,27 @@
+{
+	"name": "CognitiveService1",
+	"properties": {
+		"annotations": [],
+		"type": "CognitiveService",
+		"typeProperties": {
+			"subscriptionId": "f5c29e46-bd9a-47de-b598-c7a0695f3419",
+			"resourceGroup": "kmw",
+			"csName": "kmw",
+			"csKind": "CognitiveServices",
+			"csLocation": "australiaeast",
+			"endPoint": "https://australiaeast.api.cognitive.microsoft.com/",
+			"csKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault2",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "kmwcogkey"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
