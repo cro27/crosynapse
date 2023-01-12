@@ -1,0 +1,27 @@
+{
+	"name": "TextAnalytics",
+	"properties": {
+		"annotations": [],
+		"type": "CognitiveService",
+		"typeProperties": {
+			"subscriptionId": "37b2d7dc-7393-47ad-8c51-90c89944370c",
+			"resourceGroup": "ocpmelbcoglang",
+			"csName": "ocpmelbcoglang",
+			"csKind": "TextAnalytics",
+			"csLocation": "australiaeast",
+			"endPoint": "https://ocpmelbcoglang.cognitiveservices.azure.com/",
+			"csKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault2",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "textanalyticskey"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
