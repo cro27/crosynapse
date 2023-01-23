@@ -23,11 +23,23 @@
 		"ocpmelbadls_accountKey": {
 			"value": ""
 		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://croML-AML-KV.vault.azure.net/"
+		},
+		"AzureKeyVault2_properties_typeProperties_baseUrl": {
+			"value": "https://ocpmelbvault.vault.azure.net/"
+		},
 		"AzureMLService1_properties_typeProperties_subscriptionId": {
 			"value": "f5c29e46-bd9a-47de-b598-c7a0695f3419"
 		},
 		"AzureMLService1_properties_typeProperties_resourceGroupName": {
 			"value": "AML"
+		},
+		"CognitiveService1_properties_typeProperties_subscriptionId": {
+			"value": "f5c29e46-bd9a-47de-b598-c7a0695f3419"
+		},
+		"TextAnalytics_properties_typeProperties_subscriptionId": {
+			"value": "37b2d7dc-7393-47ad-8c51-90c89944370c"
 		},
 		"crosynapse-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"value": "https://ocpadlsg2.dfs.core.windows.net"
@@ -37,6 +49,9 @@
 		},
 		"ocpadls3_properties_typeProperties_url": {
 			"value": "https://ocpadls.dfs.core.windows.net"
+		},
+		"ocpadlsg2_properties_typeProperties_url": {
+			"value": "https://ocpadlsg2.dfs.core.windows.net/"
 		},
 		"ocpmelbadls_properties_typeProperties_url": {
 			"value": "https://ocpadlsg2.dfs.core.windows.net"
