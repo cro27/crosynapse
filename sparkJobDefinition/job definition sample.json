@@ -15,11 +15,11 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "1",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "e3c58b06-8b23-4c24-84ab-2a47735d1029"
+				"spark.autotune.trackingId": "3363ba8f-f1bb-4f65-9585-ca6e666a5c69"
 			},
 			"args": [
-				"abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/shakespear.txt",
-				"abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/wordcount_result"
+				"abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/shakespeare.txt",
+				"abfss://synapse-ws@ocpadlsg2.dfs.core.windows.net/wordcountresult"
 			],
 			"jars": [],
 			"pyFiles": [

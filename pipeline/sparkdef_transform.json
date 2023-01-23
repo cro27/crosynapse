@@ -1,0 +1,27 @@
+{
+	"name": "sparkdef_transform",
+	"properties": {
+		"activities": [
+			{
+				"name": "job definition sample",
+				"type": "SparkJob",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"sparkJob": {
+						"referenceName": "job definition sample",
+						"type": "SparkJobDefinitionReference"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
