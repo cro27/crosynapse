@@ -119,8 +119,14 @@
 									"referenceName": "Parquet1",
 									"type": "DatasetReference",
 									"parameters": {
-										"container": "@dataset().container",
-										"path": "@dataset().path"
+										"container": {
+											"value": "@pipeline().parameters.container",
+											"type": "Expression"
+										},
+										"path": {
+											"value": "@pipeline().parameters.path",
+											"type": "Expression"
+										}
 									}
 								}
 							]
@@ -134,6 +140,12 @@
 				"type": "string"
 			},
 			"database": {
+				"type": "string"
+			},
+			"container": {
+				"type": "string"
+			},
+			"path": {
 				"type": "string"
 			}
 		},
