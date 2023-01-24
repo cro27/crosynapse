@@ -151,7 +151,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "TransformMovies",
+						"name": "MoviesDB",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -1078,6 +1078,35 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/AzureDatabricks1')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-7174289643313433.13.azuredatabricks.net",
+					"authentication": "MSI",
+					"workspaceResourceId": "/subscriptions/37b2d7dc-7393-47ad-8c51-90c89944370c/resourceGroups/ocpadbpremium/providers/Microsoft.Databricks/workspaces/ocpadbpremium",
+					"newClusterNodeType": "Standard_F4s",
+					"newClusterNumOfWorker": "3",
+					"newClusterSparkEnvVars": {
+						"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+					},
+					"newClusterVersion": "12.1.x-scala2.12",
+					"newClusterInitScripts": [],
+					"clusterOption": "Fixed"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/AzureKeyVault1')]",
 			"type": "Microsoft.Synapse/workspaces/linkedServices",
 			"apiVersion": "2019-06-01-preview",
@@ -1494,11 +1523,10 @@
 					],
 					"transformations": [
 						{
-							"name": "FilterYears",
-							"description": "Filter comedy movies between 1910 and 2000"
+							"name": "filterYears"
 						},
 						{
-							"name": "AggregateComedyRatings"
+							"name": "AggregateComedyRating"
 						}
 					],
 					"scriptLines": [
@@ -1513,10 +1541,10 @@
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false) ~> MoviesDB",
-						"MoviesDB filter(toInteger(year) >= 1910 && toInteger(year) <= 2000 && rlike(genres, 'Comedy')) ~> FilterYears",
-						"FilterYears aggregate(groupBy(year),",
-						"     AverageComedyRating = avg(toInteger(Rating))) ~> AggregateComedyRatings",
-						"AggregateComedyRatings sink(allowSchemaDrift: true,",
+						"MoviesDB filter(toInteger(year) >= 1920 && toInteger(year) <= 2020 && rlike(genres, 'Comedy')) ~> filterYears",
+						"filterYears aggregate(groupBy(year),",
+						"     AggregateComedyRating = avg(toInteger(Rating))) ~> AggregateComedyRating",
+						"AggregateComedyRating sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     umask: 0022,",
 						"     preCommands: [],",
@@ -15856,30 +15884,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/DWpool1')]",
-			"type": "Microsoft.Synapse/workspaces/sqlPools",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"collation": "SQL_Latin1_General_CP1_CI_AS",
-				"maxSizeBytes": 263882790666240,
-				"annotations": []
-			},
-			"dependsOn": [],
-			"location": "australiaeast"
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/SQLPool1')]",
-			"type": "Microsoft.Synapse/workspaces/sqlPools",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"collation": "SQL_Latin1_General_CP1_CI_AS",
-				"maxSizeBytes": 263882790666240,
-				"annotations": []
-			},
-			"dependsOn": [],
-			"location": "australiaeast"
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/SparkPoolMedium')]",
 			"type": "Microsoft.Synapse/workspaces/bigDataPools",
 			"apiVersion": "2019-06-01-preview",
@@ -15979,6 +15983,30 @@
 				"sparkVersion": "3.2",
 				"isComputeIsolationEnabled": false,
 				"sessionLevelPackagesEnabled": false,
+				"annotations": []
+			},
+			"dependsOn": [],
+			"location": "australiaeast"
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/DWpool1')]",
+			"type": "Microsoft.Synapse/workspaces/sqlPools",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"collation": "SQL_Latin1_General_CP1_CI_AS",
+				"maxSizeBytes": 263882790666240,
+				"annotations": []
+			},
+			"dependsOn": [],
+			"location": "australiaeast"
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQLPool1')]",
+			"type": "Microsoft.Synapse/workspaces/sqlPools",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"collation": "SQL_Latin1_General_CP1_CI_AS",
+				"maxSizeBytes": 263882790666240,
 				"annotations": []
 			},
 			"dependsOn": [],
