@@ -324,7 +324,10 @@
 													"value": "@pipeline().parameters.path",
 													"type": "Expression"
 												},
-												"filename": "@item().TableName"
+												"filename": {
+													"value": "@concat(item().TableName,'.csv')",
+													"type": "Expression"
+												}
 											}
 										}
 									]
