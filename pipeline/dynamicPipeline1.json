@@ -80,12 +80,11 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "ParquetSink",
-									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings"
-									},
+									"type": "DelimitedTextSink",
 									"formatSettings": {
-										"type": "ParquetWriteSettings"
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
 									}
 								},
 								"enableStaging": false,
@@ -116,7 +115,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "Parquet1",
+									"referenceName": "DelimitedText2",
 									"type": "DatasetReference",
 									"parameters": {
 										"container": {
