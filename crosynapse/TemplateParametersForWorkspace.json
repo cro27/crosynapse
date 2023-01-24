@@ -8,8 +8,14 @@
 		"AzureSqlDatabase1_connectionString": {
 			"value": ""
 		},
+		"AzureSqlDatabase2_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().logicalserver};Initial Catalog=@{linkedService().database}"
+		},
 		"crosynapse-WorkspaceDefaultSqlServer_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:crosynapse.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"dynamicSQLDB1_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().logicalserver};Initial Catalog=@{linkedService().database}"
 		},
 		"gpsmelb_sqldb1_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=ocpmelb-sqlsvr1.database.windows.net;Initial Catalog=gpsmelb_sqldb1"
@@ -25,9 +31,6 @@
 		},
 		"ocpmelbadls_accountKey": {
 			"value": ""
-		},
-		"AzureSqlDatabase2_connectionString": {
-			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().logicalserver};Initial Catalog=@{linkedService().database}"
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://croML-AML-KV.vault.azure.net/"
