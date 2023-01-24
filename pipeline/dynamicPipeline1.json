@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from sys.tables",
+						"sqlReaderQuery": "select SCHEMA_NAME(schema_id) as SchemaName, name as TableName from sys.tables\nwhere SCHEMA_NAME(schema_id) != 'changefeed'\norder by SCHEMA_NAME(schema_id)",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
