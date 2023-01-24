@@ -117,7 +117,11 @@
 							"outputs": [
 								{
 									"referenceName": "Parquet1",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"container": "@dataset().container",
+										"path": "@dataset().path"
+									}
 								}
 							]
 						}
