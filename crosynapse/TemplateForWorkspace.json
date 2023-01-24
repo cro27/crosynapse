@@ -276,6 +276,9 @@
 										},
 										"sink": {
 											"type": "DelimitedTextSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
 											"formatSettings": {
 												"type": "DelimitedTextWriteSettings",
 												"quoteAllText": true,
@@ -320,7 +323,8 @@
 												"path": {
 													"value": "@pipeline().parameters.path",
 													"type": "Expression"
-												}
+												},
+												"filename": "@item().TableName"
 											}
 										}
 									]
@@ -648,6 +652,9 @@
 					},
 					"path": {
 						"type": "string"
+					},
+					"filename": {
+						"type": "string"
 					}
 				},
 				"annotations": [],
@@ -655,6 +662,10 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
 						"folderPath": {
 							"value": "@dataset().path",
 							"type": "Expression"
