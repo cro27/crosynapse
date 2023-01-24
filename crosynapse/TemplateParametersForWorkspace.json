@@ -26,6 +26,9 @@
 		"ocpmelbadls_accountKey": {
 			"value": ""
 		},
+		"AzureSqlDatabase2_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().logicalserver};Initial Catalog=@{linkedService().database}"
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://croML-AML-KV.vault.azure.net/"
 		},

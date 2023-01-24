@@ -37,6 +37,11 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'ocpmelbadls'"
 		},
+		"AzureSqlDatabase2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase2'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().logicalserver};Initial Catalog=@{linkedService().database}"
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://croML-AML-KV.vault.azure.net/"
@@ -15626,6 +15631,33 @@
 			},
 			"dependsOn": [],
 			"location": "australiaeast"
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AzureSqlDatabase2')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"parameters": {
+					"logicalserver": {
+						"type": "string"
+					},
+					"database": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase2_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
 		}
 	]
 }
