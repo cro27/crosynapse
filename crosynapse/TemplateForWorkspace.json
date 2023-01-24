@@ -275,12 +275,11 @@
 											"partitionOption": "None"
 										},
 										"sink": {
-											"type": "ParquetSink",
-											"storeSettings": {
-												"type": "AzureBlobFSWriteSettings"
-											},
+											"type": "DelimitedTextSink",
 											"formatSettings": {
-												"type": "ParquetWriteSettings"
+												"type": "DelimitedTextWriteSettings",
+												"quoteAllText": true,
+												"fileExtension": ".txt"
 											}
 										},
 										"enableStaging": false,
@@ -311,7 +310,7 @@
 									],
 									"outputs": [
 										{
-											"referenceName": "Parquet1",
+											"referenceName": "DelimitedText2",
 											"type": "DatasetReference",
 											"parameters": {
 												"container": {
@@ -352,7 +351,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/datasets/AzureSqlTable2')]",
-				"[concat(variables('workspaceId'), '/datasets/Parquet1')]"
+				"[concat(variables('workspaceId'), '/datasets/DelimitedText2')]"
 			]
 		},
 		{
@@ -632,6 +631,47 @@
 			},
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/linkedServices/ocpadlsg2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/DelimitedText2')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "crosynapse-WorkspaceDefaultStorage",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"container": {
+						"type": "string"
+					},
+					"path": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": {
+							"value": "@dataset().path",
+							"type": "Expression"
+						},
+						"fileSystem": {
+							"value": "@dataset().container",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/crosynapse-WorkspaceDefaultStorage')]"
 			]
 		},
 		{
