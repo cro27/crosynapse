@@ -1,5 +1,5 @@
 {
-	"name": "Notebook 4",
+	"name": "testLakeDBissue",
 	"properties": {
 		"nbformat": 4,
 		"nbformat_minor": 2,
@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "d6bb4529-a07b-4d5d-ac66-66893cad2fa4"
+				"spark.autotune.trackingId": "b3d4bb78-183c-4b0d-813c-bd2b5ccd16c6"
 			}
 		},
 		"metadata": {
