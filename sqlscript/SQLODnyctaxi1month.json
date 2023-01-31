@@ -1,5 +1,5 @@
 {
-	"name": "SQL script 2",
+	"name": "SQLODnyctaxi1month",
 	"properties": {
 		"content": {
 			"query": "SELECT COUNT_BIG(*)\nFROM OPENROWSET\n  (\n      BULK 'parquet/taxi/year=2017/month=9/*.parquet',\n      DATA_SOURCE = 'SqlOnDemandDemo',\n      FORMAT='PARQUET'\n  ) AS nyc",
@@ -7,9 +7,10 @@
 				"language": "sql"
 			},
 			"currentConnection": {
-				"name": "crodb",
-				"type": "SqlOnDemand"
-			}
+				"databaseName": "crodb",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
 		},
 		"type": "SqlQuery"
 	}

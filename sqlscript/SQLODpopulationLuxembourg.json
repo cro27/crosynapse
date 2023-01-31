@@ -1,5 +1,5 @@
 {
-	"name": "SQL script 3",
+	"name": "SQLODpopulationLuxembourg",
 	"properties": {
 		"content": {
 			"query": "SELECT TOP 10 *\nFROM OPENROWSET\n  (\n      BULK 'csv/population/*.csv',\n      DATA_SOURCE = 'SqlOnDemandDemo',\n      FORMAT = 'CSV', PARSER_VERSION = '2.0'\n  )\nWITH\n  (\n      country_code VARCHAR (5)\n    , country_name VARCHAR (100)\n    , year smallint\n    , population bigint\n  ) AS r\nWHERE\n  country_name = 'Luxembourg' AND year = 2017",
@@ -7,9 +7,10 @@
 				"language": "sql"
 			},
 			"currentConnection": {
-				"name": "crodb",
-				"type": "SqlOnDemand"
-			}
+				"databaseName": "crodb",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
 		},
 		"type": "SqlQuery"
 	}
