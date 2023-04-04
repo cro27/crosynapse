@@ -1,0 +1,12 @@
+{
+	"name": "gpsmelb_sqldb1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "gpsmelb_sqldb1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
