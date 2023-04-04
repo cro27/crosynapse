@@ -97,7 +97,21 @@
 							"outputs": [
 								{
 									"referenceName": "sqlstage",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"container": {
+											"value": "@pipeline().parameters.container",
+											"type": "Expression"
+										},
+										"path": {
+											"value": "@pipeline().parameters.path",
+											"type": "Expression"
+										},
+										"filename": {
+											"value": "@concat(item().SchemaName,'_',item().TableName,'.csv')",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
