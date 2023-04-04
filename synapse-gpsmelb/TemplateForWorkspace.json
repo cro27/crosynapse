@@ -239,7 +239,8 @@
 											"linkedServiceName": {
 												"referenceName": "contosoStorage",
 												"type": "LinkedServiceReference"
-											}
+											},
+											"path": "migrate/sqldata"
 										},
 										"translator": {
 											"type": "TabularTranslator",
