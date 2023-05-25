@@ -1,0 +1,22 @@
+{
+	"name": "avgSalary",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "gpsmelb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "avgsalary.csv",
+				"fileSystem": "adflake"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
