@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "get emp data",
+				"name": "get emp data by deptno",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -227,6 +227,34 @@
 				"outputs": [
 					{
 						"referenceName": "numbersCSV",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Get avg salary by deptno",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "OracleSource",
+						"oracleReaderQuery": "begin\n  hr.get_avg_sal(30);\nend;",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "employees",
 						"type": "DatasetReference"
 					}
 				]
