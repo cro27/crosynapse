@@ -1,0 +1,22 @@
+{
+	"name": "emp_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "gpsmelb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "empbydept.csv",
+				"fileSystem": "adflake"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
