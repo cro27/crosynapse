@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "AzureBlobStorage",
 		"typeProperties": {
-			"serviceEndpoint": "https://vaultstage.blob.core.windows.net/",
+			"serviceEndpoint": "https://gpsmelb.blob.core.windows.net/",
 			"accountKind": "StorageV2"
 		},
 		"connectVia": {
