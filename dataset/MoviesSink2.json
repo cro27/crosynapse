@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "MovieRating.csv",
 				"fileSystem": "curated"
 			},
 			"columnDelimiter": ",",
