@@ -1,0 +1,14 @@
+{
+	"name": "pvstarteradls",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://pvstarteradcadls.dfs.core.windows.net/"
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
