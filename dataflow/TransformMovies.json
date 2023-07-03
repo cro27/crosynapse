@@ -46,11 +46,13 @@
 				"     AverageComedyRating = avg(toInteger(Rating))) ~> AggregateComedyRatings",
 				"AggregateComedyRatings sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     partitionFileNames:['MovieRatings.csv'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> MoviesSink"
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> MoviesSink"
 			]
 		}
 	}
