@@ -7,7 +7,7 @@
 			"url": "https://gpsmelb.dfs.core.windows.net/"
 		},
 		"connectVia": {
-			"referenceName": "AutoResolveIntegrationRuntime",
+			"referenceName": "integrationRuntime1",
 			"type": "IntegrationRuntimeReference"
 		}
 	}
