@@ -1,0 +1,102 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "gpsmelbADF"
+		},
+		"AzureBlob_colsen2_ocpmelb_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase2_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().logicalserver};Initial Catalog=@{linkedService().database}"
+		},
+		"asmDB_connectionString": {
+			"value": ""
+		},
+		"contosoSQL_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=gpsmelb-sqlsvr.database.windows.net;Initial Catalog=gpsmelb-sql"
+		},
+		"crosynapse-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:crosynapse.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"dynamicSQLDB1_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().logicalserver};Initial Catalog=@{linkedService().database}"
+		},
+		"gpsmelb_sqldb1_connectionString": {
+			"value": ""
+		},
+		"ocpadls_accountKey": {
+			"value": ""
+		},
+		"ocpadls3_accountKey": {
+			"value": ""
+		},
+		"ocpmelb_sqldb1_connectionString": {
+			"value": ""
+		},
+		"ocpmelbadls_accountKey": {
+			"value": ""
+		},
+		"synapse-gpsmelb-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synapse-gpsmelb.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"AzureBlobStorage1_properties_typeProperties_serviceEndpoint": {
+			"value": "https://gpsmelb.blob.core.windows.net/"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://gpsmelb.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://croML-AML-KV.vault.azure.net/"
+		},
+		"AzureKeyVault2_properties_typeProperties_baseUrl": {
+			"value": "https://ocpmelbvault.vault.azure.net/"
+		},
+		"AzureMLService1_properties_typeProperties_subscriptionId": {
+			"value": "f5c29e46-bd9a-47de-b598-c7a0695f3419"
+		},
+		"AzureMLService1_properties_typeProperties_resourceGroupName": {
+			"value": "AML"
+		},
+		"AzureMLService1_properties_typeProperties_mlWorkspaceName": {
+			"value": "ocpmelbAMLS2"
+		},
+		"CognitiveService1_properties_typeProperties_subscriptionId": {
+			"value": "f5c29e46-bd9a-47de-b598-c7a0695f3419"
+		},
+		"TextAnalytics_properties_typeProperties_subscriptionId": {
+			"value": "37b2d7dc-7393-47ad-8c51-90c89944370c"
+		},
+		"contosoStorage_properties_typeProperties_url": {
+			"value": "https://gpsmelb.dfs.core.windows.net/"
+		},
+		"crosynapse-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://pvstarteradcadls.dfs.core.windows.net"
+		},
+		"gpsmelb_properties_typeProperties_url": {
+			"value": "https://gpsmelb.dfs.core.windows.net/"
+		},
+		"ocpadls_properties_typeProperties_url": {
+			"value": "https://ocpadls.dfs.core.windows.net"
+		},
+		"ocpadls3_properties_typeProperties_url": {
+			"value": "https://ocpadls.dfs.core.windows.net"
+		},
+		"ocpadlsg2_properties_typeProperties_url": {
+			"value": "https://ocpadlsg2.dfs.core.windows.net/"
+		},
+		"ocpmelbadls_properties_typeProperties_url": {
+			"value": "https://ocpadlsg2.dfs.core.windows.net"
+		},
+		"pvstarteradls_properties_typeProperties_url": {
+			"value": "https://pvstarteradcadls.dfs.core.windows.net/"
+		},
+		"synapse-gpsmelb-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://gpsmelb.dfs.core.windows.net"
+		}
+	}
+}
