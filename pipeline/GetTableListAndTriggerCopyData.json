@@ -41,10 +41,6 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "IterateAndCopySQLTables",
-						"type": "PipelineReference"
-					},
 					"waitOnCompletion": false,
 					"parameters": {
 						"tableList": {
