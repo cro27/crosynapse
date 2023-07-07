@@ -1,15 +1,15 @@
 {
 	"name": "crosynapse-WorkspaceDefaultStorage",
-	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
-		"typeProperties": {
-			"url": "https://ocpadlsg2.dfs.core.windows.net"
-		},
+		"annotations": [],
 		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://pvstarteradcadls.dfs.core.windows.net"
+		},
 		"connectVia": {
 			"referenceName": "integrationRuntime1",
 			"type": "IntegrationRuntimeReference"
-		},
-		"annotations": []
-	}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/linkedservices"
 }
