@@ -1,0 +1,9 @@
+{
+	"name": "gpsmelbADF",
+	"location": "australiasoutheast",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "02d2754d-bf8d-4b0c-883c-56165e063b97",
+		"tenantId": "dc54634d-549a-44c9-83b5-2c3806519c69"
+	}
+}
