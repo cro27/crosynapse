@@ -22,18 +22,8 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "AzureSqlTable2",
-						"type": "DatasetReference",
-						"parameters": {
-							"logicalserver": {
-								"value": "@pipeline().parameters.logicalserver",
-								"type": "Expression"
-							},
-							"database": {
-								"value": "@pipeline().parameters.database",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "AzureSqlTable3",
+						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
 				}
@@ -102,18 +92,8 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "AzureSqlTable2",
-									"type": "DatasetReference",
-									"parameters": {
-										"logicalserver": {
-											"value": "@pipeline().parameters.logicalserver",
-											"type": "Expression"
-										},
-										"database": {
-											"value": "@pipeline().parameters.database",
-											"type": "Expression"
-										}
-									}
+									"referenceName": "AzureSqlTable3",
+									"type": "DatasetReference"
 								}
 							],
 							"outputs": [

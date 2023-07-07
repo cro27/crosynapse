@@ -1,0 +1,24 @@
+{
+	"name": "AzureSqlTable3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dynamicSQLDB1",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"logicalserver": "@dataset().logicalserver",
+				"database": "@dataset().database"
+			}
+		},
+		"parameters": {
+			"logicalserver": {
+				"type": "string"
+			},
+			"database": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
