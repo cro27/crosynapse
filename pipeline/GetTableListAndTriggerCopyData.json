@@ -41,13 +41,11 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"waitOnCompletion": false,
-					"parameters": {
-						"tableList": {
-							"value": "@activity('LookupTableList').output.value",
-							"type": "Expression"
-						}
-					}
+					"pipeline": {
+						"referenceName": "dynamicPipeline1",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": false
 				}
 			}
 		],
