@@ -23,7 +23,11 @@
 					},
 					"dataset": {
 						"referenceName": "AzureSqlTable3",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"logicalserver": "@pipeline().parameters.logicalserver",
+							"database": "@pipeline().parameters.database"
+						}
 					},
 					"firstRowOnly": false
 				}
