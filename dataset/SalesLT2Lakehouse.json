@@ -1,0 +1,34 @@
+{
+	"name": "SalesLT2Lakehouse",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Demo Lakehouse",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Path": {
+				"type": "string"
+			},
+			"Filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "LakehouseLocation",
+				"fileName": {
+					"value": "@dataset().Filename",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().Path",
+					"type": "Expression"
+				}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
