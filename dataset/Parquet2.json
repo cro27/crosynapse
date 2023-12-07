@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "LakehouseLocation",
-				"fileName": "Customer"
+				"fileName": "Customer",
+				"folderPath": "Files"
 			},
 			"compressionCodec": "snappy"
 		},
