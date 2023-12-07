@@ -74,14 +74,12 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "DelimitedTextSink",
+									"type": "ParquetSink",
 									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings"
+										"type": "LakehouseWriteSettings"
 									},
 									"formatSettings": {
-										"type": "DelimitedTextWriteSettings",
-										"quoteAllText": true,
-										"fileExtension": ".txt"
+										"type": "ParquetWriteSettings"
 									}
 								},
 								"enableStaging": false,
@@ -106,21 +104,11 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "DelimitedText2",
+									"referenceName": "SalesLT2Lakehouse",
 									"type": "DatasetReference",
 									"parameters": {
-										"container": {
-											"value": "@pipeline().parameters.container",
-											"type": "Expression"
-										},
-										"path": {
-											"value": "@pipeline().parameters.path",
-											"type": "Expression"
-										},
-										"filename": {
-											"value": "@concat(item().SchemaName,'_',item().TableName,'.csv')",
-											"type": "Expression"
-										}
+										"Path": "@pipeline().parameters.path",
+										"Filename": "@concat(item().SchemaName,'_',item().TableName,'.parquet')"
 									}
 								}
 							]
