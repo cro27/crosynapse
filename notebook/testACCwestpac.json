@@ -1,0 +1,132 @@
+{
+	"name": "testACCwestpac",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "pool32",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "39c5ac1b-323f-409c-a624-a0e41f8190b8"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/7b26b394-b227-4343-91aa-7e2fa2309370/resourceGroups/gps-melb/providers/Microsoft.Synapse/workspaces/synapse-gpsmelb/bigDataPools/pool32",
+				"name": "pool32",
+				"type": "Spark",
+				"endpoint": "https://synapse-gpsmelb.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/pool32",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.2",
+				"nodeCount": 10,
+				"cores": 8,
+				"memory": 56,
+				"automaticScaleJobs": false
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"print(sc.version)"
+				],
+				"execution_count": 9
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"jdbcDF = spark.read \\\r\n",
+					"        .format(\"com.microsoft.sqlserver.jdbc.spark\") \\\r\n",
+					"        .option(\"url\", \"jdbc:sqlserver://gpsmelb-sqlsvr.database.windows.net:1433;databaseName=gpsmelb-sql\") \\\r\n",
+					"        .option(\"dbtable\", \"dbo.testregex\") \\\r\n",
+					"        .option(\"user\", \"sqladmin\") \\\r\n",
+					"        .option(\"password\", \"Welcome12345\").load()\r\n",
+					"\r\n",
+					"jdbcDF.show(5)"
+				],
+				"execution_count": 4
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "sparksql"
+					}
+				},
+				"source": [
+					"%%sql\r\n",
+					"select * from test"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"jdbcDF = spark.read \\\r\n",
+					"        .format(\"com.microsoft.sqlserver.jdbc.spark\") \\\r\n",
+					"        .option(\"url\", \"jdbc:sqlserver://synapse-test-cro-ondemand.sql.azuresynapse.net:1433;database=testserverless\") \\\r\n",
+					"        .option(\"dbtable\", \"dbo.test\") \\\r\n",
+					"        .option(\"user\", \"sqladmin\") \\\r\n",
+					"        .option(\"password\", \"Welcome12345\").load()\r\n",
+					"\r\n",
+					"jdbcDF.show(5)"
+				],
+				"execution_count": 10
+			}
+		]
+	}
+}
