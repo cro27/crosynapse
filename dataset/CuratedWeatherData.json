@@ -1,0 +1,72 @@
+{
+	"name": "CuratedWeatherData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "WeatherLake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "LakehouseTable",
+		"schema": [
+			{
+				"name": "deviceId",
+				"type": "string"
+			},
+			{
+				"name": "rec_datetime",
+				"type": "timestamp"
+			},
+			{
+				"name": "enq_utctime",
+				"type": "timestamp"
+			},
+			{
+				"name": "rainfall_hour",
+				"type": "double"
+			},
+			{
+				"name": "temp_min",
+				"type": "double"
+			},
+			{
+				"name": "temp_max",
+				"type": "double"
+			},
+			{
+				"name": "wind_gust_max",
+				"type": "double"
+			},
+			{
+				"name": "wind_avg",
+				"type": "double"
+			},
+			{
+				"name": "humidity_min",
+				"type": "long"
+			},
+			{
+				"name": "humidity_max",
+				"type": "long"
+			},
+			{
+				"name": "air_pressure_min",
+				"type": "double"
+			},
+			{
+				"name": "air_pressure_max",
+				"type": "double"
+			},
+			{
+				"name": "Year",
+				"type": "long"
+			},
+			{
+				"name": "Month",
+				"type": "long"
+			}
+		],
+		"typeProperties": {
+			"table": "CuratedWeatherData"
+		}
+	}
+}
