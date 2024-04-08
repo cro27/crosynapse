@@ -1,0 +1,36 @@
+{
+	"name": "RainfallAvg",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "WeatherLake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "LakehouseTable",
+		"schema": [
+			{
+				"name": "StationName",
+				"type": "string"
+			},
+			{
+				"name": "Year",
+				"type": "integer"
+			},
+			{
+				"name": "Month",
+				"type": "string"
+			},
+			{
+				"name": "MonthNumber",
+				"type": "integer"
+			},
+			{
+				"name": "Rainfall",
+				"type": "double"
+			}
+		],
+		"typeProperties": {
+			"table": "melbourne_monthly_rainfall_avg"
+		}
+	}
+}
