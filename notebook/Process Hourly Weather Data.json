@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "0ecd6f95-08c9-4595-8a85-daf8026a31cb"
+				"spark.autotune.trackingId": "0c0a3c94-bbcf-4f20-9882-d28091b5db4d"
 			}
 		},
 		"metadata": {
@@ -49,18 +49,17 @@
 		},
 		"cells": [
 			{
-				"cell_type": "code",
+				"cell_type": "markdown",
 				"metadata": {
-					"microsoft": {
-						"language": "python"
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
 					}
 				},
 				"source": [
-					"%%pyspark\r\n",
-					"df = spark.read.json('wasbs://weatherdata@wattleweatherdata.dfs.core.windows.net/cro-iotweather/00/05/20/07/01.json.JSON')\r\n",
-					"display(df.limit(10))"
-				],
-				"execution_count": null
+					"Setup"
+				]
 			},
 			{
 				"cell_type": "code",
@@ -76,25 +75,76 @@
 					}
 				},
 				"source": [
+					"from datetime import datetime, timedelta\r\n",
+					"from time import strftime\r\n",
+					"from os import listdir, walk\r\n",
+					"from os.path import isfile, join\r\n",
+					"from pyspark.sql.functions import *\r\n",
+					"from pyspark.sql.types import *\r\n",
+					"import pyspark.sql.functions as f\r\n",
+					"import re\r\n",
+					"import os"
+				],
+				"execution_count": 3
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"Access Blob storage"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "python"
+					}
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"blob_account_name = \"wattleweatherdata\"\r\n",
+					"blob_container_name = \"weatheradata\"\r\n",
 					"from pyspark.sql import SparkSession\r\n",
 					"\r\n",
-					"# Azure storage access info\r\n",
-					"blob_account_name = 'wattleweatherdata' # replace with your blob name\r\n",
-					"blob_container_name = 'weatherdata' # replace with your container name\r\n",
-					"blob_relative_path = 'cro-iotweather/00/05/20/07/' # replace with your relative folder path\r\n",
-					"linked_service_name = 'IoTHubWeatherData' # replace with your linked service name\r\n",
+					"sc = SparkSession.builder.getOrCreate()\r\n",
+					"token_library = sc._jvm.com.microsoft.azure.synapse.tokenlibrary.TokenLibrary\r\n",
+					"blob_sas_token = token_library.getConnectionString(\"IoTHubWeatherData\")\r\n",
 					"\r\n",
-					"blob_sas_token = mssparkutils.credentials.getConnectionStringOrCreds(linked_service_name)\r\n",
-					"\r\n",
-					"# Allow SPARK to access from Blob remotely\r\n",
-					"\r\n",
-					"wasb_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % (blob_container_name, blob_account_name, blob_relative_path)\r\n",
-					"\r\n",
-					"spark.conf.set('fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name), blob_sas_token)\r\n",
-					"print('Remote blob path: ' + wasb_path)\r\n",
+					"spark.conf.set(\r\n",
+					"    'fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name),\r\n",
+					"    blob_sas_token)\r\n",
 					""
 				],
-				"execution_count": 4
+				"execution_count": 14
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"Test"
+				]
 			},
 			{
 				"cell_type": "code",
@@ -111,10 +161,223 @@
 				},
 				"source": [
 					"from notebookutils import mssparkutils\r\n",
-					"\r\n",
+					"wasb_path = 'wasbs://weatheradata@wattleweatherdata.blob.core.windows.net/cro-iotweather/00/2024/05/20/01/'\r\n",
 					"mssparkutils.fs.ls(wasb_path)"
 				],
-				"execution_count": 5
+				"execution_count": 15
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Get current Year, Month, Day and Previous Hour to format path\r\n",
+					"year = datetime.now().strftime(\"%Y\")\r\n",
+					"month = datetime.now().strftime(\"%m\")\r\n",
+					"day = datetime.now().strftime(\"%d\")\r\n",
+					"hour = (datetime.now() - timedelta(minutes=60)).strftime(\"%H\")\r\n",
+					"NewYear = 0\r\n",
+					"NewMonth = 0\r\n",
+					"\r\n",
+					"# If we are at midnight (processing hour 23) adjust day to previous day\r\n",
+					"# If we are also at first day of month adjust month to previous\r\n",
+					"# If it is first day of year adjust year too\r\n",
+					"if hour == '23' and day == '01' and month == '01':\r\n",
+					"  year = (datetime.now() - timedelta(days=1)).strftime(\"%Y\")\r\n",
+					"  month = (datetime.now() - timedelta(days=1)).strftime(\"%m\")\r\n",
+					"  day = (datetime.now() - timedelta(days=1)).strftime(\"%d\")\r\n",
+					"  print(\"Adjusting for midnight on first day of month of new year\")\r\n",
+					"  NewYear = 1\r\n",
+					"elif hour == '23' and day == '01':\r\n",
+					"  month = (datetime.now() - timedelta(days=1)).strftime(\"%m\")\r\n",
+					"  day = (datetime.now() - timedelta(days=1)).strftime(\"%d\")\r\n",
+					"  print(\"Adjusting for midnight on first day of month\")\r\n",
+					"  NewMonth = 1\r\n",
+					"elif hour == '23':\r\n",
+					"  day = (datetime.now() - timedelta(days=1)).strftime(\"%d\")\r\n",
+					"  print(\"Adjusting for midnight\")\r\n",
+					"\r\n",
+					"# Format path string to process previous hour\r\n",
+					"mypath = \"wasbs://weatheradata@wattleweatherdata.blob.core.windows.net/cro-iotweather/00/%s/%s/%s/%s/*\"\r\n",
+					"path = mypath % (year, month, day, hour)\r\n",
+					"\r\n",
+					"print(\"Processing file: \" + path)"
+				],
+				"execution_count": 16
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Read previous hour files in\r\n",
+					"sparkDF = spark.read.json(path) "
+				],
+				"execution_count": 17
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"# Assemble the data\r\n",
+					"dataDF = sparkDF.select('Body.deviceId', \\\r\n",
+					"                         split('SystemProperties.messageId', '_')[1].alias('messageId'), \\\r\n",
+					"                        'EnqueuedTimeUtc', \\\r\n",
+					"                        'Body.rec_time', \\\r\n",
+					"                        'Body.rain_total', \\\r\n",
+					"                        'Body.temp_out', \\\r\n",
+					"                        'Body.hum_out', \\\r\n",
+					"                        'Body.wind_gust', \\\r\n",
+					"                        'Body.wind_avg', \\\r\n",
+					"                        'Body.abs_pres').orderBy(\"messageId\")\r\n",
+					"display(dataDF)"
+				],
+				"execution_count": 18
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Remove any records from the hour before the time period we are interested in\r\n",
+					"filterDF = dataDF.filter(sparkDF.EnqueuedTimeUtc.substr(12,2) == hour)"
+				],
+				"execution_count": 19
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"# Create temp table\r\n",
+					"filterDF.createOrReplaceTempView(\"raindata\")"
+				],
+				"execution_count": 22
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# get weather data aggregates for last hour\r\n",
+					"# as Spark SQL can only have one distinct function per query we build 3 views to hold distinct rec_timedate, enq_utctime and deviceID\r\n",
+					"\r\n",
+					"df1 = spark.sql(\"CREATE OR REPLACE TEMPORARY VIEW v1 AS SELECT distinct(deviceId) as deviceID, max(messageId) as messageID, cast((max(rain_total) - min(rain_total)) as decimal(10,1)) as rainfall_hour, min(temp_out) as temp_min, max(temp_out) as temp_max, max(wind_gust) as wind_gust_max, cast(avg(wind_avg) as decimal(10,1)) as wind_avg, max(hum_out) as humidity_max, min(hum_out) as humidity_min, max(abs_pres) as air_pressure_max, min(abs_pres) as air_pressure_min FROM raindata group by deviceID\")\r\n",
+					"\r\n",
+					"df2 = spark.sql(\"CREATE OR REPLACE TEMPORARY VIEW v2 AS SELECT distinct(date_trunc('hour', rec_time) + INTERVAL 1 HOURS) as rec_datetime, max(messageId) as MessageID FROM raindata group by rec_datetime\")\r\n",
+					"\r\n",
+					"df3 = spark.sql(\"CREATE OR REPLACE TEMPORARY VIEW v3 AS SELECT distinct(date_trunc('hour', EnqueuedTimeUtc) + INTERVAL 1 HOURS) as enq_utctime, max(messageId) as MessageID FROM raindata group by enq_utctime\")\r\n",
+					"\r\n",
+					"# Get dataframe based on select from all views joining on MessageID\r\n",
+					"weatherhour = spark.sql(\"SELECT v1.deviceID, v2.rec_datetime, v3.enq_utctime, v1.rainfall_hour, v1.temp_min, v1.temp_max, v1.wind_gust_max, v1.wind_avg, v1.humidity_min, v1.humidity_max, v1.air_pressure_min, v1.air_pressure_max FROM v1, v2, v3 WHERE v1.MessageID = v2.MessageID and v1.MessageID = v3.MessageID\")"
+				],
+				"execution_count": 23
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"display(weatherhour)"
+				],
+				"execution_count": 24
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Write dataframe to SQL Datbase\r\n",
+					"sqlserver = 'ocpmelb-sqlsvr1.database.windows.net'\r\n",
+					"port = '1433'\r\n",
+					"database = 'ocpmelb_sqldb1'\r\n",
+					"sqlUsername = dbutils.secrets.get(scope = \"sqldbscope\", key = \"sqluser\")\r\n",
+					"sqlPassword = dbutils.secrets.get(scope = \"sqldbscope\", key = \"sqlpwd\")\r\n",
+					"\r\n",
+					"print(\"Writing data to database: \" + database)\r\n",
+					"  \r\n",
+					"weatherhour.write \\\r\n",
+					"   .option('user', sqlUsername) \\\r\n",
+					"   .option('password', sqlPassword) \\\r\n",
+					"   .jdbc('jdbc:sqlserver://' + sqlserver + ':' + port + ';database=' + database, 'dbo.Weather_hourly', mode = 'append' )"
+				],
+				"execution_count": null
 			}
 		]
 	}
