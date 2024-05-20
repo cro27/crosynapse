@@ -18,7 +18,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "724f0776-e77e-4e6a-95d1-565c7dc5a879"
+				"spark.autotune.trackingId": "afd4f7e4-8298-4fa3-9285-88b7e07b9db8"
 			}
 		},
 		"metadata": {
@@ -86,7 +86,7 @@
 					"import re\r\n",
 					"import os"
 				],
-				"execution_count": 1
+				"execution_count": 10
 			},
 			{
 				"cell_type": "markdown",
@@ -132,7 +132,7 @@
 					"    blob_sas_token)\r\n",
 					""
 				],
-				"execution_count": 2
+				"execution_count": 11
 			},
 			{
 				"cell_type": "markdown",
@@ -193,7 +193,7 @@
 					"\r\n",
 					"print(\"Processing file: \" + path)"
 				],
-				"execution_count": 4
+				"execution_count": 12
 			},
 			{
 				"cell_type": "markdown",
@@ -225,7 +225,7 @@
 					"# Read previous hour files in\r\n",
 					"sparkDF = spark.read.json(path) "
 				],
-				"execution_count": 5
+				"execution_count": 13
 			},
 			{
 				"cell_type": "code",
@@ -255,7 +255,7 @@
 					"                        'Body.abs_pres').orderBy(\"messageId\")\r\n",
 					"#display(dataDF)"
 				],
-				"execution_count": null
+				"execution_count": 14
 			},
 			{
 				"cell_type": "code",
@@ -274,7 +274,7 @@
 					"# Remove any records from the hour before the time period we are interested in\r\n",
 					"filterDF = dataDF.filter(sparkDF.EnqueuedTimeUtc.substr(12,2) == hour)"
 				],
-				"execution_count": 7
+				"execution_count": 15
 			},
 			{
 				"cell_type": "code",
@@ -294,7 +294,7 @@
 					"# Create temp table\r\n",
 					"filterDF.createOrReplaceTempView(\"raindata\")"
 				],
-				"execution_count": 8
+				"execution_count": 16
 			},
 			{
 				"cell_type": "code",
@@ -322,7 +322,7 @@
 					"# Get dataframe based on select from all views joining on MessageID\r\n",
 					"weatherhour = spark.sql(\"SELECT v1.deviceID, v2.rec_datetime, v3.enq_utctime, v1.rainfall_hour, v1.temp_min, v1.temp_max, v1.wind_gust_max, v1.wind_avg, v1.humidity_min, v1.humidity_max, v1.air_pressure_min, v1.air_pressure_max FROM v1, v2, v3 WHERE v1.MessageID = v2.MessageID and v1.MessageID = v3.MessageID\")"
 				],
-				"execution_count": 9
+				"execution_count": 17
 			},
 			{
 				"cell_type": "code",
@@ -371,20 +371,20 @@
 				},
 				"source": [
 					"# Write dataframe to SQL Datbase\r\n",
-					"sqlserver = 'ocpmelb-sqlsvr1.database.windows.net'\r\n",
+					"sqlserver = 'gpsmelb-sqlsvr.database.windows.net'\r\n",
 					"port = '1433'\r\n",
-					"database = 'ocpmelb_sqldb1'\r\n",
-					"sqlUsername = dbutils.secrets.get(scope = \"sqldbscope\", key = \"sqluser\")\r\n",
-					"sqlPassword = dbutils.secrets.get(scope = \"sqldbscope\", key = \"sqlpwd\")\r\n",
+					"database = 'weatherdb'\r\n",
+					"#sqlUsername = dbutils.secrets.get(scope = \"sqldbscope\", key = \"sqluser\")\r\n",
+					"#sqlPassword = dbutils.secrets.get(scope = \"sqldbscope\", key = \"sqlpwd\")\r\n",
 					"\r\n",
 					"print(\"Writing data to database: \" + database)\r\n",
 					"  \r\n",
 					"weatherhour.write \\\r\n",
-					"   .option('user', sqlUsername) \\\r\n",
-					"   .option('password', sqlPassword) \\\r\n",
+					"   .option('user', 'sqladmin') \\\r\n",
+					"   .option('password', 'Welcome12345') \\\r\n",
 					"   .jdbc('jdbc:sqlserver://' + sqlserver + ':' + port + ';database=' + database, 'dbo.Weather_hourly', mode = 'append' )"
 				],
-				"execution_count": null
+				"execution_count": 19
 			}
 		]
 	}
