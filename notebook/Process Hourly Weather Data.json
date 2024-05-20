@@ -13,11 +13,12 @@
 			"executorMemory": "56g",
 			"executorCores": 8,
 			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": true,
 			"conf": {
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "0c0a3c94-bbcf-4f20-9882-d28091b5db4d"
+				"spark.autotune.trackingId": "724f0776-e77e-4e6a-95d1-565c7dc5a879"
 			}
 		},
 		"metadata": {
@@ -85,7 +86,7 @@
 					"import re\r\n",
 					"import os"
 				],
-				"execution_count": 3
+				"execution_count": 1
 			},
 			{
 				"cell_type": "markdown",
@@ -131,7 +132,7 @@
 					"    blob_sas_token)\r\n",
 					""
 				],
-				"execution_count": 14
+				"execution_count": 2
 			},
 			{
 				"cell_type": "markdown",
@@ -143,28 +144,8 @@
 					}
 				},
 				"source": [
-					"Test"
+					"Setup blob path to process"
 				]
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					}
-				},
-				"source": [
-					"from notebookutils import mssparkutils\r\n",
-					"wasb_path = 'wasbs://weatheradata@wattleweatherdata.blob.core.windows.net/cro-iotweather/00/2024/05/20/01/'\r\n",
-					"mssparkutils.fs.ls(wasb_path)"
-				],
-				"execution_count": 15
 			},
 			{
 				"cell_type": "code",
@@ -212,7 +193,20 @@
 					"\r\n",
 					"print(\"Processing file: \" + path)"
 				],
-				"execution_count": 16
+				"execution_count": 4
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"Process the data"
+				]
 			},
 			{
 				"cell_type": "code",
@@ -231,7 +225,7 @@
 					"# Read previous hour files in\r\n",
 					"sparkDF = spark.read.json(path) "
 				],
-				"execution_count": 17
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
@@ -259,9 +253,9 @@
 					"                        'Body.wind_gust', \\\r\n",
 					"                        'Body.wind_avg', \\\r\n",
 					"                        'Body.abs_pres').orderBy(\"messageId\")\r\n",
-					"display(dataDF)"
+					"#display(dataDF)"
 				],
-				"execution_count": 18
+				"execution_count": null
 			},
 			{
 				"cell_type": "code",
@@ -280,7 +274,7 @@
 					"# Remove any records from the hour before the time period we are interested in\r\n",
 					"filterDF = dataDF.filter(sparkDF.EnqueuedTimeUtc.substr(12,2) == hour)"
 				],
-				"execution_count": 19
+				"execution_count": 7
 			},
 			{
 				"cell_type": "code",
@@ -300,7 +294,7 @@
 					"# Create temp table\r\n",
 					"filterDF.createOrReplaceTempView(\"raindata\")"
 				],
-				"execution_count": 22
+				"execution_count": 8
 			},
 			{
 				"cell_type": "code",
@@ -328,7 +322,7 @@
 					"# Get dataframe based on select from all views joining on MessageID\r\n",
 					"weatherhour = spark.sql(\"SELECT v1.deviceID, v2.rec_datetime, v3.enq_utctime, v1.rainfall_hour, v1.temp_min, v1.temp_max, v1.wind_gust_max, v1.wind_avg, v1.humidity_min, v1.humidity_max, v1.air_pressure_min, v1.air_pressure_max FROM v1, v2, v3 WHERE v1.MessageID = v2.MessageID and v1.MessageID = v3.MessageID\")"
 				],
-				"execution_count": 23
+				"execution_count": 9
 			},
 			{
 				"cell_type": "code",
@@ -348,6 +342,19 @@
 					"display(weatherhour)"
 				],
 				"execution_count": 24
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"Write the results"
+				]
 			},
 			{
 				"cell_type": "code",
