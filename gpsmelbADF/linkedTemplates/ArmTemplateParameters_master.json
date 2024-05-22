@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "gpsmelbADF"
 		},
+		"AzureBlobStorage2_connectionString": {
+			"value": ""
+		},
 		"AzureBlob_colsen2_ocpmelb_connectionString": {
 			"value": ""
 		},
@@ -14,6 +17,15 @@
 		"AzureSqlDatabase2_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().logicalserver};Initial Catalog=@{linkedService().database}"
 		},
+		"Demo Lakehouse_servicePrincipalCredential": {
+			"value": ""
+		},
+		"IoTHubWeatherData_connectionString": {
+			"value": ""
+		},
+		"WeatherLake_servicePrincipalCredential": {
+			"value": ""
+		},
 		"asmDB_connectionString": {
 			"value": ""
 		},
@@ -22,6 +34,9 @@
 		},
 		"crosynapse-WorkspaceDefaultSqlServer_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:crosynapse.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"csvcodes_connectionString": {
+			"value": ""
 		},
 		"dynamicSQLDB1_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().logicalserver};Initial Catalog=@{linkedService().database}"
@@ -68,8 +83,20 @@
 		"CognitiveService1_properties_typeProperties_subscriptionId": {
 			"value": "f5c29e46-bd9a-47de-b598-c7a0695f3419"
 		},
+		"Demo Lakehouse_properties_typeProperties_tenant": {
+			"value": "dc54634d-549a-44c9-83b5-2c3806519c69"
+		},
+		"Demo Lakehouse_properties_typeProperties_servicePrincipalId": {
+			"value": "d844bfd4-46f7-4897-a150-b987cad07566"
+		},
 		"TextAnalytics_properties_typeProperties_subscriptionId": {
 			"value": "37b2d7dc-7393-47ad-8c51-90c89944370c"
+		},
+		"WeatherLake_properties_typeProperties_tenant": {
+			"value": "dc54634d-549a-44c9-83b5-2c3806519c69"
+		},
+		"WeatherLake_properties_typeProperties_servicePrincipalId": {
+			"value": "9005b853-2c43-48d4-8298-e1b5eba40b00"
 		},
 		"contosoStorage_properties_typeProperties_url": {
 			"value": "https://gpsmelb.dfs.core.windows.net/"
@@ -97,6 +124,18 @@
 		},
 		"synapse-gpsmelb-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"value": "https://gpsmelb.dfs.core.windows.net"
+		},
+		"WeatherDB_properties_typeProperties_endpoint": {
+			"value": "https://weather.australiasoutheast.kusto.windows.net"
+		},
+		"WeatherDB_properties_typeProperties_database": {
+			"value": "weatherDB"
+		},
+		"SQLweatherDB_properties_typeProperties_server": {
+			"value": "gpsmelb-sqlsvr.database.windows.net"
+		},
+		"SQLweatherDB_properties_typeProperties_database": {
+			"value": "weatherdb"
 		},
 		"containerUri": {
 			"value": ""

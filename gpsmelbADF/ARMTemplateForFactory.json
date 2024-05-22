@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "gpsmelbADF"
 		},
+		"AzureBlobStorage2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
+		},
 		"AzureBlob_colsen2_ocpmelb_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlob_colsen2_ocpmelb'"
@@ -19,6 +23,18 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase2'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().logicalserver};Initial Catalog=@{linkedService().database}"
+		},
+		"Demo Lakehouse_servicePrincipalCredential": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalCredential' of 'Demo Lakehouse'"
+		},
+		"IoTHubWeatherData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'IoTHubWeatherData'"
+		},
+		"WeatherLake_servicePrincipalCredential": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalCredential' of 'WeatherLake'"
 		},
 		"asmDB_connectionString": {
 			"type": "secureString",
@@ -33,6 +49,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'crosynapse-WorkspaceDefaultSqlServer'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:crosynapse.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"csvcodes_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'csvcodes'"
 		},
 		"dynamicSQLDB1_connectionString": {
 			"type": "secureString",
@@ -96,9 +116,25 @@
 			"type": "string",
 			"defaultValue": "f5c29e46-bd9a-47de-b598-c7a0695f3419"
 		},
+		"Demo Lakehouse_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "dc54634d-549a-44c9-83b5-2c3806519c69"
+		},
+		"Demo Lakehouse_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "d844bfd4-46f7-4897-a150-b987cad07566"
+		},
 		"TextAnalytics_properties_typeProperties_subscriptionId": {
 			"type": "string",
 			"defaultValue": "37b2d7dc-7393-47ad-8c51-90c89944370c"
+		},
+		"WeatherLake_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "dc54634d-549a-44c9-83b5-2c3806519c69"
+		},
+		"WeatherLake_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "9005b853-2c43-48d4-8298-e1b5eba40b00"
 		},
 		"contosoStorage_properties_typeProperties_url": {
 			"type": "string",
@@ -135,12 +171,69 @@
 		"synapse-gpsmelb-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://gpsmelb.dfs.core.windows.net"
+		},
+		"WeatherDB_properties_typeProperties_endpoint": {
+			"type": "string",
+			"defaultValue": "https://weather.australiasoutheast.kusto.windows.net"
+		},
+		"WeatherDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "weatherDB"
+		},
+		"SQLweatherDB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "gpsmelb-sqlsvr.database.windows.net"
+		},
+		"SQLweatherDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "weatherdb"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/FabricLoadMonthlyRainData')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CallFabricAPI",
+						"type": "WebHook",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "POST https://api.fabric.microsoft.com/v1/workspaces/253bd6a8-f2fc-447b-9337-2ac97b9d2e4d/items/9bd43163-4cac-428a-9680-6f76493e7d4b/jobs/instances?jobType=RunNotebook",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"executionData": {
+									"configuration": {
+										"defaultLakehouse": {
+											"name": "WeatherLake",
+											"id": "910b5866-6f8a-42e8-a94a-ee3d555ccd49",
+											"workspaceId": "253bd6a8-f2fc-447b-9337-2ac97b9d2e4d"
+										}
+									}
+								}
+							},
+							"timeout": "00:10:00"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SalespersonPipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -179,8 +272,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-02-08T07:23:22Z"
@@ -227,8 +319,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"annotations": []
 			},
@@ -383,8 +474,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"parameters": {
 					"logicalserver": {
@@ -485,14 +575,12 @@
 											"partitionOption": "None"
 										},
 										"sink": {
-											"type": "DelimitedTextSink",
+											"type": "ParquetSink",
 											"storeSettings": {
-												"type": "AzureBlobFSWriteSettings"
+												"type": "LakehouseWriteSettings"
 											},
 											"formatSettings": {
-												"type": "DelimitedTextWriteSettings",
-												"quoteAllText": true,
-												"fileExtension": ".txt"
+												"type": "ParquetWriteSettings"
 											}
 										},
 										"enableStaging": false,
@@ -517,21 +605,11 @@
 									],
 									"outputs": [
 										{
-											"referenceName": "DelimitedText2",
+											"referenceName": "SalesLT2Lakehouse",
 											"type": "DatasetReference",
 											"parameters": {
-												"container": {
-													"value": "@pipeline().parameters.container",
-													"type": "Expression"
-												},
-												"path": {
-													"value": "@pipeline().parameters.path",
-													"type": "Expression"
-												},
-												"filename": {
-													"value": "@concat(item().SchemaName,'_',item().TableName,'.csv')",
-													"type": "Expression"
-												}
+												"Path": "@pipeline().parameters.path",
+												"Filename": "@concat(item().SchemaName,'_',item().TableName,'.parquet')"
 											}
 										}
 									]
@@ -541,8 +619,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"parameters": {
 					"logicalserver": {
@@ -562,7 +639,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable3')]",
-				"[concat(variables('factoryId'), '/datasets/DelimitedText2')]"
+				"[concat(variables('factoryId'), '/datasets/SalesLT2Lakehouse')]"
 			]
 		},
 		{
@@ -887,8 +964,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"annotations": []
 			},
@@ -1025,8 +1101,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"parameters": {
 					"container": {
@@ -1041,6 +1116,344 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/gpsmelb_sqldb1')]",
 				"[concat(variables('factoryId'), '/datasets/sqlstage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "LakehouseWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "PasswordHash",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "PasswordHash",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "PasswordSalt",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "PasswordSalt",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "rowguid",
+											"type": "Guid",
+											"physicalType": "uniqueidentifier"
+										},
+										"sink": {
+											"name": "rowguid",
+											"type": "Guid",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "ModifiedDate",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										},
+										"sink": {
+											"name": "ModifiedDate",
+											"type": "DateTime",
+											"physicalType": "INT_96"
+										}
+									},
+									{
+										"source": {
+											"name": "LastName",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "LastName",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Suffix",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "Suffix",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "CompanyName",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "CompanyName",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "SalesPerson",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "SalesPerson",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "EmailAddress",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "EmailAddress",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "Phone",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "Phone",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "CustomerID",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "CustomerID",
+											"type": "Int32",
+											"physicalType": "INT_32"
+										}
+									},
+									{
+										"source": {
+											"name": "NameStyle",
+											"type": "Boolean",
+											"physicalType": "bit"
+										},
+										"sink": {
+											"name": "NameStyle",
+											"type": "Boolean",
+											"physicalType": "BOOLEAN"
+										}
+									},
+									{
+										"source": {
+											"name": "Title",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "Title",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "FirstName",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "FirstName",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "MiddleName",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "MiddleName",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AW_Customer_table",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DelimitedText3",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AW_Customer_table')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText3')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AW_Customer_table')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "gpsmelb_sqldb1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "PasswordHash",
+						"type": "varchar"
+					},
+					{
+						"name": "PasswordSalt",
+						"type": "varchar"
+					},
+					{
+						"name": "rowguid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ModifiedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "LastName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Suffix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CompanyName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SalesPerson",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EmailAddress",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Phone",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CustomerID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NameStyle",
+						"type": "bit"
+					},
+					{
+						"name": "Title",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FirstName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MiddleName",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "SalesLT",
+					"table": "Customer"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/gpsmelb_sqldb1')]"
 			]
 		},
 		{
@@ -1264,6 +1677,83 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/CuratedWeatherData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WeatherLake",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "LakehouseTable",
+				"schema": [
+					{
+						"name": "deviceId",
+						"type": "string"
+					},
+					{
+						"name": "rec_datetime",
+						"type": "timestamp"
+					},
+					{
+						"name": "enq_utctime",
+						"type": "timestamp"
+					},
+					{
+						"name": "rainfall_hour",
+						"type": "double"
+					},
+					{
+						"name": "temp_min",
+						"type": "double"
+					},
+					{
+						"name": "temp_max",
+						"type": "double"
+					},
+					{
+						"name": "wind_gust_max",
+						"type": "double"
+					},
+					{
+						"name": "wind_avg",
+						"type": "double"
+					},
+					{
+						"name": "humidity_min",
+						"type": "long"
+					},
+					{
+						"name": "humidity_max",
+						"type": "long"
+					},
+					{
+						"name": "air_pressure_min",
+						"type": "double"
+					},
+					{
+						"name": "air_pressure_max",
+						"type": "double"
+					},
+					{
+						"name": "Year",
+						"type": "long"
+					},
+					{
+						"name": "Month",
+						"type": "long"
+					}
+				],
+				"typeProperties": {
+					"table": "CuratedWeatherData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WeatherLake')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1356,6 +1846,34 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/pvstarteradls')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Demo Lakehouse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "LakehouseLocation",
+						"fileName": "customer.csv",
+						"folderPath": "Files"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Demo Lakehouse')]"
 			]
 		},
 		{
@@ -1707,6 +2225,111 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Parquet2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Demo Lakehouse",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "LakehouseLocation",
+						"fileName": "Customer.parquet",
+						"folderPath": "Files"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Demo Lakehouse')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RainfallAvg')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WeatherLake",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "LakehouseTable",
+				"schema": [
+					{
+						"name": "StationName",
+						"type": "string"
+					},
+					{
+						"name": "Year",
+						"type": "integer"
+					},
+					{
+						"name": "Month",
+						"type": "string"
+					},
+					{
+						"name": "MonthNumber",
+						"type": "integer"
+					},
+					{
+						"name": "Rainfall",
+						"type": "double"
+					}
+				],
+				"typeProperties": {
+					"table": "melbourne_monthly_rainfall_avg"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WeatherLake')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SalesLT2Lakehouse')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Demo Lakehouse",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Path": {
+						"type": "string"
+					},
+					"Filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "LakehouseLocation",
+						"fileName": {
+							"value": "@dataset().Filename",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().Path",
+							"type": "Expression"
+						}
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Demo Lakehouse')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Salesperson')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2051,6 +2674,25 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage2_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlob_colsen2_ocpmelb')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -2260,6 +2902,52 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Demo Lakehouse')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Lakehouse",
+				"typeProperties": {
+					"workspaceId": "85ad6934-7d8c-4e06-9046-51839cc8a0e6",
+					"artifactId": "80093504-b285-4baf-aecb-7cf39ce7c382",
+					"tenant": "[parameters('Demo Lakehouse_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('Demo Lakehouse_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalCredentialType": "ServicePrincipalKey",
+					"servicePrincipalCredential": {
+						"type": "SecureString",
+						"value": "[parameters('Demo Lakehouse_servicePrincipalCredential')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IoTHubWeatherData')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('IoTHubWeatherData_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/TextAnalytics')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -2290,6 +2978,33 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WeatherLake')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Lakehouse",
+				"typeProperties": {
+					"workspaceId": "253bd6a8-f2fc-447b-9337-2ac97b9d2e4d",
+					"artifactId": "910b5866-6f8a-42e8-a94a-ee3d555ccd49",
+					"tenant": "[parameters('WeatherLake_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('WeatherLake_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalCredentialType": "ServicePrincipalKey",
+					"servicePrincipalCredential": {
+						"type": "SecureString",
+						"value": "[parameters('WeatherLake_servicePrincipalCredential')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
 			]
 		},
 		{
@@ -2390,6 +3105,25 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/csvcodes')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('csvcodes_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
 			]
 		},
 		{
@@ -2781,6 +3515,445 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LoadHourlyFromKQL')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "KQLtoDB",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureDataExplorerSource",
+								"query": "WeatherData\n   | where format_datetime(EventProcessedUtcTime, 'yyyy-MM-dd HH') == format_datetime(now(-1h), 'yyyy-MM-dd HH')\n   | summarize Year = max(year), Month = max(month), enq_utctime = max(datetime_add('hour',1,todatetime(strcat(strcat(format_datetime(EventProcessedUtcTime, 'yyyy-MM-dd'), 'T'), strcat(format_datetime(EventProcessedUtcTime, 'HH:'), '00:00Z'))))), rec_datetime = max(datetime_add('hour',1,todatetime(strcat(strcat(format_datetime(rec_time, 'yyyy-MM-dd'), 'T'), strcat(format_datetime(rec_time, 'HH:'), '00:00Z'))))), Rainfall_hour = round(max(rain_total) - min(rain_total),1), temp_max = round(max(temp_out),1), temp_min = round(min(temp_out),1), wind_gust_max = round(max(wind_gust),1), wind_avg = round(avg(wind_avg),1), humidity_min = min(hum_out), humidity_max = max(hum_out), air_pressure_min = round(min(abs_pres),1), air_pressure_max = round(max(abs_pres),1)\n   | project deviceId = \"wattlepi\", todatetime(rec_datetime), todatetime(enq_utctime), Rainfall_hour, temp_min, temp_max,  wind_gust_max, wind_avg, humidity_min, humidity_max, air_pressure_min, air_pressure_max, Year, Month",
+								"queryTimeout": "01:00:00",
+								"noTruncation": true
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "deviceId",
+											"type": "String",
+											"physicalType": "string"
+										},
+										"sink": {
+											"name": "deviceid",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "enq_utctime",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										},
+										"sink": {
+											"name": "enq_utctime",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										}
+									},
+									{
+										"source": {
+											"name": "rec_datetime",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										},
+										"sink": {
+											"name": "rec_datetime",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										}
+									},
+									{
+										"source": {
+											"name": "Rainfall_hour",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "rainfall_hour",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "temp_min",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "temp_min",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "temp_max",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "temp_max",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "wind_gust_max",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "wind_gust_max",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "wind_avg",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "wind_avg",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "humidity_min",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "humidity_min",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "humidity_max",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "humidity_max",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "air_pressure_min",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "air_pressure_min",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "air_pressure_max",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "air_pressure_max",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "WeatherData",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "WeatherHourly",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/WeatherData')]",
+				"[concat(variables('factoryId'), '/datasets/WeatherHourly')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WeatherDB')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataExplorer",
+				"typeProperties": {
+					"endpoint": "[parameters('WeatherDB_properties_typeProperties_endpoint')]",
+					"database": "[parameters('WeatherDB_properties_typeProperties_database')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WeatherData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WeatherDB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureDataExplorerTable",
+				"schema": [
+					{
+						"name": "deviceID",
+						"type": "string"
+					},
+					{
+						"name": "messageId",
+						"type": "int"
+					},
+					{
+						"name": "rec_time",
+						"type": "datetime"
+					},
+					{
+						"name": "EventEnqueuedUtcTime",
+						"type": "datetime"
+					},
+					{
+						"name": "EventProcessedUtcTime",
+						"type": "datetime"
+					},
+					{
+						"name": "year",
+						"type": "int"
+					},
+					{
+						"name": "month",
+						"type": "int"
+					},
+					{
+						"name": "temp_out",
+						"type": "real"
+					},
+					{
+						"name": "hum_out",
+						"type": "int"
+					},
+					{
+						"name": "abs_pres",
+						"type": "real"
+					},
+					{
+						"name": "wind_gust",
+						"type": "real"
+					},
+					{
+						"name": "wind_avg",
+						"type": "real"
+					},
+					{
+						"name": "wind_dir",
+						"type": "int"
+					},
+					{
+						"name": "wind_pos",
+						"type": "string"
+					},
+					{
+						"name": "rain_total",
+						"type": "real"
+					}
+				],
+				"typeProperties": {
+					"table": "WeatherData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WeatherDB')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLweatherDB')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('SQLweatherDB_properties_typeProperties_server')]",
+					"database": "[parameters('SQLweatherDB_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"hostNameInCertificate": "",
+					"authenticationType": "SystemAssignedManagedIdentity"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WeatherHourly')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLweatherDB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "deviceid",
+						"type": "nvarchar"
+					},
+					{
+						"name": "enq_utctime",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "rec_datetime",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "rainfall_hour",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "temp_min",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "temp_max",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "wind_gust_max",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "wind_avg",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "humidity_min",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "humidity_max",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "air_pressure_min",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "air_pressure_max",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Weather_hourly"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLweatherDB')]"
+			]
 		}
 	]
 }

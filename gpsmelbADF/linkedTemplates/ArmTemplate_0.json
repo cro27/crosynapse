@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "gpsmelbADF"
 		},
+		"AzureBlobStorage2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
+		},
 		"AzureBlob_colsen2_ocpmelb_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlob_colsen2_ocpmelb'"
@@ -20,19 +24,17 @@
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase2'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().logicalserver};Initial Catalog=@{linkedService().database}"
 		},
-		"asmDB_connectionString": {
+		"Demo Lakehouse_servicePrincipalCredential": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'asmDB'"
+			"metadata": "Secure string for 'servicePrincipalCredential' of 'Demo Lakehouse'"
 		},
-		"contosoSQL_connectionString": {
+		"IoTHubWeatherData_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'contosoSQL'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=gpsmelb-sqlsvr.database.windows.net;Initial Catalog=gpsmelb-sql"
+			"metadata": "Secure string for 'connectionString' of 'IoTHubWeatherData'"
 		},
-		"crosynapse-WorkspaceDefaultSqlServer_connectionString": {
+		"WeatherLake_servicePrincipalCredential": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'crosynapse-WorkspaceDefaultSqlServer'",
-			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:crosynapse.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+			"metadata": "Secure string for 'servicePrincipalCredential' of 'WeatherLake'"
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -66,23 +68,72 @@
 			"type": "string",
 			"defaultValue": "f5c29e46-bd9a-47de-b598-c7a0695f3419"
 		},
+		"Demo Lakehouse_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "dc54634d-549a-44c9-83b5-2c3806519c69"
+		},
+		"Demo Lakehouse_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "d844bfd4-46f7-4897-a150-b987cad07566"
+		},
 		"TextAnalytics_properties_typeProperties_subscriptionId": {
 			"type": "string",
 			"defaultValue": "37b2d7dc-7393-47ad-8c51-90c89944370c"
 		},
-		"contosoStorage_properties_typeProperties_url": {
+		"WeatherLake_properties_typeProperties_tenant": {
 			"type": "string",
-			"defaultValue": "https://gpsmelb.dfs.core.windows.net/"
+			"defaultValue": "dc54634d-549a-44c9-83b5-2c3806519c69"
 		},
-		"crosynapse-WorkspaceDefaultStorage_properties_typeProperties_url": {
+		"WeatherLake_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
-			"defaultValue": "https://pvstarteradcadls.dfs.core.windows.net"
+			"defaultValue": "9005b853-2c43-48d4-8298-e1b5eba40b00"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/FabricLoadMonthlyRainData')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CallFabricAPI",
+						"type": "WebHook",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "POST https://api.fabric.microsoft.com/v1/workspaces/253bd6a8-f2fc-447b-9337-2ac97b9d2e4d/items/9bd43163-4cac-428a-9680-6f76493e7d4b/jobs/instances?jobType=RunNotebook",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"executionData": {
+									"configuration": {
+										"defaultLakehouse": {
+											"name": "WeatherLake",
+											"id": "910b5866-6f8a-42e8-a94a-ee3d555ccd49",
+											"workspaceId": "253bd6a8-f2fc-447b-9337-2ac97b9d2e4d"
+										}
+									}
+								}
+							},
+							"timeout": "00:10:00"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -184,6 +235,25 @@
 				"typeProperties": {
 					"serviceEndpoint": "[parameters('AzureBlobStorage1_properties_typeProperties_serviceEndpoint')]",
 					"accountKind": "StorageV2"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage2_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "integrationRuntime1",
@@ -363,6 +433,52 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Demo Lakehouse')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Lakehouse",
+				"typeProperties": {
+					"workspaceId": "85ad6934-7d8c-4e06-9046-51839cc8a0e6",
+					"artifactId": "80093504-b285-4baf-aecb-7cf39ce7c382",
+					"tenant": "[parameters('Demo Lakehouse_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('Demo Lakehouse_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalCredentialType": "ServicePrincipalKey",
+					"servicePrincipalCredential": {
+						"type": "SecureString",
+						"value": "[parameters('Demo Lakehouse_servicePrincipalCredential')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IoTHubWeatherData')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('IoTHubWeatherData_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/TextAnalytics')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -396,95 +512,22 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/asmDB')]",
+			"name": "[concat(parameters('factoryName'), '/WeatherLake')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "Oracle",
+				"type": "Lakehouse",
 				"typeProperties": {
-					"connectionString": "[parameters('asmDB_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/contosoSQL')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('contosoSQL_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/contosoStorage')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('contosoStorage_properties_typeProperties_url')]"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/crosynapse-WorkspaceDefaultSqlServer')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"parameters": {
-					"DBName": {
-						"type": "String"
+					"workspaceId": "253bd6a8-f2fc-447b-9337-2ac97b9d2e4d",
+					"artifactId": "910b5866-6f8a-42e8-a94a-ee3d555ccd49",
+					"tenant": "[parameters('WeatherLake_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('WeatherLake_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalCredentialType": "ServicePrincipalKey",
+					"servicePrincipalCredential": {
+						"type": "SecureString",
+						"value": "[parameters('WeatherLake_servicePrincipalCredential')]"
 					}
-				},
-				"annotations": [],
-				"type": "AzureSqlDW",
-				"typeProperties": {
-					"connectionString": "[parameters('crosynapse-WorkspaceDefaultSqlServer_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "AutoResolveIntegrationRuntime",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/crosynapse-WorkspaceDefaultStorage')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('crosynapse-WorkspaceDefaultStorage_properties_typeProperties_url')]"
 				},
 				"connectVia": {
 					"referenceName": "integrationRuntime1",

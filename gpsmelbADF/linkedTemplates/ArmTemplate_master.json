@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "gpsmelbADF"
 		},
+		"AzureBlobStorage2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
+		},
 		"AzureBlob_colsen2_ocpmelb_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlob_colsen2_ocpmelb'"
@@ -19,6 +23,18 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase2'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().logicalserver};Initial Catalog=@{linkedService().database}"
+		},
+		"Demo Lakehouse_servicePrincipalCredential": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalCredential' of 'Demo Lakehouse'"
+		},
+		"IoTHubWeatherData_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'IoTHubWeatherData'"
+		},
+		"WeatherLake_servicePrincipalCredential": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalCredential' of 'WeatherLake'"
 		},
 		"asmDB_connectionString": {
 			"type": "secureString",
@@ -33,6 +49,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'crosynapse-WorkspaceDefaultSqlServer'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:crosynapse.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"csvcodes_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'csvcodes'"
 		},
 		"dynamicSQLDB1_connectionString": {
 			"type": "secureString",
@@ -96,9 +116,25 @@
 			"type": "string",
 			"defaultValue": "f5c29e46-bd9a-47de-b598-c7a0695f3419"
 		},
+		"Demo Lakehouse_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "dc54634d-549a-44c9-83b5-2c3806519c69"
+		},
+		"Demo Lakehouse_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "d844bfd4-46f7-4897-a150-b987cad07566"
+		},
 		"TextAnalytics_properties_typeProperties_subscriptionId": {
 			"type": "string",
 			"defaultValue": "37b2d7dc-7393-47ad-8c51-90c89944370c"
+		},
+		"WeatherLake_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "dc54634d-549a-44c9-83b5-2c3806519c69"
+		},
+		"WeatherLake_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "9005b853-2c43-48d4-8298-e1b5eba40b00"
 		},
 		"contosoStorage_properties_typeProperties_url": {
 			"type": "string",
@@ -136,6 +172,22 @@
 			"type": "string",
 			"defaultValue": "https://gpsmelb.dfs.core.windows.net"
 		},
+		"WeatherDB_properties_typeProperties_endpoint": {
+			"type": "string",
+			"defaultValue": "https://weather.australiasoutheast.kusto.windows.net"
+		},
+		"WeatherDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "weatherDB"
+		},
+		"SQLweatherDB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "gpsmelb-sqlsvr.database.windows.net"
+		},
+		"SQLweatherDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "weatherdb"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -163,6 +215,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureBlobStorage2_connectionString": {
+						"value": "[parameters('AzureBlobStorage2_connectionString')]"
+					},
 					"AzureBlob_colsen2_ocpmelb_connectionString": {
 						"value": "[parameters('AzureBlob_colsen2_ocpmelb_connectionString')]"
 					},
@@ -172,14 +227,14 @@
 					"AzureSqlDatabase2_connectionString": {
 						"value": "[parameters('AzureSqlDatabase2_connectionString')]"
 					},
-					"asmDB_connectionString": {
-						"value": "[parameters('asmDB_connectionString')]"
+					"Demo Lakehouse_servicePrincipalCredential": {
+						"value": "[parameters('Demo Lakehouse_servicePrincipalCredential')]"
 					},
-					"contosoSQL_connectionString": {
-						"value": "[parameters('contosoSQL_connectionString')]"
+					"IoTHubWeatherData_connectionString": {
+						"value": "[parameters('IoTHubWeatherData_connectionString')]"
 					},
-					"crosynapse-WorkspaceDefaultSqlServer_connectionString": {
-						"value": "[parameters('crosynapse-WorkspaceDefaultSqlServer_connectionString')]"
+					"WeatherLake_servicePrincipalCredential": {
+						"value": "[parameters('WeatherLake_servicePrincipalCredential')]"
 					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
@@ -205,14 +260,20 @@
 					"CognitiveService1_properties_typeProperties_subscriptionId": {
 						"value": "[parameters('CognitiveService1_properties_typeProperties_subscriptionId')]"
 					},
+					"Demo Lakehouse_properties_typeProperties_tenant": {
+						"value": "[parameters('Demo Lakehouse_properties_typeProperties_tenant')]"
+					},
+					"Demo Lakehouse_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('Demo Lakehouse_properties_typeProperties_servicePrincipalId')]"
+					},
 					"TextAnalytics_properties_typeProperties_subscriptionId": {
 						"value": "[parameters('TextAnalytics_properties_typeProperties_subscriptionId')]"
 					},
-					"contosoStorage_properties_typeProperties_url": {
-						"value": "[parameters('contosoStorage_properties_typeProperties_url')]"
+					"WeatherLake_properties_typeProperties_tenant": {
+						"value": "[parameters('WeatherLake_properties_typeProperties_tenant')]"
 					},
-					"crosynapse-WorkspaceDefaultStorage_properties_typeProperties_url": {
-						"value": "[parameters('crosynapse-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+					"WeatherLake_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('WeatherLake_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},
@@ -231,6 +292,18 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"asmDB_connectionString": {
+						"value": "[parameters('asmDB_connectionString')]"
+					},
+					"contosoSQL_connectionString": {
+						"value": "[parameters('contosoSQL_connectionString')]"
+					},
+					"crosynapse-WorkspaceDefaultSqlServer_connectionString": {
+						"value": "[parameters('crosynapse-WorkspaceDefaultSqlServer_connectionString')]"
+					},
+					"csvcodes_connectionString": {
+						"value": "[parameters('csvcodes_connectionString')]"
 					},
 					"dynamicSQLDB1_connectionString": {
 						"value": "[parameters('dynamicSQLDB1_connectionString')]"
@@ -253,6 +326,12 @@
 					"synapse-gpsmelb-WorkspaceDefaultSqlServer_connectionString": {
 						"value": "[parameters('synapse-gpsmelb-WorkspaceDefaultSqlServer_connectionString')]"
 					},
+					"contosoStorage_properties_typeProperties_url": {
+						"value": "[parameters('contosoStorage_properties_typeProperties_url')]"
+					},
+					"crosynapse-WorkspaceDefaultStorage_properties_typeProperties_url": {
+						"value": "[parameters('crosynapse-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+					},
 					"gpsmelb_properties_typeProperties_url": {
 						"value": "[parameters('gpsmelb_properties_typeProperties_url')]"
 					},
@@ -273,6 +352,18 @@
 					},
 					"synapse-gpsmelb-WorkspaceDefaultStorage_properties_typeProperties_url": {
 						"value": "[parameters('synapse-gpsmelb-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+					},
+					"WeatherDB_properties_typeProperties_endpoint": {
+						"value": "[parameters('WeatherDB_properties_typeProperties_endpoint')]"
+					},
+					"WeatherDB_properties_typeProperties_database": {
+						"value": "[parameters('WeatherDB_properties_typeProperties_database')]"
+					},
+					"SQLweatherDB_properties_typeProperties_server": {
+						"value": "[parameters('SQLweatherDB_properties_typeProperties_server')]"
+					},
+					"SQLweatherDB_properties_typeProperties_database": {
+						"value": "[parameters('SQLweatherDB_properties_typeProperties_database')]"
 					}
 				}
 			},
@@ -298,6 +389,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'gpsmelbADF_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "gpsmelbADF_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'gpsmelbADF_ArmTemplate_2')]"
 			]
 		}
 	]
