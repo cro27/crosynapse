@@ -1,0 +1,15 @@
+{
+	"name": "WeatherDB",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDataExplorer",
+		"typeProperties": {
+			"endpoint": "https://weather.australiasoutheast.kusto.windows.net",
+			"database": "weatherDB"
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
