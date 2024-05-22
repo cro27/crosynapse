@@ -1,0 +1,83 @@
+{
+	"name": "WeatherHourly",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLweatherDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "deviceid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "enq_utctime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "rec_datetime",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "rainfall_hour",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 1
+			},
+			{
+				"name": "temp_min",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 1
+			},
+			{
+				"name": "temp_max",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 1
+			},
+			{
+				"name": "wind_gust_max",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 1
+			},
+			{
+				"name": "wind_avg",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 1
+			},
+			{
+				"name": "humidity_min",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "humidity_max",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "air_pressure_min",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 1
+			},
+			{
+				"name": "air_pressure_max",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 1
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Weather_hourly"
+		}
+	}
+}
