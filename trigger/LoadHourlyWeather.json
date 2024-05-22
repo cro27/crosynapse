@@ -1,5 +1,5 @@
 {
-	"name": "LoadHorlyWeather",
+	"name": "LoadHourlyWeather",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
