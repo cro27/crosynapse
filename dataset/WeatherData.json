@@ -1,0 +1,76 @@
+{
+	"name": "WeatherData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "WeatherDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureDataExplorerTable",
+		"schema": [
+			{
+				"name": "deviceID",
+				"type": "string"
+			},
+			{
+				"name": "messageId",
+				"type": "int"
+			},
+			{
+				"name": "rec_time",
+				"type": "datetime"
+			},
+			{
+				"name": "EventEnqueuedUtcTime",
+				"type": "datetime"
+			},
+			{
+				"name": "EventProcessedUtcTime",
+				"type": "datetime"
+			},
+			{
+				"name": "year",
+				"type": "int"
+			},
+			{
+				"name": "month",
+				"type": "int"
+			},
+			{
+				"name": "temp_out",
+				"type": "real"
+			},
+			{
+				"name": "hum_out",
+				"type": "int"
+			},
+			{
+				"name": "abs_pres",
+				"type": "real"
+			},
+			{
+				"name": "wind_gust",
+				"type": "real"
+			},
+			{
+				"name": "wind_avg",
+				"type": "real"
+			},
+			{
+				"name": "wind_dir",
+				"type": "int"
+			},
+			{
+				"name": "wind_pos",
+				"type": "string"
+			},
+			{
+				"name": "rain_total",
+				"type": "real"
+			}
+		],
+		"typeProperties": {
+			"table": "WeatherData"
+		}
+	}
+}

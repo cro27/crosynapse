@@ -1,0 +1,215 @@
+{
+	"name": "LoadHourlyFromKQL",
+	"properties": {
+		"activities": [
+			{
+				"name": "KQLtoDB",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureDataExplorerSource",
+						"query": "WeatherData\n   | where format_datetime(EventProcessedUtcTime, 'yyyy-MM-dd HH') == format_datetime(now(-1h), 'yyyy-MM-dd HH')\n   | summarize Year = max(year), Month = max(month), enq_utctime = max(datetime_add('hour',1,todatetime(strcat(strcat(format_datetime(EventProcessedUtcTime, 'yyyy-MM-dd'), 'T'), strcat(format_datetime(EventProcessedUtcTime, 'HH:'), '00:00Z'))))), rec_datetime = max(datetime_add('hour',1,todatetime(strcat(strcat(format_datetime(rec_time, 'yyyy-MM-dd'), 'T'), strcat(format_datetime(rec_time, 'HH:'), '00:00Z'))))), Rainfall_hour = round(max(rain_total) - min(rain_total),1), temp_max = round(max(temp_out),1), temp_min = round(min(temp_out),1), wind_gust_max = round(max(wind_gust),1), wind_avg = round(avg(wind_avg),1), humidity_min = min(hum_out), humidity_max = max(hum_out), air_pressure_min = round(min(abs_pres),1), air_pressure_max = round(max(abs_pres),1)\n   | project deviceId = \"wattlepi\", todatetime(rec_datetime), todatetime(enq_utctime), Rainfall_hour, temp_min, temp_max,  wind_gust_max, wind_avg, humidity_min, humidity_max, air_pressure_min, air_pressure_max, Year, Month",
+						"queryTimeout": "01:00:00",
+						"noTruncation": true
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "deviceId",
+									"type": "String",
+									"physicalType": "string"
+								},
+								"sink": {
+									"name": "deviceid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "enq_utctime",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "enq_utctime",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "rec_datetime",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "rec_datetime",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "Rainfall_hour",
+									"type": "Double",
+									"physicalType": "real"
+								},
+								"sink": {
+									"name": "rainfall_hour",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 1,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "temp_min",
+									"type": "Double",
+									"physicalType": "real"
+								},
+								"sink": {
+									"name": "temp_min",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 1,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "temp_max",
+									"type": "Double",
+									"physicalType": "real"
+								},
+								"sink": {
+									"name": "temp_max",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 1,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "wind_gust_max",
+									"type": "Double",
+									"physicalType": "real"
+								},
+								"sink": {
+									"name": "wind_gust_max",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 1,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "wind_avg",
+									"type": "Double",
+									"physicalType": "real"
+								},
+								"sink": {
+									"name": "wind_avg",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 1,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "humidity_min",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "humidity_min",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "humidity_max",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "humidity_max",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "air_pressure_min",
+									"type": "Double",
+									"physicalType": "real"
+								},
+								"sink": {
+									"name": "air_pressure_min",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 1,
+									"precision": 18
+								}
+							},
+							{
+								"source": {
+									"name": "air_pressure_max",
+									"type": "Double",
+									"physicalType": "real"
+								},
+								"sink": {
+									"name": "air_pressure_max",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 1,
+									"precision": 18
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "WeatherData",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "WeatherHourly",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
