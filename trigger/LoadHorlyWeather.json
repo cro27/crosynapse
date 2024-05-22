@@ -1,0 +1,24 @@
+{
+	"name": "LoadHorlyWeather",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "LoadHourlyFromKQL",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 1,
+				"startTime": "2024-05-21T15:10:00",
+				"timeZone": "AUS Eastern Standard Time"
+			}
+		}
+	}
+}
