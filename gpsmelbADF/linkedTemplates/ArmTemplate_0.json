@@ -32,10 +32,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'IoTHubWeatherData'"
 		},
-		"WeatherLake_servicePrincipalCredential": {
-			"type": "secureString",
-			"metadata": "Secure string for 'servicePrincipalCredential' of 'WeatherLake'"
-		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://croML-AML-KV.vault.azure.net/"
@@ -76,64 +72,31 @@
 			"type": "string",
 			"defaultValue": "d844bfd4-46f7-4897-a150-b987cad07566"
 		},
+		"SQLweatherDB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "gpsmelb-sqlsvr.database.windows.net"
+		},
+		"SQLweatherDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "weatherdb"
+		},
 		"TextAnalytics_properties_typeProperties_subscriptionId": {
 			"type": "string",
 			"defaultValue": "37b2d7dc-7393-47ad-8c51-90c89944370c"
 		},
-		"WeatherLake_properties_typeProperties_tenant": {
+		"WeatherDB_properties_typeProperties_endpoint": {
 			"type": "string",
-			"defaultValue": "dc54634d-549a-44c9-83b5-2c3806519c69"
+			"defaultValue": "https://weather.australiasoutheast.kusto.windows.net"
 		},
-		"WeatherLake_properties_typeProperties_servicePrincipalId": {
+		"WeatherDB_properties_typeProperties_database": {
 			"type": "string",
-			"defaultValue": "9005b853-2c43-48d4-8298-e1b5eba40b00"
+			"defaultValue": "weatherDB"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/FabricLoadMonthlyRainData')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "CallFabricAPI",
-						"type": "WebHook",
-						"dependsOn": [],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "POST https://api.fabric.microsoft.com/v1/workspaces/253bd6a8-f2fc-447b-9337-2ac97b9d2e4d/items/9bd43163-4cac-428a-9680-6f76493e7d4b/jobs/instances?jobType=RunNotebook",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"executionData": {
-									"configuration": {
-										"defaultLakehouse": {
-											"name": "WeatherLake",
-											"id": "910b5866-6f8a-42e8-a94a-ee3d555ccd49",
-											"workspaceId": "253bd6a8-f2fc-447b-9337-2ac97b9d2e4d"
-										}
-									}
-								}
-							},
-							"timeout": "00:10:00"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -479,6 +442,30 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SQLweatherDB')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('SQLweatherDB_properties_typeProperties_server')]",
+					"database": "[parameters('SQLweatherDB_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"hostNameInCertificate": "",
+					"authenticationType": "SystemAssignedManagedIdentity"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/TextAnalytics')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -512,22 +499,15 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/WeatherLake')]",
+			"name": "[concat(parameters('factoryName'), '/WeatherDB')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "Lakehouse",
+				"type": "AzureDataExplorer",
 				"typeProperties": {
-					"workspaceId": "253bd6a8-f2fc-447b-9337-2ac97b9d2e4d",
-					"artifactId": "910b5866-6f8a-42e8-a94a-ee3d555ccd49",
-					"tenant": "[parameters('WeatherLake_properties_typeProperties_tenant')]",
-					"servicePrincipalId": "[parameters('WeatherLake_properties_typeProperties_servicePrincipalId')]",
-					"servicePrincipalCredentialType": "ServicePrincipalKey",
-					"servicePrincipalCredential": {
-						"type": "SecureString",
-						"value": "[parameters('WeatherLake_servicePrincipalCredential')]"
-					}
+					"endpoint": "[parameters('WeatherDB_properties_typeProperties_endpoint')]",
+					"database": "[parameters('WeatherDB_properties_typeProperties_database')]"
 				},
 				"connectVia": {
 					"referenceName": "integrationRuntime1",

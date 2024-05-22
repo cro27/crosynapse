@@ -89,8 +89,20 @@
 		"Demo Lakehouse_properties_typeProperties_servicePrincipalId": {
 			"value": "d844bfd4-46f7-4897-a150-b987cad07566"
 		},
+		"SQLweatherDB_properties_typeProperties_server": {
+			"value": "gpsmelb-sqlsvr.database.windows.net"
+		},
+		"SQLweatherDB_properties_typeProperties_database": {
+			"value": "weatherdb"
+		},
 		"TextAnalytics_properties_typeProperties_subscriptionId": {
 			"value": "37b2d7dc-7393-47ad-8c51-90c89944370c"
+		},
+		"WeatherDB_properties_typeProperties_endpoint": {
+			"value": "https://weather.australiasoutheast.kusto.windows.net"
+		},
+		"WeatherDB_properties_typeProperties_database": {
+			"value": "weatherDB"
 		},
 		"WeatherLake_properties_typeProperties_tenant": {
 			"value": "dc54634d-549a-44c9-83b5-2c3806519c69"
@@ -124,18 +136,6 @@
 		},
 		"synapse-gpsmelb-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"value": "https://gpsmelb.dfs.core.windows.net"
-		},
-		"WeatherDB_properties_typeProperties_endpoint": {
-			"value": "https://weather.australiasoutheast.kusto.windows.net"
-		},
-		"WeatherDB_properties_typeProperties_database": {
-			"value": "weatherDB"
-		},
-		"SQLweatherDB_properties_typeProperties_server": {
-			"value": "gpsmelb-sqlsvr.database.windows.net"
-		},
-		"SQLweatherDB_properties_typeProperties_database": {
-			"value": "weatherdb"
 		}
 	}
 }

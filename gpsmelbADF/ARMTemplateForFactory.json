@@ -124,9 +124,25 @@
 			"type": "string",
 			"defaultValue": "d844bfd4-46f7-4897-a150-b987cad07566"
 		},
+		"SQLweatherDB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "gpsmelb-sqlsvr.database.windows.net"
+		},
+		"SQLweatherDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "weatherdb"
+		},
 		"TextAnalytics_properties_typeProperties_subscriptionId": {
 			"type": "string",
 			"defaultValue": "37b2d7dc-7393-47ad-8c51-90c89944370c"
+		},
+		"WeatherDB_properties_typeProperties_endpoint": {
+			"type": "string",
+			"defaultValue": "https://weather.australiasoutheast.kusto.windows.net"
+		},
+		"WeatherDB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "weatherDB"
 		},
 		"WeatherLake_properties_typeProperties_tenant": {
 			"type": "string",
@@ -171,22 +187,6 @@
 		"synapse-gpsmelb-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://gpsmelb.dfs.core.windows.net"
-		},
-		"WeatherDB_properties_typeProperties_endpoint": {
-			"type": "string",
-			"defaultValue": "https://weather.australiasoutheast.kusto.windows.net"
-		},
-		"WeatherDB_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "weatherDB"
-		},
-		"SQLweatherDB_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "gpsmelb-sqlsvr.database.windows.net"
-		},
-		"SQLweatherDB_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "weatherdb"
 		}
 	},
 	"variables": {
@@ -194,45 +194,296 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/FabricLoadMonthlyRainData')]",
+			"name": "[concat(parameters('factoryName'), '/LoadHourlyFromKQL')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "CallFabricAPI",
-						"type": "WebHook",
+						"name": "KQLtoDB",
+						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
 							"secureInput": false
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "POST https://api.fabric.microsoft.com/v1/workspaces/253bd6a8-f2fc-447b-9337-2ac97b9d2e4d/items/9bd43163-4cac-428a-9680-6f76493e7d4b/jobs/instances?jobType=RunNotebook",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"executionData": {
-									"configuration": {
-										"defaultLakehouse": {
-											"name": "WeatherLake",
-											"id": "910b5866-6f8a-42e8-a94a-ee3d555ccd49",
-											"workspaceId": "253bd6a8-f2fc-447b-9337-2ac97b9d2e4d"
+							"source": {
+								"type": "AzureDataExplorerSource",
+								"query": "WeatherData\n   | where format_datetime(EventProcessedUtcTime, 'yyyy-MM-dd HH') == format_datetime(now(-1h), 'yyyy-MM-dd HH')\n   | summarize Year = max(year), Month = max(month), enq_utctime = max(datetime_add('hour',1,todatetime(strcat(strcat(format_datetime(EventProcessedUtcTime, 'yyyy-MM-dd'), 'T'), strcat(format_datetime(EventProcessedUtcTime, 'HH:'), '00:00Z'))))), rec_datetime = max(datetime_add('hour',1,todatetime(strcat(strcat(format_datetime(rec_time, 'yyyy-MM-dd'), 'T'), strcat(format_datetime(rec_time, 'HH:'), '00:00Z'))))), Rainfall_hour = round(max(rain_total) - min(rain_total),1), temp_max = round(max(temp_out),1), temp_min = round(min(temp_out),1), wind_gust_max = round(max(wind_gust),1), wind_avg = round(avg(wind_avg),1), humidity_min = min(hum_out), humidity_max = max(hum_out), air_pressure_min = round(min(abs_pres),1), air_pressure_max = round(max(abs_pres),1)\n   | project deviceId = \"wattlepi\", todatetime(rec_datetime), todatetime(enq_utctime), Rainfall_hour, temp_min, temp_max,  wind_gust_max, wind_avg, humidity_min, humidity_max, air_pressure_min, air_pressure_max, Year, Month",
+								"queryTimeout": "01:00:00",
+								"noTruncation": true
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "deviceId",
+											"type": "String",
+											"physicalType": "string"
+										},
+										"sink": {
+											"name": "deviceid",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "enq_utctime",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										},
+										"sink": {
+											"name": "enq_utctime",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										}
+									},
+									{
+										"source": {
+											"name": "rec_datetime",
+											"type": "DateTime",
+											"physicalType": "datetime"
+										},
+										"sink": {
+											"name": "rec_datetime",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										}
+									},
+									{
+										"source": {
+											"name": "Rainfall_hour",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "rainfall_hour",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "temp_min",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "temp_min",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "temp_max",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "temp_max",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "wind_gust_max",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "wind_gust_max",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "wind_avg",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "wind_avg",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "humidity_min",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "humidity_min",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "humidity_max",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "humidity_max",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "air_pressure_min",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "air_pressure_min",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "air_pressure_max",
+											"type": "Double",
+											"physicalType": "real"
+										},
+										"sink": {
+											"name": "air_pressure_max",
+											"type": "Decimal",
+											"physicalType": "decimal",
+											"scale": 1,
+											"precision": 18
+										}
+									},
+									{
+										"source": {
+											"name": "Year",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "Year",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Month",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "Month",
+											"type": "Int32",
+											"physicalType": "int"
 										}
 									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
 								}
-							},
-							"timeout": "00:10:00"
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "WeatherData",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "WeatherHourly",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "Weather"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/WeatherData')]",
+				"[concat(variables('factoryId'), '/datasets/WeatherHourly')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LoadMonthlyWeatherAvg')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "RunLoadRainAvg",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[insert_monthly_rain_avg]"
+						},
+						"linkedServiceName": {
+							"referenceName": "SQLweatherDB",
+							"type": "LinkedServiceReference"
 						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"folder": {
+					"name": "Weather"
+				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLweatherDB')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SalespersonPipeline')]",
@@ -2363,6 +2614,175 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/WeatherData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WeatherDB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureDataExplorerTable",
+				"schema": [
+					{
+						"name": "deviceID",
+						"type": "string"
+					},
+					{
+						"name": "messageId",
+						"type": "int"
+					},
+					{
+						"name": "rec_time",
+						"type": "datetime"
+					},
+					{
+						"name": "EventEnqueuedUtcTime",
+						"type": "datetime"
+					},
+					{
+						"name": "EventProcessedUtcTime",
+						"type": "datetime"
+					},
+					{
+						"name": "year",
+						"type": "int"
+					},
+					{
+						"name": "month",
+						"type": "int"
+					},
+					{
+						"name": "temp_out",
+						"type": "real"
+					},
+					{
+						"name": "hum_out",
+						"type": "int"
+					},
+					{
+						"name": "abs_pres",
+						"type": "real"
+					},
+					{
+						"name": "wind_gust",
+						"type": "real"
+					},
+					{
+						"name": "wind_avg",
+						"type": "real"
+					},
+					{
+						"name": "wind_dir",
+						"type": "int"
+					},
+					{
+						"name": "wind_pos",
+						"type": "string"
+					},
+					{
+						"name": "rain_total",
+						"type": "real"
+					}
+				],
+				"typeProperties": {
+					"table": "WeatherData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WeatherDB')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WeatherHourly')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLweatherDB",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "deviceid",
+						"type": "nvarchar"
+					},
+					{
+						"name": "enq_utctime",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "rec_datetime",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "rainfall_hour",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "temp_min",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "temp_max",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "wind_gust_max",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "wind_avg",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "humidity_min",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "humidity_max",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "air_pressure_min",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "air_pressure_max",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Weather_hourly"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLweatherDB')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/avgSalary')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2948,6 +3368,30 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SQLweatherDB')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('SQLweatherDB_properties_typeProperties_server')]",
+					"database": "[parameters('SQLweatherDB_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"hostNameInCertificate": "",
+					"authenticationType": "SystemAssignedManagedIdentity"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/TextAnalytics')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -2978,6 +3422,26 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/WeatherDB')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataExplorer",
+				"typeProperties": {
+					"endpoint": "[parameters('WeatherDB_properties_typeProperties_endpoint')]",
+					"database": "[parameters('WeatherDB_properties_typeProperties_database')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
 			]
 		},
 		{
@@ -3361,6 +3825,77 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/InsertMonthlyAvg')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "LoadMonthlyWeatherAvg",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Month",
+						"interval": 1,
+						"startTime": "2024-05-22T17:30:00",
+						"timeZone": "AUS Eastern Standard Time",
+						"schedule": {
+							"minutes": [
+								30
+							],
+							"hours": [
+								0
+							],
+							"monthDays": [
+								1
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/LoadMonthlyWeatherAvg')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LoadHourlyWeather')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "LoadHourlyFromKQL",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Hour",
+						"interval": 1,
+						"startTime": "2024-05-22T17:10:00",
+						"timeZone": "AUS Eastern Standard Time"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/LoadHourlyFromKQL')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AutoResolveIntegrationRuntime')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -3515,576 +4050,6 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LoadHourlyFromKQL')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "KQLtoDB",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureDataExplorerSource",
-								"query": "WeatherData\n   | where format_datetime(EventProcessedUtcTime, 'yyyy-MM-dd HH') == format_datetime(now(-1h), 'yyyy-MM-dd HH')\n   | summarize Year = max(year), Month = max(month), enq_utctime = max(datetime_add('hour',1,todatetime(strcat(strcat(format_datetime(EventProcessedUtcTime, 'yyyy-MM-dd'), 'T'), strcat(format_datetime(EventProcessedUtcTime, 'HH:'), '00:00Z'))))), rec_datetime = max(datetime_add('hour',1,todatetime(strcat(strcat(format_datetime(rec_time, 'yyyy-MM-dd'), 'T'), strcat(format_datetime(rec_time, 'HH:'), '00:00Z'))))), Rainfall_hour = round(max(rain_total) - min(rain_total),1), temp_max = round(max(temp_out),1), temp_min = round(min(temp_out),1), wind_gust_max = round(max(wind_gust),1), wind_avg = round(avg(wind_avg),1), humidity_min = min(hum_out), humidity_max = max(hum_out), air_pressure_min = round(min(abs_pres),1), air_pressure_max = round(max(abs_pres),1)\n   | project deviceId = \"wattlepi\", todatetime(rec_datetime), todatetime(enq_utctime), Rainfall_hour, temp_min, temp_max,  wind_gust_max, wind_avg, humidity_min, humidity_max, air_pressure_min, air_pressure_max, Year, Month",
-								"queryTimeout": "01:00:00",
-								"noTruncation": true
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": false
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "deviceId",
-											"type": "String",
-											"physicalType": "string"
-										},
-										"sink": {
-											"name": "deviceid",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "enq_utctime",
-											"type": "DateTime",
-											"physicalType": "datetime"
-										},
-										"sink": {
-											"name": "enq_utctime",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										}
-									},
-									{
-										"source": {
-											"name": "rec_datetime",
-											"type": "DateTime",
-											"physicalType": "datetime"
-										},
-										"sink": {
-											"name": "rec_datetime",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										}
-									},
-									{
-										"source": {
-											"name": "Rainfall_hour",
-											"type": "Double",
-											"physicalType": "real"
-										},
-										"sink": {
-											"name": "rainfall_hour",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 1,
-											"precision": 18
-										}
-									},
-									{
-										"source": {
-											"name": "temp_min",
-											"type": "Double",
-											"physicalType": "real"
-										},
-										"sink": {
-											"name": "temp_min",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 1,
-											"precision": 18
-										}
-									},
-									{
-										"source": {
-											"name": "temp_max",
-											"type": "Double",
-											"physicalType": "real"
-										},
-										"sink": {
-											"name": "temp_max",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 1,
-											"precision": 18
-										}
-									},
-									{
-										"source": {
-											"name": "wind_gust_max",
-											"type": "Double",
-											"physicalType": "real"
-										},
-										"sink": {
-											"name": "wind_gust_max",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 1,
-											"precision": 18
-										}
-									},
-									{
-										"source": {
-											"name": "wind_avg",
-											"type": "Double",
-											"physicalType": "real"
-										},
-										"sink": {
-											"name": "wind_avg",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 1,
-											"precision": 18
-										}
-									},
-									{
-										"source": {
-											"name": "humidity_min",
-											"type": "Int32",
-											"physicalType": "int"
-										},
-										"sink": {
-											"name": "humidity_min",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "humidity_max",
-											"type": "Int32",
-											"physicalType": "int"
-										},
-										"sink": {
-											"name": "humidity_max",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "air_pressure_min",
-											"type": "Double",
-											"physicalType": "real"
-										},
-										"sink": {
-											"name": "air_pressure_min",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 1,
-											"precision": 18
-										}
-									},
-									{
-										"source": {
-											"name": "air_pressure_max",
-											"type": "Double",
-											"physicalType": "real"
-										},
-										"sink": {
-											"name": "air_pressure_max",
-											"type": "Decimal",
-											"physicalType": "decimal",
-											"scale": 1,
-											"precision": 18
-										}
-									},
-									{
-										"source": {
-											"name": "Year",
-											"type": "Int32",
-											"physicalType": "int"
-										},
-										"sink": {
-											"name": "Year",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Month",
-											"type": "Int32",
-											"physicalType": "int"
-										},
-										"sink": {
-											"name": "Month",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "WeatherData",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "WeatherHourly",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/WeatherData')]",
-				"[concat(variables('factoryId'), '/datasets/WeatherHourly')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WeatherDB')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDataExplorer",
-				"typeProperties": {
-					"endpoint": "[parameters('WeatherDB_properties_typeProperties_endpoint')]",
-					"database": "[parameters('WeatherDB_properties_typeProperties_database')]"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WeatherData')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WeatherDB",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureDataExplorerTable",
-				"schema": [
-					{
-						"name": "deviceID",
-						"type": "string"
-					},
-					{
-						"name": "messageId",
-						"type": "int"
-					},
-					{
-						"name": "rec_time",
-						"type": "datetime"
-					},
-					{
-						"name": "EventEnqueuedUtcTime",
-						"type": "datetime"
-					},
-					{
-						"name": "EventProcessedUtcTime",
-						"type": "datetime"
-					},
-					{
-						"name": "year",
-						"type": "int"
-					},
-					{
-						"name": "month",
-						"type": "int"
-					},
-					{
-						"name": "temp_out",
-						"type": "real"
-					},
-					{
-						"name": "hum_out",
-						"type": "int"
-					},
-					{
-						"name": "abs_pres",
-						"type": "real"
-					},
-					{
-						"name": "wind_gust",
-						"type": "real"
-					},
-					{
-						"name": "wind_avg",
-						"type": "real"
-					},
-					{
-						"name": "wind_dir",
-						"type": "int"
-					},
-					{
-						"name": "wind_pos",
-						"type": "string"
-					},
-					{
-						"name": "rain_total",
-						"type": "real"
-					}
-				],
-				"typeProperties": {
-					"table": "WeatherData"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WeatherDB')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLweatherDB')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"server": "[parameters('SQLweatherDB_properties_typeProperties_server')]",
-					"database": "[parameters('SQLweatherDB_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": false,
-					"hostNameInCertificate": "",
-					"authenticationType": "SystemAssignedManagedIdentity"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WeatherHourly')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLweatherDB",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "deviceid",
-						"type": "nvarchar"
-					},
-					{
-						"name": "enq_utctime",
-						"type": "datetime2",
-						"scale": 7
-					},
-					{
-						"name": "rec_datetime",
-						"type": "datetime2",
-						"scale": 7
-					},
-					{
-						"name": "rainfall_hour",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 1
-					},
-					{
-						"name": "temp_min",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 1
-					},
-					{
-						"name": "temp_max",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 1
-					},
-					{
-						"name": "wind_gust_max",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 1
-					},
-					{
-						"name": "wind_avg",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 1
-					},
-					{
-						"name": "humidity_min",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "humidity_max",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "air_pressure_min",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 1
-					},
-					{
-						"name": "air_pressure_max",
-						"type": "decimal",
-						"precision": 18,
-						"scale": 1
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Weather_hourly"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLweatherDB')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LoadHourlyWeather')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "LoadHourlyFromKQL",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Hour",
-						"interval": 1,
-						"startTime": "2024-05-22T17:10:00",
-						"timeZone": "AUS Eastern Standard Time"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/LoadHourlyFromKQL')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LoadMonthlyWeatherAvg')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "RunLoadRainAvg",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[insert_monthly_rain_avg]"
-						},
-						"linkedServiceName": {
-							"referenceName": "SQLweatherDB",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLweatherDB')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/InsertMonthlyAvg')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "LoadMonthlyWeatherAvg",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Month",
-						"interval": 1,
-						"startTime": "2024-05-22T17:30:00",
-						"timeZone": "AUS Eastern Standard Time",
-						"schedule": {
-							"minutes": [
-								30
-							],
-							"hours": [
-								0
-							],
-							"monthDays": [
-								1
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/LoadMonthlyWeatherAvg')]"
-			]
 		}
 	]
 }

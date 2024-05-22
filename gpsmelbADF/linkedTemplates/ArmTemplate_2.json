@@ -883,59 +883,166 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/avgSalary')]",
+			"name": "[concat(parameters('factoryName'), '/WeatherData')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "gpsmelb",
+					"referenceName": "WeatherDB",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "avgsalary.csv",
-						"fileSystem": "adflake"
+				"type": "AzureDataExplorerTable",
+				"schema": [
+					{
+						"name": "deviceID",
+						"type": "string"
 					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
-				},
-				"schema": []
+					{
+						"name": "messageId",
+						"type": "int"
+					},
+					{
+						"name": "rec_time",
+						"type": "datetime"
+					},
+					{
+						"name": "EventEnqueuedUtcTime",
+						"type": "datetime"
+					},
+					{
+						"name": "EventProcessedUtcTime",
+						"type": "datetime"
+					},
+					{
+						"name": "year",
+						"type": "int"
+					},
+					{
+						"name": "month",
+						"type": "int"
+					},
+					{
+						"name": "temp_out",
+						"type": "real"
+					},
+					{
+						"name": "hum_out",
+						"type": "int"
+					},
+					{
+						"name": "abs_pres",
+						"type": "real"
+					},
+					{
+						"name": "wind_gust",
+						"type": "real"
+					},
+					{
+						"name": "wind_avg",
+						"type": "real"
+					},
+					{
+						"name": "wind_dir",
+						"type": "int"
+					},
+					{
+						"name": "wind_pos",
+						"type": "string"
+					},
+					{
+						"name": "rain_total",
+						"type": "real"
+					}
+				],
+				"typeProperties": {
+					"table": "WeatherData"
+				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/contosoSQLsink')]",
+			"name": "[concat(parameters('factoryName'), '/WeatherHourly')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "contosoSQL",
+					"referenceName": "SQLweatherDB",
 					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"tablename": {
-						"type": "string"
-					},
-					"schema": {
-						"type": "string"
-					}
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": {
-						"value": "@dataset().schema",
-						"type": "Expression"
+				"schema": [
+					{
+						"name": "deviceid",
+						"type": "nvarchar"
 					},
-					"table": {
-						"value": "@dataset().tablename",
-						"type": "Expression"
+					{
+						"name": "enq_utctime",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "rec_datetime",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "rainfall_hour",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "temp_min",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "temp_max",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "wind_gust_max",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "wind_avg",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "humidity_min",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "humidity_max",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "air_pressure_min",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
+					},
+					{
+						"name": "air_pressure_max",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 1
 					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Weather_hourly"
 				}
 			},
 			"dependsOn": []
